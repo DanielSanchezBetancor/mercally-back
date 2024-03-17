@@ -33,10 +33,12 @@ const Drinks: TBrand[] = [
     name: "AT roca",
     pattern: /at roca/gi,
   },
-  //This is too generic, causes too much conflicts so we will specify negative lookaheads
   {
+    //This is too generic, causes too much conflicts so we will specify negative lookaheads
+    // - The word "blue" should not be followed by "dragon"
+    // - The word "blue" should be the first word in the string
     name: "Blue",
-    pattern: /blue(?!\s?[dragon])/gi,
+    pattern: /^blue(?!\s?[dragon])/gi,
   },
   {
     name: "Campo de Estrellas",
@@ -67,8 +69,8 @@ const Drinks: TBrand[] = [
     pattern: /rondel/gi,
   },
   {
-    name: "Romale",
-    pattern: /romale/gi,
+    name: "Villa Romale",
+    pattern: /villa romale/gi,
   },
   {
     name: "Andre Clouet",
@@ -96,7 +98,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Veuve Clicquot",
-    pattern: /veuve clicquot/gi,
+    pattern: /veuve clic?quot/gi,
   },
   {
     name: "Don Luciano",
@@ -140,7 +142,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Urban",
-    pattern: /urban/gi,
+    pattern: /^urban/gi,
   },
   {
     name: "Sou Tea",
@@ -236,7 +238,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "La Castellana",
-    pattern: /(?:la\s)?castellana/gi,
+    pattern: /(?:la\s)?castellana(?!\svegecampo)/gi,
   },
   {
     name: "Chinchón",
@@ -256,7 +258,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "103",
-    pattern: /103/gi,
+    pattern: /103(?!\sg)/gi,
   },
   {
     name: "Carlos I",
@@ -380,7 +382,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "MG",
-    pattern: /mg/gi,
+    pattern: /^mg/gi,
   },
   {
     name: "Monkey 47",
@@ -453,7 +455,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Dama de Baza",
-    pattern: /dama\sd(?:e|')\sbaza/gi,
+    pattern: /dama\sd[e|']\sbaza/gi,
   },
   {
     name: "Fernet Branca",
@@ -462,6 +464,666 @@ const Drinks: TBrand[] = [
   {
     name: "Frangelico",
     pattern: /frangelico/gi,
+  },
+  {
+    name: "Jägermeister",
+    pattern: /j[äa]gg?ermeister/gi,
+  },
+  {
+    name: "Licor 43",
+    pattern: /licor\s43/gi,
+  },
+  {
+    name: "Magua",
+    pattern: /magua/gi,
+  },
+  {
+    name: "Malibú",
+    pattern: /malib[uú]/gi,
+  },
+  {
+    name: "O'Millo",
+    pattern: /(?:\s|^)o['`]?millo/gi,
+  },
+  {
+    name: "Petroni",
+    pattern: /petroni/gi,
+  },
+  {
+    name: "Sheridans",
+    pattern: /sheridans/gi,
+  },
+  {
+    name: "Siroco",
+    pattern: /siroco/gi,
+  },
+  {
+    name: "Specht Pampelmuse",
+    pattern: /specht\spampelmuse/gi,
+  },
+  {
+    name: "Spritz & roll",
+    pattern: /spritz\s&\sroll/gi,
+  },
+  {
+    name: "Tia maria",
+    pattern: /tia\smaria/gi,
+  },
+  {
+    name: "Tunel",
+    pattern: /tunel/gi,
+  },
+  {
+    name: "Aguere",
+    pattern: /aguere/gi,
+  },
+  {
+    name: "Aldea",
+    pattern: /aldea\s/gi,
+  },
+  {
+    name: "Arehucas",
+    pattern: /arehucas/gi,
+  },
+  {
+    name: "Barceló",
+    pattern: /barcel[oó]/gi,
+  },
+  {
+    name: "Brugal",
+    pattern: /brugal/gi,
+  },
+  {
+    name: "Cacique",
+    pattern: /cacique/gi,
+  },
+  {
+    name: "Smirnoff",
+    pattern: /smirnoff/gi,
+  },
+  {
+    name: "Ketel One",
+    pattern: /ketel\sone/gi,
+  },
+  {
+    name: "Cîroc",
+    pattern: /c[îi]roc/gi,
+  },
+  {
+    name: "Jinzo",
+    pattern: /jinzo/gi,
+  },
+  {
+    name: "Tanqueray",
+    pattern: /tanqueray/gi,
+  },
+  {
+    name: "Gordon's",
+    pattern: /gordon'?s/gi,
+  },
+  {
+    name: "Zacapa",
+    pattern: /zacapa/gi,
+  },
+  {
+    name: "Pampero",
+    pattern: /pampero/gi,
+  },
+  {
+    name: "Captain Morgan",
+    pattern: /captain\smorgan/gi,
+  },
+  {
+    name: "Johnnie Walker",
+    pattern: /johnnie\s+walker/gi,
+  },
+  {
+    name: "Black & White",
+    pattern: /black\s+&\s+white/gi,
+  },
+  {
+    name: "J&B",
+    pattern: /j&b/gi,
+  },
+  {
+    name: "Vat 69",
+    pattern: /vat\s+69/gi,
+  },
+  {
+    name: "Copper Dog",
+    pattern: /copper\s+dog/gi,
+  },
+  {
+    name: "White Horse",
+    pattern: /white\s+horse/gi,
+  },
+  {
+    name: "Windsor",
+    pattern: /windsor/gi,
+  },
+  {
+    name: "Single Malts",
+    pattern: /single\s+malts/gi,
+  },
+  {
+    name: "Cardhu",
+    pattern: /cardhu/gi,
+  },
+  {
+    name: "Mortlach",
+    pattern: /mortlach/gi,
+  },
+  {
+    name: "The Singleton",
+    pattern: /(?:the\s)?singleton/gi,
+  },
+  {
+    name: "Bell's",
+    pattern: /bell's/gi,
+  },
+  {
+    name: "Talisker",
+    pattern: /talisker/gi,
+  },
+  {
+    name: "Haig Club",
+    pattern: /haig\s+club/gi,
+  },
+  {
+    name: "Bulleit",
+    pattern: /bulleit/gi,
+  },
+  {
+    name: "Crown Royal",
+    pattern: /crown\s+royal/gi,
+  },
+  {
+    name: "Roe & CO",
+    pattern: /roe\s+&\s+co/gi,
+  },
+  {
+    name: "Don Julio",
+    pattern: /don\s+julio/gi,
+  },
+  {
+    name: "Baileys",
+    pattern: /baileys/gi,
+  },
+  {
+    name: "Belsazar",
+    pattern: /belsazar/gi,
+  },
+  {
+    name: "Pimm's",
+    pattern: /pimm's/gi,
+  },
+  {
+    name: "Guinness",
+    pattern: /guin?ness/gi,
+  },
+  {
+    name: "Smithwick's",
+    pattern: /smithwick's/gi,
+  },
+  {
+    name: "Diplomático",
+    pattern: /diplom[aá]tico/gi,
+  },
+  {
+    name: "Flor de Caña",
+    pattern: /flor\sde\scaña/gi,
+  },
+  {
+    name: "Guajiro",
+    pattern: /guajiro/gi,
+  },
+  {
+    name: "Havana Club",
+    pattern: /havana(?:\sclub)?/gi,
+  },
+  {
+    name: "Amaretto",
+    pattern: /amaretto\s(?!del\spatriarca)/gi,
+  },
+  {
+    name: "Kojak",
+    pattern: /kojak/gi,
+  },
+  {
+    name: "Juanita",
+    pattern: /juanita/gi,
+  },
+  {
+    name: "Telde",
+    pattern: /telde/gi,
+  },
+  {
+    name: "Indias",
+    pattern: /indias/gi,
+  },
+  {
+    name: "La Indiana",
+    pattern: /la\sindiana/gi,
+  },
+  {
+    name: "Matusalem",
+    pattern: /matusalem/gi,
+  },
+  {
+    name: "Chapala",
+    pattern: /chapala/gi,
+  },
+  {
+    name: "Jose Cuervo",
+    pattern: /jos[eé]\scuervo/gi,
+  },
+  {
+    name: "Sierra",
+    pattern: /sierra/gi,
+  },
+  {
+    name: "Aperol",
+    pattern: /aperol/gi,
+  },
+  {
+    name: "Campari",
+    pattern: /campari/gi,
+  },
+  {
+    name: "Cinzano",
+    pattern: /cinzano/gi,
+  },
+  {
+    name: "El 18",
+    pattern: /(?:\s|^)el\s18/gi,
+  },
+  {
+    name: "Ricard",
+    pattern: /ricard\s/gi,
+  },
+  {
+    name: "Yzaguirre",
+    pattern: /yzaguirre/gi,
+  },
+  {
+    name: "Absolut",
+    pattern: /absolut(?!e\smen)(?:\s|$)/gi,
+  },
+  {
+    name: "Beluga",
+    pattern: /beluga/gi,
+  },
+  {
+    name: "Belvedere",
+    pattern: /belvedere/gi,
+  },
+  {
+    name: "Blat",
+    pattern: /blat/gi,
+  },
+  {
+    name: "Grey Goose",
+    pattern: /grey\s+goose/gi,
+  },
+  {
+    name: "Karlova",
+    pattern: /karlova/gi,
+  },
+  {
+    name: "Koriv",
+    pattern: /koriv/gi,
+  },
+  {
+    name: "Mamont",
+    pattern: /mamont/gi,
+  },
+  {
+    name: "Moskovskaya",
+    pattern: /moskovskaya/gi,
+  },
+  {
+    name: "Rushkinoff",
+    pattern: /rushkinoff/gi,
+  },
+  {
+    name: "WKD",
+    pattern: /wkd/gi,
+  },
+  {
+    name: "100 pipers",
+    pattern: /100\spipers/gi,
+  },
+  {
+    name: "Ballantines",
+    pattern: /ballantine'?s/gi,
+  },
+  {
+    name: "Buchanan's",
+    pattern: /buchanan[`'´]?s/gi,
+  },
+  {
+    name: "Chivas",
+    pattern: /chivas/gi,
+  },
+  {
+    name: "Cutty Sark",
+    pattern: /cutty\ssark/gi,
+  },
+  {
+    name: "Dalmore",
+    pattern: /dalmore/gi,
+  },
+  {
+    name: "Doble V",
+    pattern: /doble\sv(?:\s|$)/gi,
+  },
+  {
+    name: "Drago Grain",
+    pattern: /drago\sgrain/gi,
+  },
+  {
+    name: "DYC",
+    pattern: /dyc/gi,
+  },
+  {
+    name: "Famous Grouse",
+    pattern: /famous\sgrouse/gi,
+  },
+  {
+    name: "Glenfiddich",
+    pattern: /glenfiddich/gi,
+  },
+  {
+    name: "Glenmorangie",
+    pattern: /glenmorangie/gi,
+  },
+  {
+    name: "Grants",
+    pattern: /grants/gi,
+  },
+  {
+    name: "Jack Daniels",
+    pattern: /jack\s+daniels/gi,
+  },
+  {
+    name: "Jameson",
+    pattern: /jameson/gi,
+  },
+  {
+    name: "John Haig",
+    pattern: /john\shaig/gi,
+  },
+  {
+    name: "Knockando",
+    pattern: /knockando/gi,
+  },
+  {
+    name: "Lagavulin",
+    pattern: /lagavulin/gi,
+  },
+  {
+    name: "Maciu",
+    pattern: /maciu/gi,
+  },
+  {
+    name: "Maker's Mark",
+    pattern: /maker'?s\smark/gi,
+  },
+  {
+    name: "Nikka",
+    pattern: /nikka/gi,
+  },
+  {
+    name: "Passport",
+    pattern: /passport/gi,
+  },
+  {
+    name: "James Webb",
+    pattern: /james\swebb/gi,
+  },
+  {
+    name: "Negrita",
+    pattern: /negrita/gi,
+  },
+  {
+    name: "La Recompensa",
+    pattern: /la\srecompensa/gi,
+  },
+  {
+    name: "Royal Swan",
+    pattern: /royal\sswan/gi,
+  },
+  {
+    name: "Knebep",
+    pattern: /knebep/gi,
+  },
+  {
+    name: "Dama Mayor",
+    pattern: /dama\smayor/gi,
+  },
+  {
+    name: "Puente Pazos",
+    pattern: /puente\spazos/gi,
+  },
+  {
+    name: "Franzini",
+    pattern: /franzini/gi,
+  },
+  {
+    name: "Amaretto Del Patriarca",
+    pattern: /amaretto\sdel\spatriarca/gi,
+  },
+  {
+    name: "El Mayu",
+    pattern: /el\smayu/gi,
+  },
+  {
+    name: "Polían",
+    pattern: /pol[ií]an/gi,
+  },
+  {
+    name: "El Lagar",
+    pattern: /el\slagar/gi,
+  },
+  {
+    name: "Cabré & Sabaté",
+    pattern: /cabr[eé]\s&\ssabat[eé]/gi,
+  },
+  {
+    name: "Magic",
+    pattern: /(?<!deliplus\s)magic(?!.*malt.*)(?:\s|$)/gi,
+  },
+  {
+    name: "Señorío De Requena",
+    pattern: /señor[ií]o\sde\srequena/gi,
+  },
+  {
+    name: "Viña Secret",
+    pattern: /viña\ssecret/gi,
+  },
+  {
+    name: "Max factor",
+    pattern: /max\s+factor/gi,
+  },
+  {
+    name: "Velvera",
+    pattern: /velvera/gi,
+  },
+  {
+    name: "Nuestra Señora del Carmen",
+    pattern: /nuestra\sseñora\sd[ae]l\scarmen/gi,
+  },
+  {
+    name: "Palmelita",
+    pattern: /palmelita/gi,
+  },
+  {
+    name: "St. Dalfour",
+    pattern: /st\.?\sdalfour/gi,
+  },
+  {
+    name: "La Lechera",
+    pattern: /la\slechera/gi,
+  },
+  {
+    name: "Belberry",
+    pattern: /belberry/gi,
+  },
+  {
+    name: "Del Monte",
+    pattern: /del\smonte/gi,
+  },
+  {
+    name: "Dole",
+    pattern: /dole/gi,
+  },
+  {
+    name: "Andros",
+    pattern: /andros/gi,
+  },
+  {
+    name: "Conchita",
+    pattern: /conchita(?:\s|$)/gi,
+  },
+  {
+    name: "Granja Flor",
+    pattern: /granja\sflor/gi,
+  },
+  {
+    name: "Bebé",
+    pattern: /^beb[eé]/gi,
+  },
+  {
+    name: "La Vieja Fábrica",
+    pattern: /la\svieja\sf[aá]brica/gi,
+  },
+  {
+    name: "El apicultor",
+    pattern: /el\sapicultor/gi,
+  },
+  {
+    name: "Granja San Francisco",
+    pattern: /granja\ssan\sfr?ancisco/gi,
+  },
+  {
+    name: "Luna de Miel",
+    pattern: /luna\sd[ea]\smiel/gi,
+  },
+  {
+    name: "Agrisanz",
+    pattern: /agrisanz/gi,
+  },
+  {
+    name: "Montey",
+    pattern: /montey/gi,
+  },
+  {
+    name: "Fior Di Frutta",
+    pattern: /fior\sd[ií]\sfrutta/gi,
+  },
+  {
+    name: "Caña nature",
+    pattern: /caña\snature/gi,
+  },
+  {
+    name: "Freshmix",
+    pattern: /freshmix/gi,
+  },
+  {
+    name: "Rana",
+    pattern: /(?:\s|^)rana(?:\s|$)/gi,
+  },
+  {
+    name: "Taverna",
+    pattern: /taverna/gi,
+  },
+  {
+    name: "Fanta",
+    pattern: /fanta(?:\s|$)/gi,
+  },
+  {
+    name: "Finca Meleros",
+    pattern: /finca\smeleros/gi,
+  },
+  {
+    name: "Alvalle",
+    pattern: /alvalle/gi,
+  },
+  {
+    name: "Majao",
+    pattern: /majao/gi,
+  },
+  {
+    name: "Big Tom",
+    pattern: /big\stom/gi,
+  },
+  {
+    name: "La Huerta",
+    pattern: /(?<!de\s)la\shuerta/gi,
+  },
+  {
+    name: "Pombel",
+    pattern: /pombel/gi,
+  },
+  {
+    name: "Simón Life",
+    pattern: /sim[oó]n\slife/gi,
+  },
+  {
+    name: "Summum",
+    pattern: /summum/gi,
+  },
+  {
+    name: "Via nature",
+    pattern: /via\snature/gi,
+  },
+  {
+    name: "Cuatro Ríos",
+    pattern: /cuatro\sr[ií]os/gi,
+  },
+  {
+    name: "Mano de Hierro",
+    pattern: /mano\sde\shierro/gi,
+  },
+  {
+    name: "Moralejo",
+    pattern: /moralejo/gi,
+  },
+  {
+    name: "Doux",
+    pattern: /doux/gi,
+  },
+  {
+    name: "Menceyes",
+    pattern: /menceyes/gi,
+  },
+  {
+    name: "Sushita",
+    pattern: /sushita/gi,
+  },
+  {
+    name: "Piz Buin Tan & Protect",
+    pattern: /piz\sbuin(?:\stan\s[&y]\sprotect)?/gi,
+  },
+  {
+    name: "Delial",
+    pattern: /delial/gi,
+  },
+  {
+    name: "Krystal",
+    pattern: /krystal/gi,
+  },
+  {
+    name: "1916",
+    pattern: /1916/gi,
+  },
+  {
+    name: "Tulipán Negro",
+    pattern: /\stn\s|tulip[aá]n negro|roll on deo|spray deo/gi,
+  },
+  {
+    name: "Brummel",
+    pattern: /brumm?el/gi,
   }
 ];
 

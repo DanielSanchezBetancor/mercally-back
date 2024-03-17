@@ -15,11 +15,11 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Hiperdino",
-    pattern: /hiperdino/gi,
+    pattern: /(?:hiper\s?|^)dino\s/gi,
   },
   {
     name: "Ifa Eliges",
-    pattern: /(?:dino-?)?ifa\s?(?:eliges|unnia|sabe|amigo|-Hiperdino)?/gi,
+    pattern: /(?:dino-)?ifa[\s-](?:eliges|unnia|sabe|amigo|Hiperdino)?/gi,
   },
   // En algun momento, unir arriba
   {
@@ -32,7 +32,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Enso",
-    pattern: /enso/gi,
+    pattern: /(?:\s|^)enso/gi,
   },
   {
     name: "Old El Paso",
@@ -48,7 +48,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Hellmans",
-    pattern: /hellmans/gi,
+    pattern: /hellmann?'?s/gi,
   },
   {
     name: "Intercasa",
@@ -140,7 +140,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Amazon",
-    pattern: /amazon/gi,
+    pattern: /amazon(?:\s|$)/gi,
   },
   {
     name: "Asian delicatessen",
@@ -168,7 +168,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "HP",
-    pattern: /hp/gi,
+    pattern: /(?:\s|^)hp/gi,
   },
   {
     name: "Kikkoman",
@@ -192,7 +192,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Scana",
-    pattern: /scana/gi,
+    pattern: /scana\s/gi,
   },
   {
     name: "Sharwoods",
@@ -231,8 +231,9 @@ const GeneralBrands: TBrand[] = [
     pattern: /buitoni/gi,
   },
   {
+    // This has conga as optional, I'm going to erase it because it's causing problems
     name: "Conga Organics",
-    pattern: /(?:conga\s)?organics?/gi,
+    pattern: /conga\sorganics?/gi,
   },
   {
     name: "Gallina Blanca",
@@ -243,8 +244,11 @@ const GeneralBrands: TBrand[] = [
     pattern: /garofalo/gi,
   },
   {
+    // This brand is causing problems with the pattern, let's make it more specific
+    // - First specific pattern: It should be the first word in the string
+    // - Second specific pattern: It should has a space after the word
     name: "GIA",
-    pattern: /(?:\s|^)gia/gi,
+    pattern: /(?:\s|^)gia\s/gi,
   },
   {
     name: "Saclá",
@@ -276,7 +280,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "La Asturiana",
-    pattern: /(?:la\s)?asturiana/gi,
+    pattern: /(?<!fabada\s)(?:la\s)?asturiana(?!.*mayu)/gi,
   },
   {
     name: "Australiana",
@@ -296,15 +300,17 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Tulipán",
-    pattern: /tulip[aá]n/gi,
+    pattern: /tulip[aá]n(?!\snegro)/gi,
   },
   {
     name: "Village",
     pattern: /village/gi,
   },
   {
+    // This brand is causing problems with the pattern, let's make it more specific
+    // - First specific pattern: It should be the first word in the string
     name: "Flora",
-    pattern: /flora/gi,
+    pattern: /^flora[\$\s]/gi,
   },
   {
     name: "Becel",
@@ -348,7 +354,8 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Bosque Verde",
-    pattern: /bosque\s+verde/gi,
+    pattern:
+      /bosque\s+verde|funda para lavadora|insecticida antimosquitos|pulsera de citronela/gi,
   },
   {
     name: "Cuidaplus Forte",
@@ -360,7 +367,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "IAN",
-    pattern: /ian/gi,
+    pattern: /(?:\s|^)ian/gi,
   },
   {
     name: "Alesves",
@@ -396,7 +403,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Prima",
-    pattern: /prima/gi,
+    pattern: /prima\s/gi,
   },
   {
     name: "Rio Mare",
@@ -408,7 +415,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Isabel",
-    pattern: /isabel/gi,
+    pattern: /[^\s]isabel[$\s]/gi,
   },
   {
     name: "Wild Planet",
@@ -420,11 +427,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Cuca",
-    pattern: /cuca/gi,
-  },
-  {
-    name: "Palmera",
-    pattern: /palmera/gi,
+    pattern: /cuca\s/gi,
   },
   {
     name: "WC Net",
@@ -432,7 +435,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Smac",
-    pattern: /smac/gi,
+    pattern: /smac(?:\s|$)/gi,
   },
   {
     name: "Omino Bianco",
@@ -444,7 +447,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Cif",
-    pattern: /cif/gi,
+    pattern: /[\^\s]cif/gi,
   },
   {
     name: "Ajax",
@@ -604,7 +607,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Nestlé",
-    pattern: /nestlé/gi,
+    pattern: /nestl?[eé]|cono extreme|extreme (?:cono|cookie|mini)|extrafino/gi,
   },
   {
     name: "Cini Minis",
@@ -620,7 +623,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Brillante",
-    pattern: /brillante/gi,
+    pattern: /(?:\s|^)brillante/gi,
   },
   {
     name: "Gastraval",
@@ -644,7 +647,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Mimo",
-    pattern: /mimo/gi,
+    pattern: /mimo(?:\s|$)/gi,
   },
   {
     name: "Rombo d'Oro",
@@ -656,7 +659,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Zalea",
-    pattern: /zalea/gi,
+    pattern: /(?:\s|^)zalea/gi,
   },
   {
     name: "Don Celorrio",
@@ -684,7 +687,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Vástagos de Rúbal",
-    pattern: /vástagos\s+de\s+r[uú]bal/gi,
+    pattern: /v[aá]stagos\s+de\s+r[uú]bal/gi,
   },
   {
     name: "Cantara",
@@ -704,7 +707,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Vis",
-    pattern: /vis/gi,
+    pattern: /^vis/gi,
   },
   {
     name: "Campo Rioja",
@@ -724,7 +727,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Chef",
-    pattern: /chef/gi,
+    pattern: /^chef/gi,
   },
   {
     name: "OaeO",
@@ -840,7 +843,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Bicentury",
-    pattern: /bicentury/gi,
+    pattern: /bicentury|^tortita de maiz (?:yogur|choco negro|mini setas)/gi,
   },
   {
     name: "Bimanán",
@@ -856,15 +859,17 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Vive",
-    pattern: /vive/gi,
+    pattern: /vive\s/gi,
   },
   {
     name: "Gerblé",
     pattern: /gerbl[eé]/gi,
   },
   {
-    name: "Santiveri Noglut",
-    pattern: /(?:santiveri\s)?noglut/gi,
+    // This brand has some products that dont have the brand name in the product name
+    name: "Santiveri",
+    pattern:
+      /(?:(?:santiveri\s)?noglut|galletas?\s(?:digestive espelta|sesamo doble zero))/gi,
   },
   {
     name: "Pagesa",
@@ -872,7 +877,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Schär",
-    pattern: /sch[aä]r/gi,
+    pattern: /sch[aä]r(?:\s|$)/gi,
   },
   {
     name: "Barebells",
@@ -892,7 +897,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Premier",
-    pattern: /premier/gi,
+    pattern: /(?<!colgate\s)premier/gi,
   },
   {
     name: "Pompadour",
@@ -932,7 +937,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Becasan Nature",
-    pattern: /becasan\s+nature/gi,
+    pattern: /becasan(?:\s+nature)?/gi,
   },
   {
     name: "Anian",
@@ -944,7 +949,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Flex",
-    pattern: /flex/gi,
+    pattern: /(?:\s|^)flex(?:\s|$)/gi,
   },
   {
     name: "Garnier",
@@ -966,7 +971,6 @@ const GeneralBrands: TBrand[] = [
     name: "Belle Color",
     pattern: /(?:garnier\s)?belle\s+color/gi,
   },
-  // For now, we will match Garnier prefix, if this causes problems, we will make it more specific and optional
   {
     name: "Good",
     pattern: /garnier\sgood/gi,
@@ -1034,7 +1038,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Gillete",
-    pattern: /gillete/gi,
+    pattern: /gillett?e/gi,
   },
   {
     name: "Venus",
@@ -1050,7 +1054,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Herbal Essences",
-    pattern: /herbal(\sessences)?/gi,
+    pattern: /(?<!colgate\s)herbal(\sessences)?(?!\sdeliplus)/gi,
   },
   {
     name: "Pantene",
@@ -1171,7 +1175,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Yosoy",
-    pattern: /yosoy/gi,
+    pattern: /yo\s?soy/gi,
   },
   {
     name: "Alpro",
@@ -1179,7 +1183,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Ecomil",
-    pattern: /ecomil/gi,
+    pattern: /ecomil(?:\sdiemilk)?|diemilk/gi,
   },
   {
     name: "Kaiku",
@@ -1191,7 +1195,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Provamel",
-    pattern: /provamel/gi,
+    pattern: /provamel|promavel/gi,
   },
   {
     name: "Vivibio",
@@ -1290,8 +1294,9 @@ const GeneralBrands: TBrand[] = [
     pattern: /strepsils/gi,
   },
   {
+    // This brand causes collitions with 'Colón'. I'm going to make it more specific but we need to be careful
     name: "Vanish",
-    pattern: /vanish/gi,
+    pattern: /^vanish/gi,
   },
   {
     name: "Veet",
@@ -1303,11 +1308,11 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Ambar Perfums",
-    pattern: /ambar/gi,
+    pattern: /ambar(?!\slata)/gi,
   },
   {
     name: "Don Algodon Ambients",
-    pattern: /don\salgodon\sambients/gi,
+    pattern: /don\salgodon\s(?:ambients)?/gi,
   },
   {
     name: "The Fruit Company",
@@ -1323,7 +1328,8 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Lumar Aromatic",
-    pattern: /lumar\saromatic/gi,
+    pattern:
+      /lumar\saromatic|pack [23]0 tealights|tabla incienso colores|vaso yogurt perf\.|velas día de San Valentín/gi,
   },
   {
     name: "Aromatium",
@@ -1361,9 +1367,12 @@ const GeneralBrands: TBrand[] = [
     name: "Orion",
     pattern: /orion/gi,
   },
+  /* This brand is causing problems, we will need to be more specific
+   * - First specific match: Being the first word in the string
+   **/
   {
     name: "Oro",
-    pattern: /oro/gi,
+    pattern: /^oro/gi,
   },
   {
     name: "Sanytol",
@@ -1391,7 +1400,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "IQ",
-    pattern: /iq/gi,
+    pattern: /^iq/gi,
   },
   {
     name: "Asevi",
@@ -1407,11 +1416,11 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "MPL",
-    pattern: /mpl/gi,
+    pattern: /^mpl/gi,
   },
   {
     name: "Pato",
-    pattern: /pato/gi,
+    pattern: /(?<![paté|muslos|hígado]\sde)(?:^|\s)pato(?:$|\s)/gi,
   },
   {
     name: "Pattex",
@@ -1419,11 +1428,11 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Tenn",
-    pattern: /tenn/gi,
+    pattern: /tenn(?:\s|$)/gi,
   },
   {
     name: "Albal",
-    pattern: /albal/gi,
+    pattern: /(?:\s|^)albal/gi,
   },
   {
     name: "Macopack",
@@ -1462,8 +1471,11 @@ const GeneralBrands: TBrand[] = [
     pattern: /raid/gi,
   },
   {
+    // This brand is causing problems, we will need to be more specific
+    // - First specific match: Being the first word in the string
+    // - Second specific match: The word should have an space after
     name: "Zum",
-    pattern: /zum/gi,
+    pattern: /^zum\s/gi,
   },
   {
     name: "Farmazum",
@@ -1527,7 +1539,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Conejo",
-    pattern: /conejo/gi,
+    pattern: /^conejo/gi,
   },
   {
     name: "Domestos",
@@ -1539,7 +1551,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Colón",
-    pattern: /col[oó]n/gi,
+    pattern: /col[oó]n(?:\s|$)/gi,
   },
   {
     name: "Handy Bag",
@@ -1575,7 +1587,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "La Piel",
-    pattern: /la\s+piel/gi,
+    pattern: /(?:\s|^)la\s+piel(?!\sbonté)/gi,
   },
   {
     name: "Palc",
@@ -1624,7 +1636,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Born",
-    pattern: /born/gi,
+    pattern: /[\^\s]born[\$\s]/gi,
   },
   {
     // I saw a case a 'ecoesta'...
@@ -1677,10 +1689,6 @@ const GeneralBrands: TBrand[] = [
     pattern: /alternativa\s+3/gi,
   },
   {
-    name: "Dulzán",
-    pattern: /dulz[aá]n/gi,
-  },
-  {
     name: "Granovita",
     pattern: /granovita/gi,
   },
@@ -1711,7 +1719,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "EKO",
-    pattern: /eko/gi,
+    pattern: /(?:\s|^)eko/gi,
   },
   {
     // I saw a case a 'ganero'...
@@ -1788,9 +1796,8 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Linwoods",
-    pattern: /linwoods/gi
-  }
+    pattern: /linwoods/gi,
+  },
 ];
 
 export default GeneralBrands;
-
