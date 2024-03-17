@@ -1329,7 +1329,6 @@ const BRANDS: TBrand[] = [
     name: "Monje",
     pattern: /monje/gi,
   },
-  // From here, we have several products that comes without brand
   {
     name: "Betina",
     pattern: /Pan baguetina sin gluten/gi,
@@ -1338,8 +1337,6 @@ const BRANDS: TBrand[] = [
     name: "Campelos",
     pattern: /(?:pan baguetin lareira|barra 100% integral )/gi,
   },
-  // This is a complicated brand
-  // - Making problems with: Omino Bianco, Nature Compagnie
   {
     name: "Berlys",
     pattern: /^nature\s(?!.*compagnie.*|valley)/gi,
@@ -1349,8 +1346,9 @@ const BRANDS: TBrand[] = [
     pattern: /(?:pant[aá]stico|burguer 4 unidades)/gi,
   },
   {
-    name: "sabores de la luisiana",
-    pattern: /(?:colín palitos|rosquillas|sabores de la luisi?ana)/gi,
+    name: "Sabores de la Luisiana",
+    pattern:
+      /(?:colín palitos|rosquillas|sabores de la luisi?ana)(?:\s|$)(?!(?:de chocolate|al cacao) El molino de Dia|(?:de azúcar|integrales) Pelayo)/gi,
   },
   {
     name: "Gourmandise",
@@ -1391,6 +1389,8 @@ const HOMEMADE_PATTERNS = [
   /almeja/gi,
   /berberecho/gi,
   /bogavante/gi,
+  /obleas/gi,
+  /lenguas/gi,
   /buey de mar/gi,
   /centollo/gi,
   /malla/gi,

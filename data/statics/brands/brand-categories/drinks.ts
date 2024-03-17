@@ -258,7 +258,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "103",
-    pattern: /103(?!\sg)/gi,
+    pattern: /(?<!deliplus)(?:\s|^)103(?!\sg)/gi,
   },
   {
     name: "Carlos I",
@@ -1124,7 +1124,7 @@ const Drinks: TBrand[] = [
   {
     name: "Brummel",
     pattern: /brumm?el/gi,
-  }
+  },
 ];
 
 export default Drinks;

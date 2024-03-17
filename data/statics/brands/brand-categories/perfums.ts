@@ -333,6 +333,154 @@ const PerfumBrands: TBrand[] = [
     name: "Lanson",
     pattern: /lanson/gi,
   },
+  {
+    name: "Beautik Pro",
+    pattern: /beautik pro/gi,
+  },
+  {
+    name: "Cal y Canto",
+    pattern: /cal y canto/gi,
+  },
+  {
+    name: "La Llama",
+    pattern: /la llama/gi,
+  },
+  {
+    name: "Amoos",
+    pattern: /amoos/gi,
+  },
+  {
+    name: "Planeta Junior",
+    pattern: /planeta junior/gi,
+  },
+  {
+    name: "Mandul",
+    pattern: /mandul/gi,
+  },
+  {
+    name: "Galleteca",
+    pattern: /galleteca/gi,
+  },
+  {
+    name: "Pastiñam",
+    pattern: /pastiñam/gi,
+  },
+  {
+    name: "Arenas",
+    pattern: /arenas/gi,
+  },
+  {
+    name: "El Cateto",
+    pattern: /el cateto/gi,
+  },
+  {
+    name: "Dulca",
+    pattern: /dulca/gi,
+  },
+  {
+    name: "Oh La France",
+    pattern: /oh la france/gi,
+  },
+  {
+    name: "Virgen del Brezo",
+    pattern: /virgen del brezo/gi,
+  },
+  {
+    name: "Blanco",
+    pattern: /blanco/gi,
+  },
+  {
+    name: "La Abuela",
+    pattern: /la abuela/gi,
+  },
+  {
+    name: "Vega Pas",
+    pattern: /vega pas/gi,
+  },
+  {
+    name: "Biscuits Galicia",
+    pattern: /biscuits galicia/gi,
+  },
+  {
+    name: "Gran Pasevi",
+    pattern: /gran pasevi/gi,
+  },
+  {
+    name: "Galleteca",
+    pattern: /galleteca/gi,
+  },
+  {
+    name: "St Michel",
+    pattern: /st michel/gi,
+  },
+  {
+    name: "Doña Delicia",
+    pattern: /doña delicia/gi,
+  },
+  {
+    name: "Bonne Maman",
+    pattern: /bonne maman/gi,
+  },
+  {
+    name: "Paw Patrol",
+    pattern: /paw patrol/gi,
+  },
+  {
+    name: "Río",
+    pattern: /río/gi,
+  },
+  {
+    name: "Diet",
+    pattern: /diet/gi,
+  },
+  {
+    name: "Flora",
+    pattern: /flora/gi,
+  },
+  {
+    name: "Natacha",
+    pattern: /natacha/gi,
+  },
+  {
+    name: "Huevos Garrido",
+    pattern: /huevos garrido/gi,
+  },
+  {
+    name: "La Receta",
+    pattern: /la receta/gi,
+  },
+  {
+    name: "Grupo de Lucas",
+    pattern: /grupo de lucas/gi,
+  },
+  {
+    name: "Cacaolat",
+    pattern: /cacaolat/gi,
+  },
+  {
+    name: "Ram",
+    pattern: /ram/gi,
+  },
+  {
+    name: "OR Xata",
+    pattern: /or xata/gi,
+  },
+  {
+    name: "Central Lechera Asturiana",
+    pattern: /central lechera asturiana/gi,
+  },
+  {
+    name: "Sveltesse",
+    pattern: /sveltesse/gi,
+  },
+  {
+    name: "Lauki",
+    pattern: /lauki/gi,
+  },
+  {
+    name: "Celta",
+    pattern: /celta/gi,
+  },
 ];
 
 export default PerfumBrands;
