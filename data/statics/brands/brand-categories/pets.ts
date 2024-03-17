@@ -15,7 +15,7 @@ const PetsBrands: TBrand[] = [
   // This brand is too generic, so we will add negative condition lookaheads
   {
     name: "Gourmet",
-    pattern: /gourmet(?!\s?(cazorla))/gi,
+    pattern: /^gourmet(?!\s?(cazorla))/gi,
     onlyCategory: Categories.Mascotas,
   },
   {
@@ -88,8 +88,13 @@ const PetsBrands: TBrand[] = [
     pattern: /granzoo/gi,
   },
   {
+    // This brand is too generic, so we will add negative condition lookaheads
+    // Causing problems with: Natura Nuova
+    // Adding more specificty to the pattern
+    // - First specificity: It should has an space after the word
+    // - Second specificity: It should be the first word in the string
     name: "Natura",
-    pattern: /natura/gi,
+    pattern: /(?:^|\s)natura\s(?!nuova)/gi,
   },
   {
     name: "Delikuit",
@@ -110,7 +115,7 @@ const PetsBrands: TBrand[] = [
   {
     name: "Single",
     pattern: /single/gi,
-  }
+  },
 ];
 
 export default PetsBrands;

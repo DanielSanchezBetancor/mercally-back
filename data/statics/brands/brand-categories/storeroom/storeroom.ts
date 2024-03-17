@@ -109,7 +109,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Lays",
-    pattern: /lay'?s/gi,
+    pattern: /[\s|^]lay'?s/gi,
   },
   {
     name: "Doritos",
@@ -153,15 +153,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Risi",
-    pattern: /risi|mios/gi,
+    pattern: /(?:\s|^)risi|mios/gi,
   },
   {
     name: "Soldanza",
     pattern: /soldanza/gi,
-  },
-  {
-    name: "Antonio",
-    pattern: /antonio/gi,
   },
   {
     name: "Diamante",
@@ -301,7 +297,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Lindtr Lindor",
-    pattern: /(?:lindt )?Lindor(?: lindt)?/gi,
+    pattern: /(?:(?:lindt\s)?(?:lindt|lindor)(?:\slindt)?)|gold bunny/gi,
   },
   {
     name: "Mondose",
@@ -321,7 +317,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Castillo de Holanda",
-    pattern: /castillo/gi,
+    pattern: /castillo(?:de holanda|.*queso.*)/gi,
   },
   {
     name: "Colliers",
@@ -345,7 +341,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Portillo",
-    pattern: /portillo/gi,
+    pattern: /(?:\s|^)portillo/gi,
   },
   {
     name: "Maxorata",
@@ -397,7 +393,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "García Baquero",
-    pattern: /garc[íi]a baquero/gi,
+    pattern: /(?:garc[íi]a|g.)?\s?baquero/gi,
   },
   {
     name: "Gran Capitán",
@@ -417,7 +413,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Distribuidor de Quesos Canarios",
-    pattern: /distribuidor [de ]?quesos canarios/gi,
+    pattern: /distribuidor (?:de\s)?quesos canarios/gi,
   },
   {
     name: "Isla Bonita",
@@ -449,7 +445,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Parti",
-    pattern: /parti/gi,
+    pattern: /parti(?:\s|$)/gi,
   },
   {
     name: "Pazo do queixo",
@@ -516,8 +512,11 @@ const StoreRoom: TBrand[] = [
     pattern: /munchos/gi,
   },
   {
+    // This brand is causing problems with the pattern, let's make it more specific
+    // - Is causing problems with beer brands, since most of them starts with 'Estrella', like 'Estrella Galicia', 'Estrella Damm', etc.
+    // - First specific pattern: No word 'cerveza' before the brand
     name: "Estrella",
-    pattern: /estrella/gi,
+    pattern: /estrella(?:\s|$)(?!cerveza|galicia|del sur|damm)/gi,
   },
   {
     name: "La Llanura",
@@ -541,7 +540,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Filipinos",
-    pattern: /filipinos/gi,
+    pattern: /(?<!con\s)filipinos/gi,
   },
   {
     name: "Marbú Doradas",
@@ -557,7 +556,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Coral",
-    pattern: /coral/gi,
+    pattern: /coral(?<!desodorante)/gi,
   },
   {
     name: "Tosta Rica",
@@ -573,11 +572,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Krit",
-    pattern: /krit/gi,
+    pattern: /krit(?:\s|$)/gi,
   },
   {
     name: "Bocaditos",
-    pattern: /bocaditos/gi,
+    pattern: /^bocaditos(?!en\ssalsa)/gi,
   },
   {
     name: "El Auténtico",
@@ -609,7 +608,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Cuétara Galletas",
-    pattern: /cu[eé]tara\s.*(?:galletas?|barquillos?)/gi,
+    pattern: /cu[eé]tara\s?(?:galletas?|barquillos?)?/gi,
   },
   {
     name: "Fabián Martín",
@@ -617,7 +616,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Gullón",
-    pattern: /(?:digestive|gull[oó]n)/gi,
+    pattern: /(?!(?:mcvities|santiveri)\sgalletas\s)digestive|gull[oó]n/gi,
   },
   {
     name: "Merci",
@@ -633,7 +632,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Mels",
-    pattern: /mels/gi,
+    pattern: /mels|brazo nata/gi,
   },
   {
     name: "D. Sancho Melero",
@@ -749,11 +748,14 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Lacta",
-    pattern: /lacta/gi,
+    pattern: /lacta\s/gi,
   },
   {
+    // This brand is causing problems with the pattern, let's make it more specific
+    // - First specific pattern: It should be the first word in the string
+    // - Second specific pattern: It should contain an space after the word
     name: "Lu",
-    pattern: /^lu/gi,
+    pattern: /(?:\s|^)lu(?:\s|$)/gi,
   },
   {
     name: "Marabou",
@@ -769,11 +771,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Milka",
-    pattern: /milka/gi,
+    pattern: /milka(?!\sroyal)/gi,
   },
   {
     name: "Oreo",
-    pattern: /oreo/gi,
+    pattern: /oreo(?!\sroyal)/gi,
   },
   {
     name: "Perfect Snacks",
@@ -793,7 +795,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Royal",
-    pattern: /royal/gi,
+    pattern: /royal(?:\s|$)(?!swan|greenland)/gi,
   },
   {
     name: "Sour Patch Kids",
@@ -805,7 +807,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Tang",
-    pattern: /tang/gi,
+    pattern: /tang\s/gi,
   },
   {
     name: "Tate's Bake Shop",
@@ -825,7 +827,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Tuc",
-    pattern: /tuc/gi,
+    pattern: /tuc(?:\s|$)/gi,
   },
   {
     name: "Wheat Thins",
@@ -833,7 +835,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Pirulín",
-    pattern: /pirul[ií]n/gi,
+    pattern: /(?:^|\s)pirul[ií]n/gi,
   },
   {
     name: "Pirucream",
@@ -909,7 +911,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Rita",
-    pattern: /rita/gi,
+    pattern: /^rita/gi,
   },
   {
     name: "Oroweat",
@@ -929,7 +931,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "The Rustik Bakery",
-    pattern: /the\s+rustik\s+bakery/gi,
+    pattern: /the\s+rustik\s+bakery|mini magdalenas/gi,
   },
   {
     name: "Martínez",
@@ -940,12 +942,8 @@ const StoreRoom: TBrand[] = [
     pattern: /bollycao/gi,
   },
   {
-    name: "Pantera Rosa",
-    pattern: /pantera\s+rosa/gi,
-  },
-  {
     name: "Bimbo",
-    pattern: /bimbo/gi,
+    pattern: /bimbo|pantera\s+rosa/gi,
   },
   {
     name: "Little Bites",
@@ -973,7 +971,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Donuts",
-    pattern: /donuts/gi,
+    pattern: /(?<!eidetesa\s(?:[0-9]\s)?(?:mini\s)?)donuts?/gi,
   },
   {
     name: "Weikis",
@@ -981,7 +979,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Qé",
-    pattern: /qé/gi,
+    pattern: /qé!?/gi,
   },
   {
     name: "Family Biscuits",
@@ -989,7 +987,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Lotus",
-    pattern: /lotus/gi,
+    pattern: /lotus(?:\sbiscoff)?/gi,
   },
   {
     name: "Reglero",
@@ -1014,11 +1012,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Moment",
-    pattern: /moment/gi,
+    pattern: /moment(?!\snatural)/gi,
   },
   {
     name: "Colacao",
-    pattern: /colacao/gi,
+    pattern: /cola\s?cao/gi,
   },
   {
     name: "Nocilla",
@@ -1026,7 +1024,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Paladin",
-    pattern: /paladin/gi,
+    pattern: /palad[ií]n/gi,
   },
   {
     name: "Okey",
@@ -1101,10 +1099,6 @@ const StoreRoom: TBrand[] = [
     pattern: /barber/gi,
   },
   {
-    name: "Prima",
-    pattern: /prima/gi,
-  },
-  {
     name: "La Cañada",
     pattern: /la\s+cañada/gi,
   },
@@ -1112,7 +1106,877 @@ const StoreRoom: TBrand[] = [
     name: "La Pasion",
     pattern: /la\s+pasion/gi,
   },
+  {
+    name: "Palique canario",
+    pattern: /palique\scanario/gi,
+  },
+  {
+    name: "Presas Ocampo",
+    pattern: /presas\socampo/gi,
+  },
+  {
+    name: "Trancao",
+    pattern: /(?:tentaci[oó]n|trancao)/gi,
+  },
+  {
+    name: "Vega Norte",
+    pattern: /vega\snorte/gi,
+  },
+  {
+    name: "Viña Arese",
+    pattern: /viña\sarese/gi,
+  },
+  {
+    name: "Viña Norte",
+    pattern: /viña\snorte/gi,
+  },
+  {
+    name: "Las piedras",
+    pattern: /las\spiedras/gi,
+  },
+  {
+    name: "Care",
+    pattern: /^care\s/gi,
+  },
+  {
+    name: "Bach",
+    pattern: /^bach/gi,
+  },
+  {
+    name: "Conde de Caralt",
+    pattern: /conde\s(?:de\s)?caralt?/gi,
+  },
+  {
+    name: "Marqués de Griñón",
+    pattern: /marqu[eé]s\sde\sgriñ[oó]n/gi,
+  },
+  {
+    name: "Natureo",
+    pattern: /natureo/gi,
+  },
+  {
+    name: "Perpetual",
+    pattern: /perpetual/gi,
+  },
+  {
+    name: "Rene Barbier",
+    pattern: /rene\sbarbier/gi,
+  },
+  {
+    name: "Salmos",
+    pattern: /salmos/gi,
+  },
+  {
+    name: "Sangre de Toro",
+    pattern: /sangre\nde\storo/gi,
+  },
+  {
+    name: "Algueira",
+    pattern: /algueira/gi,
+  },
+  {
+    name: "Alamos",
+    pattern: /alamos/gi,
+  },
+  {
+    name: "Burklin",
+    pattern: /burklin/gi,
+  },
+  {
+    name: "Catena",
+    pattern: /catena/gi,
+  },
+  {
+    name: "Chateau Brejou",
+    pattern: /chateau\sbrejou/gi,
+  },
+  {
+    name: "Donnhoff",
+    pattern: /donnhoff/gi,
+  },
+  {
+    name: "Les Rabassieres",
+    pattern: /les\srabassieres/gi,
+  },
+  {
+    name: "Maestri Cantinieri",
+    pattern: /maestri\scantinieri/gi,
+  },
+  {
+    name: "Niepoort",
+    pattern: /niepoort/gi,
+  },
+  {
+    name: "The Chocolate Block",
+    pattern: /the\s+chocolate\s+block/gi,
+  },
+  {
+    name: "El abuelo",
+    pattern: /el\sabuelo/gi,
+  },
+  {
+    name: "El Vínculo",
+    pattern: /el\sv[ií]nculo/gi,
+  },
+  {
+    name: "Martúe",
+    pattern: /mart[uú]e/gi,
+  },
+  {
+    name: "Matsu",
+    pattern: /matsu/gi,
+  },
+  {
+    name: "Meque13",
+    pattern: /meque13/gi,
+  },
+  {
+    name: "Piqueras",
+    pattern: /piqueras/gi,
+  },
+  {
+    name: "Mucho más",
+    pattern: /mucho\sm[aá]s/gi,
+  },
+  {
+    name: "Viña Cancel",
+    pattern: /viña\scancel/gi,
+  },
+  {
+    name: "Doña Isabella",
+    pattern: /doña\sisabella/gi,
+  },
+  {
+    name: "Le Naturel",
+    pattern: /le\snaturel/gi,
+  },
+  {
+    name: "Viña Onquiola",
+    pattern: /viña\sonquiola/gi,
+  },
+  {
+    name: "409",
+    pattern: /409 autor/gi,
+  },
+  {
+    name: "Aalto",
+    pattern: /aalto/gi,
+  },
+  {
+    name: "Abadía San Quice",
+    pattern: /abad[ií]a\ssan\squice/gi,
+  },
+  {
+    name: "Alión",
+    pattern: /ali[oó]n/gi,
+  },
+  {
+    name: "Alonso del Yerro",
+    pattern: /alonso\sdel\syerro/gi,
+  },
+  {
+    name: "Altos de Tamarón",
+    pattern: /altos\sdel?\stamar[oó]n/gi,
+  },
+  {
+    name: "Antídoto",
+    pattern: /ant[ií]doto/gi,
+  },
+  {
+    name: "Arzuaga",
+    pattern: /arzuaga/gi,
+  },
+  {
+    name: "Bardos",
+    pattern: /bardos/gi,
+  },
+  {
+    name: "Tierras de Cair",
+    pattern: /(?:tierras\sde\s)?cair/gi,
+  },
+  {
+    name: "Canta Perdices",
+    pattern: /canta\sperdices/gi,
+  },
+  {
+    name: "Carmelo Rodero",
+    pattern: /carmelo\srodero/gi,
+  },
+  {
+    name: "Carramimbre",
+    pattern: /carramimbre/gi,
+  },
+  {
+    name: "Celeste",
+    pattern: /celeste(?!\ssp berner)/gi,
+  },
+  {
+    name: "Cepa 21",
+    pattern: /(?:cepa\s21|hito vino tinto|malabrig)/gi,
+  },
+  {
+    name: "Cepa Gavilán",
+    pattern: /cepa\sgavil[aá]n/gi,
+  },
+  {
+    name: "Cillar de Silos",
+    pattern: /cillar\de\ssilos/gi,
+  },
+  {
+    name: "Condado de Haza",
+    pattern: /condado\sde\shaza/gi,
+  },
+  {
+    name: "Corimbo",
+    pattern: /corimbo/gi,
+  },
+  {
+    name: "Cune",
+    pattern: /cune/gi,
+  },
+  {
+    name: "Dehesa de los Canónigos",
+    pattern: /dehesa\s(?:de\slos\s)?can[oó]nigos/gi,
+  },
+  {
+    name: "Dominio de Atauta",
+    pattern: /dominio\sde\satauta/gi,
+  },
+  {
+    name: "Durón",
+    pattern: /dur[oó]n/gi,
+  },
+  {
+    name: "Ederra",
+    pattern: /ederra/gi,
+  },
+  {
+    name: "Emilio Moro",
+    pattern: /emilio\smoro/gi,
+  },
+  {
+    name: "Erial",
+    pattern: /(?:\s|^)erial/gi,
+  },
+  {
+    name: "Etcétera",
+    pattern: /etcetera/gi,
+  },
+  {
+    name: "Figuero",
+    pattern: /figuero/gi,
+  },
+  {
+    name: "Gazur",
+    pattern: /gazur/gi,
+  },
+  {
+    name: "Hacienda Monasterio",
+    pattern: /(?:hacienda|h\.)\smonasterio/gi,
+  },
+  {
+    name: "La Cometa",
+    pattern: /la\scometa/gi,
+  },
+  {
+    name: "La Planta",
+    pattern: /la\splanta/gi,
+  },
+  {
+    name: "Legaris",
+    pattern: /legaris/gi,
+  },
+  {
+    name: "Lágrima Negra",
+    pattern: /l[aá]grima\snegra/gi,
+  },
+  {
+    name: "Emilio Moro",
+    pattern: /(?:Malleolus Valderramiro)/gi,
+  },
+  {
+    name: "Matarromera",
+    pattern: /^matarromera/gi,
+  },
+  {
+    name: "Melior de Matarromera",
+    pattern: /melior\sde\smatarromera/gi,
+  },
+  {
+    name: "Mayor de Castilla",
+    pattern: /mayor\sde\scastilla/gi,
+  },
+  {
+    name: "Monasterio San Miguel",
+    pattern: /monasterio\ssan\smiguel/gi,
+  },
+  {
+    name: "Ocho dos dos",
+    pattern: /ocho\sdos\sdos/gi,
+  },
+  {
+    name: "Pago de los Capellanes",
+    pattern: /pago\sde\s(?:los\s)?capellanes/gi,
+  },
+  {
+    name: "Pago de Carraovejas",
+    pattern: /pago\sde\scarraovejas/gi,
+  },
+  {
+    name: "Pago de Fuentevega",
+    pattern: /pago\sde\sfuentevega/gi,
+  },
+  {
+    name: "Parada de Atauta",
+    pattern: /parada\sde\satauta/gi,
+  },
+  {
+    name: "Pesquera",
+    pattern: /pesquera/gi,
+  },
+  {
+    name: "Portia",
+    pattern: /portia/gi,
+  },
+  {
+    name: "Pradorey",
+    pattern: /pradorey/gi,
+  },
+  {
+    name: "Protos",
+    pattern: /protos/gi,
+  },
+  {
+    name: "Pruno",
+    pattern: /pruno/gi,
+  },
+  {
+    name: "Psi",
+    pattern: /^psi/gi,
+  },
+  {
+    name: "Rivendel",
+    pattern: /rivendel/gi,
+  },
+  {
+    name: "Tomás Postigo",
+    pattern: /tom[aá]s\spostigo/gi,
+  },
+  {
+    name: "Vega Sicilia",
+    pattern: /vega\ssicilia/gi,
+  },
+  {
+    name: "Venta las Vacas",
+    pattern: /venta\slas\svacas/gi,
+  },
+  {
+    name: "Vizcarra",
+    pattern: /vizcarra/gi,
+  },
+  {
+    name: "Viña Mayor",
+    pattern: /viña\smayor/gi,
+  },
+  {
+    name: "Viña Pedrosa",
+    pattern: /viña\spedrosa/gi,
+  },
+  {
+    // This brand is causing problems with the pattern, let's make it more specific
+    // - First specific pattern: It should be the first word in the string
+    name: "LAN",
+    pattern: /^(?:lan(?:\sa mano)?(?:\s|$)|7 metros crianza do rioja)/gi,
+  },
+  {
+    name: "Alcorta",
+    pattern: /alcorta/gi,
+  },
+  {
+    name: "Altos Ibéricos",
+    pattern: /altos\sib[eé]ricos/gi,
+  },
+  {
+    name: "Amaren",
+    pattern: /(?:[aá]ngeles\sde\s)?amaren/gi,
+  },
+  {
+    name: "Azpilicueta",
+    pattern: /azpilicueta/gi,
+  },
+  {
+    name: "Baigorri",
+    pattern: /baigorri/gi,
+  },
+  {
+    name: "Barón de Ley",
+    pattern: /bar[oó]n\nde\sley/gi,
+  },
+  {
+    name: "Barón Hayarza",
+    pattern: /bar[oó]n\shayarza/gi,
+  },
+  {
+    name: "Berberana",
+    pattern: /berberana/gi,
+  },
+  {
+    name: "Beronia",
+    pattern: /beronia/gi,
+  },
+  {
+    name: "Campillo",
+    pattern: /campillo/gi,
+  },
+  {
+    name: "Campo Viejo",
+    pattern: /campo\sviejo/gi,
+  },
+  {
+    name: "Castillo de Albai",
+    pattern: /castillo\sde\salbai/gi,
+  },
+  {
+    name: "Cerro Añón",
+    pattern: /cerro\s(?:de\s)?añ[oó]n/gi,
+  },
+  {
+    name: "Conde de Basalu",
+    pattern: /conde\sde\sbasalu/gi,
+  },
+  {
+    name: "Contino",
+    pattern: /contino/gi,
+  },
+  {
+    name: "Corriente",
+    pattern: /corriente/gi,
+  },
+  {
+    name: "Coto de imaz",
+    pattern: /coto\sde\simaz/gi,
+  },
+  {
+    name: "El Coto",
+    pattern: /(?:el\s)?coto/gi,
+  },
+  {
+    name: "Dinastía Vivanco",
+    pattern: /dinast[ií]a\svivanco/gi,
+  },
+  {
+    name: "Faustino Rivero Ulecia",
+    pattern: /faustino\srivero\sulecia/gi,
+  },
+  {
+    name: "Faustino",
+    pattern: /faustint?o(?!\sVII)/gi,
+  },
+  {
+    name: "Fernández de Pieróla",
+    pattern: /fern[aá]ndez\sde\spier[oó]la/gi,
+  },
+  {
+    name: "Glorioso",
+    pattern: /glorioso/gi,
+  },
+  {
+    name: "La Bicicleta Voladora",
+    pattern: /la\sbicicleta\svoladora/gi,
+  },
+  {
+    name: "La Vicalanda",
+    pattern: /la\svicalanda/gi,
+  },
+  {
+    name: "Lagunilla",
+    pattern: /lagunilla/gi,
+  },
   ...StoreRoomSpreadableBrands,
+  {
+    name: "Lanzaga",
+    pattern: /lanzaga/gi,
+  },
+  {
+    name: "Lindes Remelluri",
+    pattern: /(?:lindes\s)?remelluri/gi,
+  },
+  {
+    name: "Luis Cañas",
+    pattern: /luis\scañas/gi,
+  },
+  {
+    name: "LZ 12",
+    pattern: /lz\s12/gi,
+  },
+  {
+    name: "López de Haro",
+    pattern: /l[oó]pez\sde\sharo/gi,
+  },
+  {
+    name: "Marqués Concordia",
+    pattern: /marqu[eé]s\sconcordia/gi,
+  },
+  {
+    name: "Marqués Cáceres",
+    pattern: /marqu[eé]s\s(?:de\s)?c[aá]ceres/gi,
+  },
+  {
+    name: "Marqués de Murrieta",
+    pattern: /marqu[eé]s\sde\smurrieta/gi,
+  },
+  {
+    name: "Marqués Riscal",
+    pattern: /marqu[eé]s\sriscal/gi,
+  },
+  {
+    name: "Martínez Lacuesta",
+    pattern: /mart[ií]nez\slacuesta/gi,
+  },
+  {
+    name: "Mayor de Ondarre",
+    pattern: /mayor\sde\sondarre/gi,
+  },
+  {
+    name: "Milflores",
+    pattern: /milflores/gi,
+  },
+  {
+    name: "Monte Real",
+    pattern: /monte\sreal/gi,
+  },
+  {
+    name: "Montecillo",
+    pattern: /montecillo/gi,
+  },
+  {
+    name: "Monólogo",
+    pattern: /mon[oó]logo/gi,
+  },
+  {
+    name: "Muga",
+    pattern: /(?:(?:torre\s)?muga|prado enea)/gi,
+  },
+  {
+    name: "Murua",
+    pattern: /murua/gi,
+  },
+  {
+    name: "Obalo",
+    pattern: /obalo/gi,
+  },
+  {
+    name: "Orben",
+    pattern: /^orben/gi,
+  },
+  {
+    name: "Orube",
+    pattern: /orube/gi,
+  },
+  {
+    name: "Otoñal",
+    pattern: /otoñal/gi,
+  },
+  {
+    name: "Paco García",
+    pattern: /paco\sgarc[ií]a/gi,
+  },
+  {
+    name: "Pata Negra",
+    pattern: /pata\snegra/gi,
+  },
+  {
+    name: "Paternina",
+    pattern: /paternina/gi,
+  },
+  {
+    name: "Predicador",
+    pattern: /predicador/gi,
+  },
+  {
+    name: "Puerta Vieja",
+    pattern: /puerta\svieja/gi,
+  },
+  {
+    name: "Ramón Bilbao",
+    pattern: /ram[oó]n\s(?:bilbao|bilbo)/gi,
+  },
+  {
+    name: "Roda",
+    pattern: /roda\s/gi,
+  },
+  {
+    name: "Sela",
+    pattern: /sela/gi,
+  },
+  {
+    name: "Solar Viejo",
+    pattern: /solar\sviejo/gi,
+  },
+  {
+    name: "Vallobera",
+    pattern: /vallobera/gi,
+  },
+  {
+    name: "Viña Alberdi",
+    pattern: /viña\salberdi/gi,
+  },
+  {
+    name: "Viña Albina",
+    pattern: /viña\salbina/gi,
+  },
+  {
+    name: "Viña Arana",
+    pattern: /viña\sarana/gi,
+  },
+  {
+    name: "Viña Ardanza",
+    pattern: /viña\sardanza/gi,
+  },
+  {
+    name: "Viña Hayarza",
+    pattern: /viña\shayarza/gi,
+  },
+  {
+    name: "Viña Herminia",
+    pattern: /viña\sherminia/gi,
+  },
+  {
+    name: "Viña Izadi",
+    pattern: /viña\sizadii?/gi,
+  },
+  {
+    name: "Viña Pomal",
+    pattern: /viña\spomal/gi,
+  },
+  {
+    name: "Viña Tondonia",
+    pattern: /viña\stondonia/gi,
+  },
+  {
+    name: "Viña Albali",
+    pattern: /viña\salbali/gi,
+  },
+  {
+    name: "Viñestral",
+    pattern: /viñestral/gi,
+  },
+  {
+    name: "Ysios",
+    pattern: /ysios/gi,
+  },
+  {
+    name: "Los Molinos",
+    pattern: /los\smolinos/gi,
+  },
+  {
+    name: "Señorío de los Llanos",
+    pattern: /señor[ií]o\sde\slos\sllanos/gi,
+  },
+  {
+    name: "Abadía Retuerta",
+    pattern: /abad[ií]a\sretuerta/gi,
+  },
+  {
+    name: "Alaja",
+    pattern: /alaja/gi,
+  },
+  {
+    name: "Audiencia",
+    pattern: /audiencia/gi,
+  },
+  {
+    name: "Bajoz",
+    pattern: /(?:gran\s)?bajoz/gi,
+  },
+  {
+    name: "Balancines",
+    pattern: /balancines/gi,
+  },
+  {
+    name: "Borsao",
+    pattern: /borsao/gi,
+  },
+  {
+    name: "Castillo de Liria",
+    pattern: /castillo\sde\sliria/gi,
+  },
+  {
+    name: "Castro Ventosa",
+    pattern: /castro\sventosa/gi,
+  },
+  {
+    name: "Celsus",
+    pattern: /celsus/gi,
+  },
+  {
+    name: "Vía Cenit",
+    pattern: /(?:v[ií]a\s)?cenit/gi,
+  },
+  {
+    name: "Colos ancestral",
+    pattern: /co?los\sancestral/gi,
+  },
+  {
+    name: "Corazón Loco",
+    pattern: /coraz[oó]n\sloco/gi,
+  },
+  {
+    name: "Dehesa Gago",
+    pattern: /(?:dehesa\s)?gago/gi,
+  },
+  {
+    name: "Dehesa La Granja",
+    pattern: /dehesa\sla\sgranja/gi,
+  },
+  {
+    name: "Demuerte",
+    pattern: /demuerte/gi,
+  },
+  {
+    name: "Domino de Valdepusa",
+    pattern: /domino\sde\svaldepusa/gi,
+  },
+  {
+    name: "Don Ramón",
+    pattern: /don\sram[oó]n/gi,
+  },
+  {
+    name: "Enrique Mendoza",
+    pattern: /(?:enrique|e.)\smendon?za/gi,
+  },
+  {
+    name: "Enate",
+    pattern: /enate/gi,
+  },
+  {
+    name: "Finca Terrerazo",
+    pattern: /finca\sterrerazo/gi,
+  },
+  {
+    name: "Gaba Do XiL",
+    pattern: /gaba\sdo\sxil/gi,
+  },
+  {
+    name: "La Garnacha Salvaje del Moncayo",
+    pattern: /(?:la\s)?garnacha\ssalvaje\sdel\smoncayo/gi,
+  },
+  {
+    name: "Habla de la Tierra",
+    pattern: /habla\sde\sla\stierra/gi,
+  },
+  {
+    name: "Habla del Silencio",
+    pattern: /habla\sdel\ssilencio/gi,
+  },
+  {
+    name: "Honoro",
+    pattern: /honoro/gi,
+  },
+  {
+    name: "Huno",
+    pattern: /huno/gi,
+  },
+  {
+    name: "Infiltrado",
+    pattern: /infiltrado/gi,
+  },
+  {
+    name: "Juan Gil",
+    pattern: /juan\sgil/gi,
+  },
+  {
+    name: "Lunático",
+    pattern: /lun[aá]tico/gi,
+  },
+  {
+    name: "Mala Vida",
+    pattern: /mala\svida/gi,
+  },
+  {
+    name: "Mano a Mano",
+    pattern: /mano\s(?:a\s)?mano/gi,
+  },
+  {
+    name: "Marqués de Toro",
+    pattern: /marqu[eé]s\sde\storo/gi,
+  },
+  {
+    name: "Mas de Leda",
+    pattern: /mas\sde\sleda/gi,
+  },
+  {
+    name: "Mestizaje",
+    pattern: /mestizaje/gi,
+  },
+  {
+    name: "Murviedro",
+    pattern: /murviedro/gi,
+  },
+  {
+    name: "Nº Zero",
+    pattern: /n[ºo] zero/gi,
+  },
+  {
+    name: "Oloroso Alburejo",
+    pattern: /oloroso\salburejo/gi,
+  },
+  {
+    name: "Peñamonte",
+    pattern: /peñamonte/gi,
+  },
+  {
+    name: "Pintia",
+    pattern: /pintia/gi,
+  },
+  {
+    name: "Pétalos del Bierzo",
+    pattern: /p[eé]talos\sdel\sbierzo/gi,
+  },
+  {
+    name: "Quercus",
+    pattern: /quercus/gi,
+  },
+  {
+    name: "Quota 29",
+    pattern: /quota\s29/gi,
+  },
+  {
+    name: "Scanavino",
+    pattern: /scanavino/gi,
+  },
+  {
+    name: "Solaz",
+    pattern: /solaz/gi,
+  },
+  {
+    name: "Ultrei",
+    pattern: /ultrei/gi,
+  },
+  {
+    name: "Valle García",
+    pattern: /valle\sgarc[ií]a/gi,
+  },
+  {
+    name: "Valpincia",
+    pattern: /valpincia/gi,
+  },
+  {
+    name: "Venta la Ossa",
+    pattern: /venta\sla\sossa/gi,
+  },
+  {
+    name: "Viña de Moya",
+    pattern: /viña\sde\smoya/gi,
+  },
+  {
+    name: "Yllera",
+    pattern: /yllera/gi,
+  },
+  {
+    name: "Álvarez de toledo",
+    pattern: /[aá]lvarez\sde\stoledo/gi,
+  },
 ];
 
 export default StoreRoom;
