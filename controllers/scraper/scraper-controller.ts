@@ -22,13 +22,16 @@ const saveCatalog = (
     return stopExecution(res, next, "No request detected");
   }
 
-  const { catalog }: { catalog: ISaveCatalogRequest["catalog"] } = req.body;
+  const {
+    catalog,
+    storeName,
+  }: { catalog: ISaveCatalogRequest["catalog"]; storeName: string } = req.body;
 
   if (!catalog) {
     return stopExecution(res, next, "No request detected");
   }
 
-  return parseCatalog(catalog).then(() => {
+  return parseCatalog(catalog, storeName).then(() => {
     return res.sendStatus(200);
   });
 };
@@ -43,7 +46,10 @@ const stopExecution = (
   next();
 };
 
-const parseCatalog = (catalog: ISaveCatalogRequest["catalog"]) => {
+const parseCatalog = (
+  catalog: ISaveCatalogRequest["catalog"],
+  storeName: string
+) => {
   const newCatalog: TNewCatalog = {};
 
   const parsedCatalog: {
@@ -60,7 +66,7 @@ const parseCatalog = (catalog: ISaveCatalogRequest["catalog"]) => {
     // for (let categoryKey of Object.keys(Categories)) {
     //   processCategory(categoryKey, productName, newCatalog);
     // }
-    processProduct(productName, newCatalog);
+    processProduct(productName, newCatalog, storeName);
   }
 
   logIntoFile("Catálogo final", JSON.stringify(newCatalog));
@@ -89,14 +95,18 @@ const saveNewCatalog = (
 
   newCatalog[category].push(newProduct);
 };
-const processProduct = (productName: string, newCatalog: TNewCatalog) => {
-  const brand = identifyBrand(productName);
+const processProduct = (
+  productName: string,
+  newCatalog: TNewCatalog,
+  storeName: string
+) => {
+  const brand = identifyBrand(productName, storeName);
 
   if (!brand) {
     logIntoFile("Marca no encontrada", undefined, 2);
     return;
   }
-  logIntoFile("Encontrada marca: ", brand, 2);
+  logIntoFile("Encontrada marca: ", brand.name, 2);
 
   const category = identifyCategory(productName, brand.onlyCategory);
 
@@ -125,9 +135,10 @@ const processProduct = (productName: string, newCatalog: TNewCatalog) => {
 const processCategory = (
   categoryKey: string,
   productName: string,
-  newCatalog: TNewCatalog
+  newCatalog: TNewCatalog,
+  storeName: string
 ) => {
-  const brand = identifyBrand(productName);
+  const brand = identifyBrand(productName, storeName);
 
   if (brand) {
     const { name, pattern, onlyCategory } = brand;

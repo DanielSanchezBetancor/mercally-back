@@ -76,7 +76,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Mccormick",
-    pattern: /mccormick/gi,
+    pattern: /mc\s?cormick/gi,
   },
   {
     name: "Las Hermanas",
@@ -112,7 +112,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Maggie",
-    pattern: /maggie?/gi,
+    pattern: /(?:\s|^)maggie?/gi,
   },
   {
     name: "Ponti",
@@ -152,7 +152,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Puleva",
-    pattern: /puleva(?!.*peques.*)/gi,
+    pattern: /puleva(?:\s|$)(?!peques)/gi,
   },
   {
     name: "Puleva Peques",
@@ -184,7 +184,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Boom",
-    pattern: /boom/gi,
+    pattern: /boom(?:\s|$)/gi,
   },
   {
     name: "Bounty",
@@ -336,7 +336,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Lea",
-    pattern: /lea(?:\s|$)/gi,
+    pattern: /(?:\s|^)lea(?:\s|$)/gi,
   },
   {
     name: "Wilkinson",
@@ -348,7 +348,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Bic",
-    pattern: /bic(?:\s|$)/gi,
+    pattern: /(?:\s|^)bic(?:\s|$)/gi,
   },
   {
     name: "Cocomi",
@@ -376,7 +376,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Green Cuisine",
-    pattern: /green cuisine/gi,
+    pattern: /green cuisine?/gi,
   },
   {
     name: "Amura",

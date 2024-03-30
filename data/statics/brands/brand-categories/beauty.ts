@@ -23,7 +23,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Gallo",
-    pattern: /gallo/gi,
+    pattern: /gallo(?:\s|$)(?!pequeño|mediano)/gi,
   },
   {
     name: "Dalla Costa",
@@ -107,7 +107,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Al Punto",
-    pattern: /al\spunto(?!\sde\ssal)/gi,
+    pattern: /(?:\s|^)al\spunto(?!\sde\ssal)/gi,
   },
   {
     name: "El Forsane",
@@ -127,7 +127,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Oro de Génave",
-    pattern: /oro\sde\sgenave/gi,
+    pattern: /oro\sde\sg[eé]nave/gi,
   },
   {
     name: "Capricho andaluz",
@@ -143,7 +143,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Bio",
-    pattern: /(?<!prebiotic)(?:\s|^)bio(?:\s|$)/gi,
+    pattern: /(?<!prebiotic|membrillo|vegana|vivera tofu|eudermin)(?:\s|^)bio(?:\s|$)(?!frasco)/gi,
   },
   {
     name: "Jaencoop",
@@ -315,7 +315,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Fritos",
-    pattern: /fritos/gi,
+    pattern: /(?<!cacahuetes|anacardos|ma[ií]z|harina|picatostes)(?:\s|^)fritos/gi,
   },
   {
     name: "Sarasa",
@@ -603,7 +603,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Vega del Báron",
-    pattern: /vega\sdel\sbaron/gi,
+    pattern: /vega\sdel\sb[aá]ron/gi,
   },
   {
     name: "Condominium",
@@ -667,7 +667,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Temptation",
-    pattern: /temptation/gi,
+    pattern: /temptation(?:\s|$)(?!\d)/gi,
   },
   {
     name: "Cafetería",
@@ -675,7 +675,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Bonka",
-    pattern: /bonka/gi,
+    pattern: /bonka(?:\s|$)(?!c[aá]psulas)/gi,
   },
   {
     name: "Arom'arte",
@@ -743,7 +743,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Dani",
-    pattern: /dani/gi,
+    pattern: /dani(?:\s|$)/gi,
   },
   {
     name: "Cabo de Hornos",
@@ -994,10 +994,6 @@ const Beauty: TBrand[] = [
     pattern: /peñascal/gi,
   },
   {
-    name: "Tena",
-    pattern: /tena/gi,
-  },
-  {
     name: "San Roque",
     pattern: /san\sroque/gi,
   },
@@ -1019,7 +1015,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Capricho",
-    pattern: /capricho/gi,
+    pattern: /(?<!pescanova\s)capricho/gi,
   },
   {
     name: "Beltrán",
