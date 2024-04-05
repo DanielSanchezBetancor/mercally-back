@@ -143,7 +143,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Bio",
-    pattern: /(?<!prebiotic|membrillo|vegana|vivera tofu|eudermin)(?:\s|^)bio(?:\s|$)(?!frasco)/gi,
+    pattern: /(?<!prebiotic|membrillo|vegana|vivera tofu|eudermin|remolacha|seitán)(?:\s|^)bio(?:\s|$)(?!frasco)/gi,
   },
   {
     name: "Jaencoop",
@@ -260,10 +260,12 @@ const Beauty: TBrand[] = [
   {
     name: "La gula del Norte",
     pattern: /la\sgula\sdel\snorte/gi,
+    priority: 2,
   },
   {
     name: "Krissia",
     pattern: /krissia/gi,
+    priority: 2
   },
   {
     name: "L-Casei",
@@ -414,8 +416,8 @@ const Beauty: TBrand[] = [
     pattern: /carlota\sorganic/gi,
   },
   {
-    name: "Sivore",
-    pattern: /sivore/gi,
+    name: "Sivoré",
+    pattern: /sivor[eé]/gi,
   },
   {
     name: "Vallina",
@@ -531,7 +533,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Molinos",
-    pattern: /molinos/gi,
+    pattern: /(?<!los)(?:\s|^)molinos/gi,
   },
   {
     name: "Viña Tabora",
@@ -539,7 +541,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Viñas del Vero",
-    pattern: /viñas\sdel\svero/gi,
+    pattern: /viñas\sd(?:el)?\svero/gi,
   },
   {
     name: "Viña Ardanche",
@@ -548,10 +550,6 @@ const Beauty: TBrand[] = [
   {
     name: "Estola",
     pattern: /estola/gi,
-  },
-  {
-    name: "Garnacha salvaje moncayo",
-    pattern: /garnacha\ssalvaje\smoncayo/gi,
   },
   {
     name: "Valderivero",
@@ -595,7 +593,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Sangre Toro",
-    pattern: /sangre\storo/gi,
+    pattern: /sangre\s(?:de\s)?toro/gi,
   },
   {
     name: "Williams",
@@ -654,12 +652,12 @@ const Beauty: TBrand[] = [
     pattern: /geraldino/gi,
   },
   {
-    name: "Pescador",
-    pattern: /pescador/gi,
+    name: "Blanc Pescador",
+    pattern: /(?:blanc|b\.)?(?:\s|^)pescador/gi,
   },
   {
     name: "Ribera del Duero",
-    pattern: /ribera\sdel\sduero/gi,
+    pattern: /(?<!d\.o\.?\s?)ribera\sdel\sduero/gi,
   },
   {
     name: "Antaño",
@@ -711,7 +709,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "La Broche de la Pila",
-    pattern: /(?:la broche de\s)?la pila/gi,
+    pattern: /(?:la broche de\s)?la pila|la broche/gi,
   },
   {
     name: "La Noreñense",
@@ -771,7 +769,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Calzado",
-    pattern: /calzado/gi,
+    pattern: /(?<!limpia(?:dor)?\s?|cepillo\s|desodorantes\s|crema)calzado/gi,
   },
   {
     name: "Diamir",
@@ -851,7 +849,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Air-Val",
-    pattern: /gel de ducha y champú (?:spiderman|my unicorn)/gi,
+    pattern: /gel de ducha y champú (?:spiderman|my unicorn)|air val/gi,
   },
   {
     name: "Hidrogenesse",
@@ -859,7 +857,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Alba",
-    pattern: /alba(?:\s|^)/gi,
+    pattern: /(?<!colonia\s)alba(?:\s|^)/gi,
   },
   {
     name: "Morelli",
@@ -979,7 +977,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Castillo de Salobreña",
-    pattern: /castillo\sde\ssalobreña/gi,
+    pattern: /(?:castillo\sde\s|c\.)salobreña/gi,
   },
   {
     name: "Piccolo Giovanni",

@@ -27,7 +27,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Sevenkids",
-    pattern: /sevenkids/gi,
+    pattern: /seven\s?kids/gi,
   },
   {
     name: "Chelino",
@@ -75,7 +75,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Torras",
-    pattern: /torras/gi,
+    pattern: /(?:\s|^)torras/gi,
   },
   {
     name: "La Aldeana",
@@ -107,7 +107,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Mbusto",
-    pattern: /mbusto/gi,
+    pattern: /m\.?busto/gi,
   },
   {
     name: "Raw",
@@ -171,7 +171,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "RAM",
-    pattern: /^ram\s/gi,
+    pattern: /(?:\s|^)ram(?:\s|$)/gi,
   },
   {
     name: "Illy",
@@ -315,7 +315,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Tropical",
-    pattern: /(?<!refresco|leche|zumo|sabor)(?:\s|^)tropical(?!\srexona)/gi,
+    pattern: /(?<!refresco|leche|zumo|sabor|ambientador)(?:\s|^)tropical(?!\srexona)/gi,
   },
   {
     name: "Abbaye D'aulne",
@@ -499,7 +499,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Midi",
-    pattern: /midi/gi,
+    pattern: /(?:\s|^)midi(?:\s|$)/gi,
   },
   {
     name: "Mildred",
@@ -587,7 +587,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Moon",
-    pattern: /moon/gi,
+    pattern: /moon(?:\s|$)/gi,
   },
   {
     name: "Ven al sur",
@@ -663,7 +663,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Mar de Frades",
-    pattern: /mar de frades/gi,
+    pattern: /mar (?:de\s|d\.)frades/gi,
   },
   {
     name: "Martín Codax",
@@ -699,7 +699,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Santiago Ruiz",
-    pattern: /santiago ruiz/gi,
+    pattern: /santiag(?:o\s|\.)ruiz/gi,
   },
   {
     name: "Terras Gaudas",
@@ -839,7 +839,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Casa de la Ermita",
-    pattern: /casa de la ermita/gi,
+    pattern: /casa\s(?:de\sla\s)?ermita/gi,
   },
   {
     name: "Dulce corazón",
@@ -915,7 +915,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Burgo de Arias",
-    pattern: /burgo (?:de\s)?arias|arias/gi,
+    pattern: /burgo (?:de\s)?arias|(?:\s|^)arias/gi,
   },
   {
     name: "Hochland",
@@ -975,7 +975,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Flor de Burgos",
-    pattern: /flor\s(?:de\s)?burgos|/gi,
+    pattern: /flor\s(?:de\s)?burgos/gi,
   },
   {
     name: "Bocatería",

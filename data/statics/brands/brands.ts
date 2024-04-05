@@ -9,6 +9,7 @@ import PetsBrands from "./brand-categories/pets";
 import PreparedBrands from "./brand-categories/prepared";
 import StoreRoom from "./brand-categories/storeroom/storeroom";
 import PerfumBrands from "./brand-categories/perfums";
+import MoreBrands from "./brand-categories/morebrands";
 
 /**
  * Array with the possibles brands with their patterns
@@ -98,7 +99,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Antonio",
-    pattern: /antonio(?<!\sy ricardo)/gi,
+    pattern: /antonio(?!\sy ricardo)/gi,
   },
   {
     name: "Iliada",
@@ -219,7 +220,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Indigo",
-    pattern: /(?<!nike|spray)(?:\s|^)indigo(?<!desodorante)/gi,
+    pattern: /(?<!nike|spray|colors)(?:\s|^)indigo(?<!desodorante)/gi,
   },
   {
     name: "Tabaiba",
@@ -720,7 +721,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Fuente Primavera",
-    pattern: /fuente\s+primavera/gi,
+    pattern: /(?:fuente\s|f\.)primavera/gi,
   },
   {
     name: "Font Natura",
@@ -753,7 +754,7 @@ const BRANDS: TBrand[] = [
   {
     name: "La Casera",
     pattern:
-      /(?!mexicana|croquetas|sobrasada|salsa)(?:la)?(?:\s|^)casera(?:\s|$)/gi,
+      /(?<!mexicana|croquetas|sobrasada|salsa|mayonesa)(?:la)?(?:\s|^)casera(?:\s|$)/gi,
   },
   {
     name: "TriNa",
@@ -761,7 +762,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Sunny Delight",
-    pattern: /sunny\s+delig(?:ht|th)/gi,
+    pattern: /sunny(?:\s|$)(?:delig(?:ht|th))?/gi,
   },
   {
     name: "Coca Cola",
@@ -853,7 +854,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Cuyar Jabugo",
-    pattern: /cuyar\sjabugo/gi,
+    pattern: /cuyar(?:\sjabugo)?/gi,
   },
   {
     name: "Espina",
@@ -964,8 +965,6 @@ const BRANDS: TBrand[] = [
     pattern: /pamplonica/gi,
   },
   {
-    // This brand is causes problems with the regex, let's make it more specific
-    // - First specificity: The word needs an space after finishing
     name: "Mina",
     pattern: /^mina\s/gi,
   },
@@ -974,10 +973,8 @@ const BRANDS: TBrand[] = [
     pattern: /vicente\s+lópez/gi,
   },
   {
-    // This brand is causes problems with the regex, let's make it more specific
-    // - First specificity: The word needs an space after finishing
     name: "Valle",
-    pattern: /^valle\s(?<!garcía)/gi,
+    pattern: /^valle\s(?!garcía)/gi,
   },
   {
     name: "Frial",
@@ -989,7 +986,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Álvarez",
-    pattern: /[áa]lvarez/gi,
+    pattern: /[áa]lvarez(?:\s|$)(?!de\stoledo)/gi,
   },
   {
     name: "Halal",
@@ -997,7 +994,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Maybe",
-    pattern: /maybe/gi,
+    pattern: /maybe(?:\s|$)/gi,
   },
   {
     name: "Noel",
@@ -1109,11 +1106,11 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Solá",
-    pattern: /(?:\s|^)sol[aá]/gi,
+    pattern: /(?:\s|^)sol[àaá](?:\s|$)/gi,
   },
   {
     name: "Baró",
-    pattern: /bar[oó]/gi,
+    pattern: /bar[oó](?:\s|$)/gi,
   },
   {
     name: "Max Zander",
@@ -1360,6 +1357,7 @@ const BRANDS: TBrand[] = [
   ...PetsBrands,
   ...PreparedBrands,
   ...PerfumBrands,
+  ...MoreBrands,
 ];
 
 // Esto ya lo llevare donde toque
@@ -1580,6 +1578,92 @@ const HOMEMADE_PATTERNS = [
   /almendra/gi,
   /piscina/gi,
   /jam[oó]n/gi,
+  /boniato/gi,
+  /cogollo/gi,
+  /calabac[ií]n/gi,
+  /alcachofas/gi,
+  /verduras/gi,
+  /guacamole/gi,
+  /soja/gi,
+  /alfalfa/gi,
+  /champiñ[oó]n/gi,
+  /col/gi,
+  /habas/gi,
+  /jud[ií]a/gi,
+  /corazones romana/gi,
+  /nabo/gi,
+  /nabicol/gi,
+  /saltear y listo/gi,
+  /yuca/gi,
+  /bollo/gi,
+  /banana/gi,
+  /panquemado/gi,
+  /rollitos/gi,
+  /bañadas? de choco(?:late)?/gi,
+  /bolsa/gi,
+  /pajitas/gi,
+  /carb[oó]n/gi,
+  /f[oó]sforos/gi,
+  /costilla/gi,
+  /carne/gi,
+  /chulet[oó]n/gi,
+  /cerdo/gi,
+  /bleu/gi,
+  /novillo/gi,
+  /rabadilla/gi,
+  /ternera/gi,
+  /huevo/gi,
+  /flautas?/gi,
+  /chuletas?/gi,
+  /brochetas?/gi,
+  /panceta/gi,
+  /ensalada/gi,
+  /can[oó]nigos/gi,
+  /endibias/gi,
+  /r[uú]cula/gi,
+  /escarola/gi,
+  /espinacas?/gi,
+  /wraps?/gi,
+  /california/gi,
+  /texas/gi,
+  /burger/gi,
+  /croquetas?/gi,
+  /choricitos/gi,
+  /blanquet/gi,
+  /cocido/gi,
+  /higaditos/gi,
+  /empanado/gi,
+  /pavo y queso/gi,
+  /pierna/gi,
+  /chuletillas/gi,
+  /cuellos?/gi,
+  /falda/gi,
+  /clochina/gi,
+  /pot[oó]n/gi,
+  /pescadilla/gi,
+  /carabinero/gi,
+  /morralla/gi,
+  /jurel/gi,
+  /barra/gi,
+  /r[uú]stic[ao]s?/gi,
+  /espiga/gi,
+  /mini/gi,
+  /baguette/gi,
+  /familiar/gi,
+  /leche/gi,
+  /nueces/gi,
+  /calabaza/gi,
+  /hogaza/gi,
+  /cereales/gi,
+  /baguett?ina/gi,
+  /centeno/gi,
+  /pan/gi,
+  /rebanado/gi,
+  /perritos/gi,
+  /mollete/gi,
+  /coqueta/gi,
+  /tortas/gi,
+  /palitos/gi,
 ];
 
 const identifyBrand = (

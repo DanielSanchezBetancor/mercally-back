@@ -11,7 +11,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Don Simón",
-    pattern: /don sim[oó]n/gi,
+    pattern: /(?:don|d\.)(?:\s|^)sim[oó]n/gi,
   },
   {
     name: "Hiperdino",
@@ -184,7 +184,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Pataks",
-    pattern: /patak[`']?s/gi,
+    pattern: /patak[`'´]?s/gi,
   },
   {
     name: "Salsas Asturianas",
@@ -276,7 +276,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "La Asturiana",
-    pattern: /(?<!fabada|lechera)(?:la)?(?:\s|^)asturiana(?!.*mayu)/gi,
+    pattern: /(?<!fabada|lechera|natural)(?:la)?(?:\s|^)asturiana(?!.*mayu)/gi,
   },
   {
     name: "Australiana",
@@ -303,10 +303,8 @@ const GeneralBrands: TBrand[] = [
     pattern: /village/gi,
   },
   {
-    // This brand is causing problems with the pattern, let's make it more specific
-    // - First specific pattern: It should be the first word in the string
     name: "Flora",
-    pattern: /^flora[\$\s]/gi,
+    pattern: /(?:\s|^)flora(?:\s|$)/gi,
   },
   {
     name: "Becel",
@@ -587,7 +585,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Albo",
-    pattern: /albo/gi,
+    pattern: /albo(?:\s|$)/gi,
   },
   {
     name: "Litoral",
@@ -603,7 +601,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Nestlé",
-    pattern: /nestl?[eé]|cono extreme|extreme (?:cono|cookie|mini)|(?<!lacasa chocolate\s)extrafino/gi,
+    pattern: /nestl?[eé]|cono extreme|extreme (?:cono|cookie|mini)|(?<!lacasa chocolate\s|interdentales\s)extrafino|nativa|nidina|corn flakes harvest home/gi,
   },
   {
     name: "Cini Minis",
@@ -823,7 +821,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Laurel",
-    pattern: /(?<!ducros|sabater)(?:\s|^)laurel/gi,
+    pattern: /(?<!ducros|sabater|hojas de)(?:\s|^)laurel/gi,
   },
   {
     name: "La Molisana",
@@ -855,7 +853,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Vive",
-    pattern: /(?:\s|^)vive\s/gi,
+    pattern: /(?:\s|^)(?<!el)vive\s/gi,
   },
   {
     name: "Gerblé",
@@ -1049,7 +1047,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Herbal Essences",
-    pattern: /(?<!colgate\s)herbal(\sessences)?(?!\sdeliplus)/gi,
+    pattern: /(?<!colgate|dent[ií]fric[ao])(?:\s|^)herbal(?:\s|$)(?:essences)?(?!deliplus|fresh|original)/gi,
   },
   {
     name: "Pantene",
@@ -1126,7 +1124,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Instituto Español",
-    pattern: /(?:instituto|inst)(?:\s|^|\.)español/gi,
+    pattern: /(?:instituto|inst|i\.)(?:\s|^|\.)español/gi,
   },
   {
     name: "Kerzo",
@@ -1415,7 +1413,8 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Pato",
-    pattern: /(?<!\sde|h[ií]gado)(?:^|\s)pato(?:$|\s)/gi,
+    pattern: /(?:^|\s)pato(?:$|\s)/gi,
+    priority: 2,
   },
   {
     name: "Pattex",
