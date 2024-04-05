@@ -576,7 +576,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Bocaditos",
-    pattern: /^bocaditos(?!en\ssalsa)/gi,
+    pattern: /^bocaditos(?:\s|$)(?!en\ssalsa|de cacao)/gi,
   },
   {
     name: "El Auténtico",
@@ -616,7 +616,8 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Gullón",
-    pattern: /(?!(?:mcvities|santiveri)\sgalletas\s)digestive|gull[oó]n/gi,
+    pattern:
+      /(?!(?:mcvities|santiveri)\sgalletas\s)digestive(?:\s|$)(?!(?:con chocolate|con avena y trigo)?\s?Galleteca|(?:finas\s)?con chocolate (?:con leche|negro) Fontaneda|original Fontaneda)|gull[oó]n/gi,
   },
   {
     name: "Merci",

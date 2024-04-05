@@ -227,7 +227,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Pocket",
-    pattern: /(?<!lovely\s)pocket/gi,
+    pattern: /(?<!lovely|pañuelos)(?:\s|^)pocket/gi,
   },
   {
     name: "Capitán Maní",
@@ -511,7 +511,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Porta",
-    pattern: /porta/gi,
+    pattern: /(?:repostería\s)?porta/gi,
   },
   {
     name: "Airos",
@@ -671,7 +671,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Nora",
-    pattern: /nora/gi,
+    pattern: /(?:\s|^)nora/gi,
   },
   {
     name: "O fillo da Condesa",
@@ -1234,7 +1234,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   {
     name: "Canaryceras",
     pattern: /Vela prisma repelente insectos/gi,
-  }
+  },
 ];
 
 export default StoreRoomSpreadableBrands;

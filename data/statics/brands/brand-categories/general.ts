@@ -280,7 +280,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "La Asturiana",
-    pattern: /(?<!fabada\s)(?:la\s)?asturiana(?!.*mayu)/gi,
+    pattern: /(?<!fabada|lechera)(?:la)?(?:\s|^)asturiana(?!.*mayu)/gi,
   },
   {
     name: "Australiana",
@@ -1014,7 +1014,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Ariel",
-    pattern: /ariel/gi,
+    pattern: /(?:\s|^)ariel/gi,
   },
   {
     name: "Lenor",
@@ -1432,7 +1432,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Albal",
-    pattern: /(?:\s|^)albal/gi,
+    pattern: /(?:\s|^)albal(?:\s|$)/gi,
   },
   {
     name: "Macopack",
