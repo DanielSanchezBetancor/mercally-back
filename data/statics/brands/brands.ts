@@ -1670,10 +1670,12 @@ const identifyBrand = (
   productName: string,
   storeName: string
 ): TBrand | undefined => {
-  const hasBrand = BRANDS.find((brandName) => {
-    const regex = new RegExp(brandName.pattern);
-    return regex.exec(productName);
-  });
+  const matchedBrands = BRANDS.filter((brandName) => {
+		const regex = new RegExp(brandName.pattern);
+		return regex.exec(productName);
+	});
+
+  const hasBrand = matchedBrands.sort((a, b) => (a.priority || 1) - (b.priority || 1))[0];
 
   // There are products that come without brand. Some of them are products that the supermarket makes
   if (!hasBrand) {

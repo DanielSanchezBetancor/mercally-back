@@ -143,7 +143,9 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Bio",
-    pattern: /(?<!prebiotic|membrillo|vegana|vivera tofu|eudermin|remolacha|seitán)(?:\s|^)bio(?:\s|$)(?!frasco)/gi,
+    pattern:
+      /(?<!prebiotic|membrillo|vegana|vivera tofu|eudermin|remolacha|seitán)(?:\s|^)bio(?:\s|$)(?!frasco)/gi,
+    priority: 2,
   },
   {
     name: "Jaencoop",
@@ -265,7 +267,7 @@ const Beauty: TBrand[] = [
   {
     name: "Krissia",
     pattern: /krissia/gi,
-    priority: 2
+    priority: 2,
   },
   {
     name: "L-Casei",
@@ -317,7 +319,8 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Fritos",
-    pattern: /(?<!cacahuetes|anacardos|ma[ií]z|harina|picatostes)(?:\s|^)fritos/gi,
+    pattern:
+      /(?<!cacahuetes|anacardos|ma[ií]z|harina|picatostes)(?:\s|^)fritos/gi,
   },
   {
     name: "Sarasa",
