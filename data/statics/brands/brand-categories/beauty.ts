@@ -144,6 +144,7 @@ const Beauty: TBrand[] = [
   {
     name: "Bio",
     pattern: /(?<!prebiotic|membrillo|vegana|vivera tofu|eudermin)(?:\s|^)bio(?:\s|$)(?!frasco)/gi,
+	priority: 2,
   },
   {
     name: "Jaencoop",

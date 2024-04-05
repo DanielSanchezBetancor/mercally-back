@@ -975,7 +975,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Flor de Burgos",
-    pattern: /flor\s(?:de\s)?burgos|/gi,
+    pattern: /flor\s(?:de\s)?burgos/gi,
   },
   {
     name: "Bocatería",
