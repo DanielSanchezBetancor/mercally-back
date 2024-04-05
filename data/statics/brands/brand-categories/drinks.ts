@@ -69,8 +69,8 @@ const Drinks: TBrand[] = [
     pattern: /rondel/gi,
   },
   {
-    name: "Villa Romale",
-    pattern: /villa romale/gi,
+    name: "Viña Romale",
+    pattern: /viña romale/gi,
   },
   {
     name: "Andre Clouet",
@@ -234,7 +234,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Anís del Mono",
-    pattern: /(?:an[ií]s\sd)?el\smono/gi,
+    pattern: /(?:an[ií]s\sd)?el\smono(?:\s|$)|mono(?:\s|$)/gi,
   },
   {
     name: "La Castellana",
@@ -250,7 +250,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Marie Brizard",
-    pattern: /marie\sbrizard/gi,
+    pattern: /(?:marie\s|m\.)brizard/gi,
   },
   {
     name: "Ruavieja",
@@ -298,7 +298,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Torres",
-    pattern: /torres/gi,
+    pattern: /(?<!hilario\s)torres/gi,
   },
   {
     name: "Veterano",
@@ -334,7 +334,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Bombay Sapphire",
-    pattern: /bombay\ssapp?hire/gi,
+    pattern: /bombay\ssapp?h(?:ire)?/gi,
   },
   {
     name: "Carmela",
@@ -374,7 +374,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Martin Millers",
-    pattern: /martin\smillers/gi,
+    pattern: /(?:martin\s|m\.)miller[´]?s/gi,
   },
   {
     name: "Masters",
@@ -389,12 +389,12 @@ const Drinks: TBrand[] = [
     pattern: /monkey\s47/gi,
   },
   {
-    name: "Nordes",
-    pattern: /nordes(?:\sespaña)?/gi,
+    name: "Nordés",
+    pattern: /nord[ée]s(?:\sespaña)?/gi,
   },
   {
     name: "Puerto de Indias",
-    pattern: /puerto\sde\sindias/gi,
+    pattern: /(?:puerto\s|p\.)de\sindias/gi,
   },
   {
     name: "Roku",
@@ -402,7 +402,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Seagram's",
-    pattern: /seagram'?s/gi,
+    pattern: /seagram[`'´]?s/gi,
   },
   {
     name: "Tanqueray",
@@ -575,7 +575,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Johnnie Walker",
-    pattern: /johnnie\s+walker/gi,
+    pattern: /(?:johnnie\s|j\.)walker/gi,
   },
   {
     name: "Black & White",
@@ -682,10 +682,6 @@ const Drinks: TBrand[] = [
     pattern: /havana(?:\sclub)?/gi,
   },
   {
-    name: "Amaretto",
-    pattern: /amaretto\s(?!del\spatriarca)/gi,
-  },
-  {
     name: "Kojak",
     pattern: /kojak/gi,
   },
@@ -699,7 +695,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Indias",
-    pattern: /indias/gi,
+    pattern: /(?<!p\.de)(?:\s|^)indias/gi,
   },
   {
     name: "La Indiana",
@@ -843,7 +839,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Jack Daniels",
-    pattern: /jack\s+daniels/gi,
+    pattern: /jack\s+daniel[']?s/gi,
   },
   {
     name: "Jameson",
@@ -931,7 +927,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Magic",
-    pattern: /(?<!deliplus\s)magic(?!.*malt.*)(?:\s|$)/gi,
+    pattern: /(?<!deliplus\s)magic(?!.*malt.*)(?:\s|$)(?!clean)/gi,
   },
   {
     name: "Señorío De Requena",
@@ -995,7 +991,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "La Vieja Fábrica",
-    pattern: /la\svieja\sf[aá]brica/gi,
+    pattern: /la\svieja\sf[aá]brica|vieja fabric/gi,
   },
   {
     name: "El apicultor",
@@ -1003,7 +999,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Granja San Francisco",
-    pattern: /granja\ssan\sfr?ancisco/gi,
+    pattern: /granja\ssan\sfr?ancisco|granja s\.fco/gi,
   },
   {
     name: "Luna de Miel",

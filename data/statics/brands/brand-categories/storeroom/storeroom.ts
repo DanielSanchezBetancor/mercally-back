@@ -109,7 +109,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Lays",
-    pattern: /[\s|^]lay'?s/gi,
+    pattern: /(?:\s|^)lay'?s/gi,
   },
   {
     name: "Doritos",
@@ -205,7 +205,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Eagle",
-    pattern: /eagle/gi,
+    pattern: /(?!takis)(?:\s|^)eagle/gi,
   },
   {
     name: "Escamilla",
@@ -262,10 +262,6 @@ const StoreRoom: TBrand[] = [
   {
     name: "Sabores de La Esteban",
     pattern: /sabores de la esteban/gi,
-  },
-  {
-    name: "Takis",
-    pattern: /takis/gi,
   },
   {
     name: "Valor",
@@ -333,7 +329,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "El Pastor",
-    pattern: /el pastor/gi,
+    pattern: /el pastor(?:\s|$)/gi,
   },
   {
     name: "La Jaira",
@@ -389,7 +385,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Flor De Esgueva",
-    pattern: /flor de esgueva/gi,
+    pattern: /flor\s(de\s)?esgueva/gi,
   },
   {
     name: "García Baquero",
@@ -564,15 +560,15 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Napolitanas",
-    pattern: /napolitanas/gi,
+    pattern: /(?<!consum)(?:\s|^)napolitanas/gi,
   },
   {
     name: "Flakes",
-    pattern: /flakes?/gi,
+    pattern: /(?<!corn|choco)(?:\s|^)flakes?/gi,
   },
   {
     name: "Krit",
-    pattern: /krit(?:\s|$)/gi,
+    pattern: /(!saladas)(?:\s|^)krit(?:\s|$)/gi,
   },
   {
     name: "Bocaditos",
@@ -617,7 +613,7 @@ const StoreRoom: TBrand[] = [
   {
     name: "Gullón",
     pattern:
-      /(?!(?:mcvities|santiveri)\sgalletas\s)digestive(?:\s|$)(?!(?:con chocolate|con avena y trigo)?\s?Galleteca|(?:finas\s)?con chocolate (?:con leche|negro) Fontaneda|original Fontaneda)|gull[oó]n/gi,
+      /(?!(?:mcvities|santiveri|consum)\sgalletas\s)digestive(?:\s|$)(?!(?:con chocolate|con avena y trigo)?\s?Galleteca|(?:finas\s)?con chocolate (?:con leche|negro) Fontaneda|original Fontaneda)|gull[oó]n/gi,
   },
   {
     name: "Merci",
@@ -752,11 +748,8 @@ const StoreRoom: TBrand[] = [
     pattern: /lacta\s/gi,
   },
   {
-    // This brand is causing problems with the pattern, let's make it more specific
-    // - First specific pattern: It should be the first word in the string
-    // - Second specific pattern: It should contain an space after the word
     name: "Lu",
-    pattern: /(?:\s|^)lu(?:\s|$)/gi,
+    pattern: /(?<!marie)(?:\s|^)lu(?:\s|$)/gi,
   },
   {
     name: "Marabou",
@@ -932,7 +925,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "The Rustik Bakery",
-    pattern: /the\s+rustik\s+bakery|mini magdalenas/gi,
+    pattern: /the\s+rustik\s+bakery|mini magdalenas|rustik baker/gi,
   },
   {
     name: "Martínez",
@@ -1089,7 +1082,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Regal",
-    pattern: /regal/gi,
+    pattern: /(?:\s|^)regal(?:\s|$)/gi,
   },
   {
     name: "Anyi",
@@ -1293,7 +1286,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Tierras de Cair",
-    pattern: /(?:tierras\sde\s)?cair/gi,
+    pattern: /(?:tierras\sde\s)?cair(?:\s|$)/gi,
   },
   {
     name: "Canta Perdices",
@@ -1567,7 +1560,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Faustino Rivero Ulecia",
-    pattern: /faustino\srivero\sulecia/gi,
+    pattern: /faustino\srivero(?:\sulecia)?/gi,
   },
   {
     name: "Faustino",
@@ -1640,7 +1633,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Milflores",
-    pattern: /milflores/gi,
+    pattern: /(?<!miel)(?:\s|^)milflores/gi,
   },
   {
     name: "Monte Real",
@@ -1708,7 +1701,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Sela",
-    pattern: /sela/gi,
+    pattern: /(?:\s|^)sela/gi,
   },
   {
     name: "Solar Viejo",

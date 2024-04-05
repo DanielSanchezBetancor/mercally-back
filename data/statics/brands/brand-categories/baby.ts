@@ -17,7 +17,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Natural Honey",
-    pattern: /natural honey/gi,
+    pattern: /(?:natural\s|nat\.)honey/gi,
   },
   {
     name: "Sairo",
@@ -121,7 +121,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Lacasitos",
-    pattern: /lacasitos/gi,
+    pattern: /(?<!lacasa mini|lacasa)(?:\s|^)lacasitos/gi,
   },
   {
     name: "Pancracio",
@@ -169,7 +169,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Málaga Virgen",
-    pattern: /m[aá]laga virgen/gi,
+    pattern: /(?:m[aá]laga\s|mal\.)virgen/gi,
   },
   {
     name: "Osborne Pedro Ximenez",
@@ -305,7 +305,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Aura",
-    pattern: /aura/gi,
+    pattern: /(?:\s|^)aura/gi,
   },
   {
     name: "La Salud",
@@ -369,7 +369,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "La Rubia",
-    pattern: /la rubia/gi,
+    pattern: /(?:\s|^)la rubia/gi,
   },
   {
     name: "Wild Panther",
@@ -501,7 +501,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "El Molino",
-    pattern: /el molino/gi,
+    pattern: /el molino?/gi,
   },
   {
     name: "Maizcorn",
@@ -597,7 +597,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "On",
-    pattern: /(?:\s|^)on(?:\s|$)(?!black)/gi,
+    pattern: /(?<!roll)(?:\s|^)on(?:\s|$)(?!black)/gi,
   },
   {
     name: "Alpen",
@@ -605,7 +605,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Kelloggs",
-    pattern: /kellogg`?s/gi,
+    pattern: /kellogg[`']?s/gi,
   },
   {
     name: "Kolln",
@@ -672,10 +672,6 @@ const BabyBrands: TBrand[] = [
     pattern: /(?:\s|^)spiga/gi,
   },
   {
-    name: "Millan Vicente",
-    pattern: /millan vicente/gi,
-  },
-  {
     name: "Ahinsa",
     pattern: /ahimsa/gi,
   },
@@ -685,7 +681,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Etter",
-    pattern: /etter/gi,
+    pattern: /(?:\s|^)etter/gi,
   },
   {
     name: "Happy Bio",
@@ -740,8 +736,8 @@ const BabyBrands: TBrand[] = [
     pattern: /eureka/gi,
   },
   {
-    name: "Masso",
-    pattern: /masso/gi,
+    name: "Massó",
+    pattern: /mass[oó]/gi,
   },
   {
     name: "Palacio de Oriente",
@@ -981,7 +977,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Flor",
-    pattern: /(?:\s|^)flor(?:\s|$)/gi,
+    pattern: /(?<!esponja)(?:\s|^)flor(?:\s|$)(?!de mayo|de tiaré|de sal|(?:de\s)?burgos)/gi,
   },
   {
     name: "Mimosin",
