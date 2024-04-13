@@ -1,11 +1,20 @@
 {
-    "cSpell.words": [
-        "aceituna",
-        "Conchel",
-        "Encontrada",
-        "Encontrado",
-        "Frias",
-        "Herrs",
-        "tener"
-    ]
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.indentSize": "tabSize",
+  "editor.wordWrap": "off",
+  "editor.wordBreak": "keepAll",
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "cSpell.words": [
+    "aceituna",
+    "Conchel",
+    "Encontrada",
+    "Encontrado",
+    "Frias",
+    "Herrs",
+    "tener"
+  ]
 }
