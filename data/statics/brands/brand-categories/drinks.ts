@@ -27,16 +27,13 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Codorniú",
-    pattern: /codorn[ií][uú]/gi,
+    pattern: /(?:anna\s)?codorn[ií][uú]?(?!z)/gi,
   },
   {
     name: "AT roca",
     pattern: /at roca/gi,
   },
   {
-    //This is too generic, causes too much conflicts so we will specify negative lookaheads
-    // - The word "blue" should not be followed by "dragon"
-    // - The word "blue" should be the first word in the string
     name: "Blue",
     pattern: /^blue(?!\s?[dragon])/gi,
   },
@@ -62,7 +59,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Juve & Camps",
-    pattern: /juve\s?&\s?camps/gi,
+    pattern: /juve\s?&?\s?camps/gi,
   },
   {
     name: "Rondel",
@@ -166,11 +163,11 @@ const Drinks: TBrand[] = [
   },
   {
     name: "San Pellegrino",
-    pattern: /san pellegrino/gi,
+    pattern: /(?:san\s|s\.)?pellegrino/gi,
   },
   {
     name: "Vichy Catalán",
-    pattern: /vichy\scatal[aá]n/gi,
+    pattern: /vichy(?:\scatal[aá]n)?/gi,
   },
   {
     name: "Aquabona",
@@ -198,7 +195,7 @@ const Drinks: TBrand[] = [
   },
   {
     name: "Solán de Cabras",
-    pattern: /sol[aá]n\sde\scabras/gi,
+    pattern: /sol[aá]n\sde\scabras|solan cabras/gi,
   },
   {
     name: "Veri",

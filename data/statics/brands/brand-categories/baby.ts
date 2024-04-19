@@ -17,7 +17,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Natural Honey",
-    pattern: /(?:natural\s|nat\.)honey/gi,
+    pattern: /(?:natural\s|nat\.)honey?/gi,
   },
   {
     name: "Sairo",
@@ -49,7 +49,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Aire de Sevilla",
-    pattern: /aire de sevilla/gi,
+    pattern: /(?:aire\s|a\.)de sevilla/gi,
   },
   {
     name: "AQC",
@@ -57,7 +57,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Aquar",
-    pattern: /aquar/gi,
+    pattern: /aquar(?:\s|$)/gi,
   },
   {
     name: "Tipiak",
@@ -137,7 +137,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Castillo Liria",
-    pattern: /castillo liria/gi,
+    pattern: /(?:castillo\s|cast\.)liria/gi,
   },
   {
     name: "La Guita",
@@ -209,7 +209,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Garden Gourmet",
-    pattern: /garden gourmet/gi,
+    pattern: /garden(?:\sgourm)?(?:et)?/gi,
   },
   {
     name: "Senén",
@@ -261,7 +261,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Mel",
-    pattern: /[\^\s]mel[\$\s]/gi,
+    pattern: /(?:\s|^)mel(?:\s|$)/gi,
   },
   {
     name: "Chocomel",
@@ -393,7 +393,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Completa",
-    pattern: /(?<!limpieza|protecci[oón])(?:\s|^)completa/gi,
+    pattern: /(?<!limpieza|protecci[oó]n|acci[oó]n|ensalada|wraps|chef)(?:\s|^)completa/gi,
   },
   {
     name: "Granja Riosol",
@@ -425,11 +425,11 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Colgate",
-    pattern: /colgate/gi,
+    pattern: /colgate|minions cepillo dental/gi,
   },
   {
     name: "Licor del Polo",
-    pattern: /licor del polo/gi,
+    pattern: /(?:licor del\s|l\.)polo/gi,
   },
   {
     name: "Oral B",
@@ -449,7 +449,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Kin",
-    pattern: /kin(?:\s|$)/gi,
+    pattern: /(?:\s|^)kin(?:\s|$)/gi,
   },
   {
     name: "Polident",
@@ -581,7 +581,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Tapa",
-    pattern: /^cortezas\s$/gi,
+    pattern: /(?:\s|^)cortezas(?:\s|$)/gi,
   },
   {
     name: "Moldex",
@@ -693,7 +693,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Heno de Pravia",
-    pattern: /heno de pravia/gi,
+    pattern: /heno (?:de\s)?pravia/gi,
   },
   {
     name: "9.60",
@@ -706,10 +706,6 @@ const BabyBrands: TBrand[] = [
   {
     name: "Gotitas de Oro",
     pattern: /gotitas de oro/gi,
-  },
-  {
-    name: "Aquar",
-    pattern: /aquar/gi,
   },
   {
     name: "Martinelia",
@@ -821,7 +817,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "La Casa",
-    pattern: /la casa/gi,
+    pattern: /(?<!de\s)la casa/gi,
   },
   {
     name: "Parot",
@@ -836,8 +832,8 @@ const BabyBrands: TBrand[] = [
     pattern: /ch[eé]rie/gi,
   },
   {
-    name: "Kemphor 1918",
-    pattern: /kemphor 1918/gi,
+    name: "Kemphor",
+    pattern: /kemphor/gi,
   },
   {
     name: "Casón Histórico",
@@ -889,7 +885,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Atardecer",
-    pattern: /atardecer/gi,
+    pattern: /atardecer(?:\s|$)(?!magn[eé]tico)/gi,
   },
   {
     name: "Sangue di Giuda",

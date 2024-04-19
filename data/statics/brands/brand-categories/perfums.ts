@@ -99,7 +99,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Enciende",
-    pattern: /enciende/gi,
+    pattern: /(?<!pastillas\s)enciende/gi,
   },
   {
     name: "Impacto",
@@ -142,8 +142,8 @@ const PerfumBrands: TBrand[] = [
     pattern: /criterio ego/gi,
   },
   {
-    name: "Antonio Banderas Blue Seduction",
-    pattern: /antonio banderas blue seduction/gi,
+    name: "Antonio Banderas",
+    pattern: /(?:antonio\s|a\.)banderas/gi,
   },
   {
     name: "Él",
@@ -236,6 +236,7 @@ const PerfumBrands: TBrand[] = [
   {
     name: "De León",
     pattern: /de león/gi,
+    priority: 2,
   },
   {
     name: "El Cencerro",
@@ -263,7 +264,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Flax&kale",
-    pattern: /flax&kale/gi,
+    pattern: /flax\s?&\s?kale/gi,
   },
   {
     name: "Mary Lee",
@@ -319,7 +320,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Polil",
-    pattern: /polil/gi,
+    pattern: /polil(?:\s|$)/gi,
   },
   {
     name: "Ambipur",
@@ -383,7 +384,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Blanco",
-    pattern: /(?<!mosto|verm[uú]t|ron|vino|choco)(?:\s|^)blanco(?:\s|$)/gi,
+    pattern: /(?<!mosto|verm[uú]t|ron|vino|choco|dent[ií]frico|apio|chocolate|ojos|cocinar|tocino)(?:\s|^)blanco(?:\s|$)/gi,
   },
   {
     name: "La Abuela",
@@ -423,11 +424,11 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Río",
-    pattern: /(?:\s|^)r[ií]o/gi,
+    pattern: /(?:\s|^)r[ií]o(?:\s|$)/gi,
   },
   {
     name: "Diet",
-    pattern: /diet/gi,
+    pattern: /(?:\s|^)diet(?:\s|$)/gi,
   },
   {
     name: "Flora",
@@ -475,7 +476,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "S3",
-    pattern: /s3/gi,
+    pattern: /s-?3/gi,
   },
   {
     name: "Fruits Attraction",
@@ -583,7 +584,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Arco Iris",
-    pattern: /arco iris/gi,
+    pattern: /(?<!trucha)(?:\s|^)arco iris/gi,
   },
   {
     name: "Nacional",
@@ -622,10 +623,6 @@ const PerfumBrands: TBrand[] = [
     pattern: /montaraz/gi,
   },
   {
-    name: "Solá",
-    pattern: /solá/gi,
-  },
-  {
     name: "Rolfho",
     pattern: /rolfho/gi,
   },
@@ -639,7 +636,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Nana",
-    pattern: /nana/gi,
+    pattern: /(?:\s|^)nana/gi,
   },
   {
     name: "Carloteña",
@@ -715,11 +712,11 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Águila Negra",
-    pattern: /águila negra/gi,
+    pattern: /[aá]guila negra/gi,
   },
   {
     name: "La Mari",
-    pattern: /la mari/gi,
+    pattern: /la mari(?:\s|$)/gi,
   },
   {
     name: "Borinot",
@@ -764,10 +761,6 @@ const PerfumBrands: TBrand[] = [
   {
     name: "18/70",
     pattern: /18\/70/gi,
-  },
-  {
-    name: "Turis",
-    pattern: /turis/gi,
   },
   {
     name: "San Clemente",
@@ -831,7 +824,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Vici",
-    pattern: /vici/gi,
+    pattern: /(?:\s|^)vici/gi,
   },
   {
     name: "Bioglow",
@@ -975,7 +968,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Rose",
-    pattern: /rose(?!e)/gi,
+    pattern: /(?<!femenina)(?:\s|^)rose(?!e)/gi,
   },
   {
     name: "Vittore",
@@ -999,7 +992,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Rosee",
-    pattern: /rosee/gi,
+    pattern: /(?:\s|^)rosee/gi,
   },
   {
     name: "100 Pecados",
@@ -1023,7 +1016,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "White",
-    pattern: /(?<!mosto|verm[uú]t|ron)(?:\s|^)white(?:\s|$)/gi,
+    pattern: /(?<!mosto|verm[uú]t|ron|active)(?:\s|^)white(?:\s|$)/gi,
   },
   {
     name: "Reynolds Brothers",
@@ -1191,11 +1184,12 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "San",
-    pattern: /(?:\s|^)san(?:\s|$)/gi,
+    pattern: /(?:\s|^)san(?:\s|$)(?!jacobos?)/gi,
   },
   {
     name: "Alin",
     pattern: /alin/gi,
+    priority: 2
   },
   {
     name: "Vernel",

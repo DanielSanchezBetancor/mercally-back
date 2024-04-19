@@ -4,7 +4,7 @@ import Categories from "../../category/category";
 const PetsBrands: TBrand[] = [
   {
     name: "Félix",
-    pattern: /f[eé]lix/gi,
+    pattern: /(?<!carnes\s)f[eé]lix/gi,
     onlyCategory: Categories.Mascotas,
   },
   {
@@ -88,7 +88,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Natura",
-    pattern: /(?:^|\s)natura\s(?!nuova)/gi,
+    pattern: /(?:^|\s)natura(?:\s|$)(?!nuova)/gi,
   },
   {
     name: "Delikuit",
@@ -183,8 +183,9 @@ const PetsBrands: TBrand[] = [
     pattern: /tildasundari/gi,
   },
   {
+    // Marca de pasta, comida
     name: "Romero",
-    pattern: /(?<!con\s)romero/gi,
+    pattern: /(?<!con\s)romero(?!\sfrasco)/gi,
   },
   {
     name: "JR",
@@ -252,7 +253,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Frigo",
-    pattern: /frigo/gi,
+    pattern: /frigo(?:\s|$)/gi,
   },
   {
     name: "Royne",
@@ -345,6 +346,7 @@ const PetsBrands: TBrand[] = [
   {
     name: "Gil",
     pattern: /gil/gi,
+    priority: 2,
   },
   {
     name: "Maldon",
@@ -380,7 +382,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Toque",
-    pattern: /toque/gi,
+    pattern: /(?<!al\s)toque/gi,
   },
   {
     name: "Leyenda",
@@ -476,11 +478,11 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Crunch",
-    pattern: /crunch/gi,
+    pattern: /crunch(?:\s|$)/gi,
   },
   {
     name: "Polo",
-    pattern: /polo/gi,
+    pattern: /(?<!licor\s|l\.)polo/gi,
   },
   {
     name: "Miguelete",
@@ -500,7 +502,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Pez",
-    pattern: /pez/gi,
+    pattern: /(?:\s|^)pez/gi,
   },
   {
     name: "Boomer",
@@ -720,7 +722,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Lida",
-    pattern: /lida/gi,
+    pattern: /(?:\s|^)lida/gi,
   },
   {
     name: "Eucerin",

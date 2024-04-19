@@ -501,16 +501,13 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "De Juan",
-    pattern: /de\sjuan/gi,
+    pattern: /de\sjuan(?:\s|$)/gi,
   },
   {
     name: "Munchos",
     pattern: /munchos/gi,
   },
   {
-    // This brand is causing problems with the pattern, let's make it more specific
-    // - Is causing problems with beer brands, since most of them starts with 'Estrella', like 'Estrella Galicia', 'Estrella Damm', etc.
-    // - First specific pattern: No word 'cerveza' before the brand
     name: "Estrella",
     pattern: /estrella(?:\s|$)(?!cerveza|galicia|del sur|damm)/gi,
   },
@@ -552,7 +549,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Coral",
-    pattern: /coral(?<!desodorante)/gi,
+    pattern: /(?<!desodorante|nº\d\s|19\s)coral/gi,
   },
   {
     name: "Tosta Rica",
@@ -617,7 +614,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Merci",
-    pattern: /merci/gi,
+    pattern: /merci(?:\s|$)/gi,
   },
   {
     name: "Knoppers",
@@ -801,7 +798,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Tang",
-    pattern: /tang\s/gi,
+    pattern: /(?<!go-)tang\s/gi,
   },
   {
     name: "Tate's Bake Shop",
@@ -989,7 +986,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Jumbo",
-    pattern: /jumbo/gi,
+    pattern: /(?<!xl\s)jumbo/gi,
   },
   {
     // I saw a case as 'Santivery'...
@@ -1090,7 +1087,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Barber",
-    pattern: /barber/gi,
+    pattern: /barber(?:\s|$)/gi,
   },
   {
     name: "La Cañada",
@@ -1219,6 +1216,7 @@ const StoreRoom: TBrand[] = [
   {
     name: "Matsu",
     pattern: /matsu/gi,
+    priority: 2,
   },
   {
     name: "Meque13",
@@ -1250,7 +1248,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "409",
-    pattern: /409 autor/gi,
+    pattern: /409(?:\s|$)(?:autor)?/gi,
   },
   {
     name: "Aalto",
@@ -1270,7 +1268,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Altos de Tamarón",
-    pattern: /altos\sdel?\stamar[oó]n/gi,
+    pattern: /(?:altos\sdel?\s|alt\.)tamar[oó]n/gi,
   },
   {
     name: "Antídoto",
@@ -1318,7 +1316,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Condado de Haza",
-    pattern: /condado\sde\shaza/gi,
+    pattern: /condado\s(?:de\s)?haza/gi,
   },
   {
     name: "Corimbo",
@@ -1394,11 +1392,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Melior de Matarromera",
-    pattern: /melior\sde\smatarromera/gi,
+    pattern: /melior(?:\sde\smatarromera)?/gi,
   },
   {
     name: "Mayor de Castilla",
-    pattern: /mayor\sde\scastilla/gi,
+    pattern: /(?:mayor\sde\s|may\.)castilla/gi,
   },
   {
     name: "Monasterio San Miguel",
@@ -1504,7 +1502,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Barón de Ley",
-    pattern: /bar[oó]n\nde\sley/gi,
+    pattern: /bar[oó]n\sde\sley/gi,
   },
   {
     name: "Barón Hayarza",
@@ -1528,7 +1526,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Castillo de Albai",
-    pattern: /castillo\sde\salbai/gi,
+    pattern: /(?:castillo\sde\s|cast\.)albai/gi,
   },
   {
     name: "Cerro Añón",
@@ -1548,11 +1546,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Coto de imaz",
-    pattern: /coto\sde\simaz/gi,
+    pattern: /coto\s(?:de\s)?imaz/gi,
   },
   {
     name: "El Coto",
-    pattern: /(?:el\s)?coto/gi,
+    pattern: /(?:el\s)?coto(?:\s|$)(?!imaz)/gi,
   },
   {
     name: "Dinastía Vivanco",
@@ -1560,7 +1558,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Faustino Rivero Ulecia",
-    pattern: /faustino\srivero(?:\sulecia)?/gi,
+    pattern: /(?:faustino\s|faust\.)rivero(?:\sulecia)?/gi,
   },
   {
     name: "Faustino",
@@ -1609,11 +1607,11 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Marqués Concordia",
-    pattern: /marqu[eé]s\sconcordia/gi,
+    pattern: /marqu[eé]s\sconcordia|marq\.concord/gi,
   },
   {
-    name: "Marqués Cáceres",
-    pattern: /marqu[eé]s\s(?:de\s)?c[aá]ceres/gi,
+    name: "Marqués de Cáceres",
+    pattern: /(?:marqu[eé]s\s|marq\.)(?:de\s)?c[aá]ceres/gi,
   },
   {
     name: "Marqués de Murrieta",
@@ -1621,7 +1619,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Marqués Riscal",
-    pattern: /marqu[eé]s\sriscal/gi,
+    pattern: /(?:marqu[eé]s\s|marq\.)riscal/gi,
   },
   {
     name: "Martínez Lacuesta",
@@ -1737,7 +1735,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Viña Izadi",
-    pattern: /viña\sizadii?/gi,
+    pattern: /(?:viña\s)?izadii?/gi,
   },
   {
     name: "Viña Pomal",
@@ -1765,7 +1763,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Señorío de los Llanos",
-    pattern: /señor[ií]o\sde\slos\sllanos/gi,
+    pattern: /(?:señor[ií]o\sde\slos\s|señor\.)llanos/gi,
   },
   {
     name: "Abadía Retuerta",
@@ -1853,7 +1851,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "La Garnacha Salvaje del Moncayo",
-    pattern: /(?:la\s)?garnacha\ssalvaje\sdel\smoncayo/gi,
+    pattern: /(?:la\s)?garnacha\ssalvaje\sdel\smoncayo|gar\.salvaje/gi,
   },
   {
     name: "Habla de la Tierra",

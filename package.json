@@ -5,13 +5,15 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "jest",
-		"dev": "nodemon ./index.ts"
+		"dev": "nodemon ./index.ts",
+		"settings": "vscode-settings install"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@coding-flavour/logger": "^1.0.1",
+		"@coding-flavour/logger": "^1.0.0",
+		"@coding-flavour/vscode-settings": "^1.0.0",
 		"@types/cors": "^2.8.17",
 		"@types/express": "^4.17.21",
 		"cors": "^2.8.5",
