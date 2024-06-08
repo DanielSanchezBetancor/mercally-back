@@ -1,4 +1,4 @@
-import { ResultSetHeader } from "mysql2";
+import { FieldPacket, ResultSetHeader } from "mysql2";
 import Products, { QueryResultItem } from "../../../orm/products/Products";
 import { Product } from "../../../orm/products/base";
 
@@ -29,7 +29,7 @@ function fillWithOriginalProductMock(products: OverchargedUnknown[]) {
   return productsWithData;
 }
 
-function mockProducts() {
+function mockProducts(value?: string) {
   const getByPkSpy = jest.spyOn(Products.prototype, "getByPk").mockImplementation(async (id: string | number) => {
     return getOriginalProductMock(Number(id));
   })
@@ -42,8 +42,15 @@ function mockProducts() {
     return [getOriginalProductMock(0)] as unknown as ResultSetHeader & QueryResultItem[];
   })
 
-  return { getByPkSpy, searchSpy, searchSuggestionSpy };
+  const autocompleteSpy = jest.spyOn(Products.prototype, "autocomplete").mockImplementation(async (_searchValue: string) => {
+    return value as unknown as ResultSetHeader & string;
+  });
+
+
+  return { getByPkSpy, searchSpy, searchSuggestionSpy, autocompleteSpy };
 }
+
+
 
 export { fillWithOriginalProductMock, mockProducts, getOriginalProductMock };
 

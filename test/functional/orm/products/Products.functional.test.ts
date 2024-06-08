@@ -23,4 +23,22 @@ describe("Products Test Suite", () => {
     // Then
     expect(suggestions).toEqual(expected);
   });
+  it("should query an autocomplete product", async () => {
+    // Given
+    const search = "app";
+    const originalProducts = new Products();
+    const actual = { name: "Apple" }
+    // When
+    const result = await originalProducts.autocomplete(search);
+    // Then
+    expect(result).toStrictEqual(actual);
+  });
+  it("should not throw if no product is found", async () => {
+    // Given
+    const originalProducts = new Products();
+    // When
+    const result = await originalProducts.autocomplete("non-existing-product");
+    // Then
+    expect(result).not.toBeDefined();
+  });
 });

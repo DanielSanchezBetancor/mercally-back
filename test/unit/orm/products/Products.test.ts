@@ -1,5 +1,5 @@
 import Products from "../../../../orm/products/Products";
-import mockBase from "../../../mocks/orm/mock-base";
+import mockBase, { mockAutosuggested } from "../../../mocks/orm/mock-base";
 import { getBiggestDifferenceMock } from "../../../mocks/orm/mock-prices";
 import { fillWithOriginalProductMock, getOriginalProductMock } from "../../../mocks/orm/mock-products";
 
@@ -47,5 +47,43 @@ describe("Products Test Suite", () => {
       LIMIT 10
     `);
     expect(result).toStrictEqual(actual);
+  });
+  it("should query an autocomplete product", async () => {
+    // Given
+    const search = "app";
+    const originalProducts = new Products();
+    const {
+      autosuggestedSpy
+    } = mockAutosuggested('apple')
+    const actual = "apple"
+    // When
+    const result = await originalProducts.autocomplete(search);
+    // Then
+    expect(autosuggestedSpy).toHaveBeenCalledTimes(1);
+    expect(autosuggestedSpy).toHaveBeenCalledWith(`
+      SELECT name
+      FROM products
+      WHERE name LIKE '%${search}%'
+      LIMIT 1
+    `);
+    expect(result).toStrictEqual(actual);
+  });
+  it("should not throw if no product is found", async () => {
+    // Given
+    const originalProducts = new Products();
+    const {
+      autosuggestedSpy
+    } = mockAutosuggested()
+    // When
+    const result = await originalProducts.autocomplete("non-existing-product");
+    // Then
+    expect(autosuggestedSpy).toHaveBeenCalledTimes(1);
+    expect(autosuggestedSpy).toHaveBeenCalledWith(`
+      SELECT name
+      FROM products
+      WHERE name LIKE '%non-existing-product%'
+      LIMIT 1
+    `);
+    expect(result).not.toBeDefined();
   });
 });

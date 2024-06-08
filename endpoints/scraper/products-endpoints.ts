@@ -5,6 +5,7 @@ import { biggestDiffProductsController } from "../../controllers/products/bigges
 import { cheapestProductsController } from "../../controllers/products/cheapestProductsController";
 import { searchController } from "../../controllers/products/searchController";
 import { searchSuggestionController } from "../../controllers/products/searchSuggestionController";
+import { autocompleteController } from "../../controllers/products/autocompleteController";
 
 const productsEndpoints = (app: Express) => {
   app.get("/getProducts", getProductsController);
@@ -13,6 +14,7 @@ const productsEndpoints = (app: Express) => {
   app.get("/cheapestProducts", cheapestProductsController);
   app.get("/search", searchController)
   app.get("/searchSuggestion", searchSuggestionController)
+  app.get("/autocomplete", autocompleteController)
 };
 
 export { productsEndpoints };

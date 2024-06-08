@@ -106,6 +106,17 @@ class Products extends ProductsBase {
 
     return products;
   }
+
+  async autocomplete(searchProduct: string) {
+    const [suggestedProduct] = await this.query<string[]>(`
+      SELECT name
+      FROM ${this.table}
+      WHERE name LIKE '%${searchProduct}%'
+      LIMIT 1
+    `);
+
+    return suggestedProduct[0];
+  }
 }
 
 export type { QueryResultItem, SearchBy }
