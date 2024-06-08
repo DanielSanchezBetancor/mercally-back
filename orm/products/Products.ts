@@ -93,7 +93,20 @@ class Products extends ProductsBase {
         return 'ORDER BY price ASC'
     }
   }
+
+  async searchSuggestion(searchProduct: string) {
+    const [products] = await this.query<QueryResultItem[]>(`
+      SELECT * 
+      FROM ${this.table} 
+      JOIN prices ON prices.id_product = products.id
+      WHERE name LIKE '%${searchProduct}%'
+      ORDER BY price ASC
+      LIMIT 10
+    `);
+
+    return products;
+  }
 }
 
-export type { QueryResultItem }
+export type { QueryResultItem, SearchBy }
 export default Products

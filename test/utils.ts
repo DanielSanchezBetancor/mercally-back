@@ -1,10 +1,12 @@
 import express from "express";
-import { productsEndpoints } from "../endpoints/scraper/products.endpoints";
+import { productsEndpoints } from "../endpoints/scraper/products-endpoints";
+import { PRICES, PRODUCTS } from "../scripts/dummies";
 import init from "../scripts/init-seed";
 
-
 async function buildTestDB() {
-  await init()
+  await init(PRODUCTS, PRICES)
+
+  return { products: PRODUCTS, prices: PRICES }
 }
 
 async function executeEndpoint(endpoint: string) {
@@ -22,3 +24,4 @@ async function executeEndpoint(endpoint: string) {
 }
 
 export { buildTestDB, executeEndpoint };
+

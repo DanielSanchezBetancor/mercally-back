@@ -1,6 +1,13 @@
 import { ResultSetHeader } from "mysql2";
 import { getConnection } from "../base/connection";
-import { Product } from "../../data/types/product";
+
+// Este fichero debe irse y unirse a Products
+type Product = {
+  brand: string,
+  category: string,
+  unit: number,
+  product: string
+}
 
 type ProductPacket = ResultSetHeader & Product
 

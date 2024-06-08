@@ -6,4 +6,5 @@ export default {
 		".+\\.ts": "ts-jest",
 	},
 	transformIgnorePatterns: [],
+  setupFilesAfterEnv: ["<rootDir>/test/mocks/mock-env.ts"],
 };
