@@ -8,7 +8,7 @@ describe("Biggest Diff Products Controller Test Suite", () => {
   it("should return the products with the biggest difference", async () => {
     // Given
     // When
-    const res = await executeEndpoint('biggestDiffProducts')
+    const { res } = await executeEndpoint('biggestDiffProducts')
 
     // Then
     expect(res).toBeDefined()

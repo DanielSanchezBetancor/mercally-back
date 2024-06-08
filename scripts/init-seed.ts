@@ -74,6 +74,7 @@ async function createTables() {
       name VARCHAR(255) NOT NULL,
       is_white_brand BOOLEAN NOT NULL,
       id_category INTEGER NOT NULL,
+      id_brand INTEGER NOT NULL,
       PRIMARY KEY (id)
     )
   `)

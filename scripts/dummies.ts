@@ -20,6 +20,7 @@ ID_PRODUCTS.forEach(idProduct => {
     name: FRUITS[idProduct - 1],
     is_white_brand: randomBoolean(),
     id_category: 1,
+    id_brand: 1,
   })
 })
 

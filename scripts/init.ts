@@ -29,82 +29,100 @@ async function dropTables() {
 }
 
 async function createTables() {
-  logger.log('Creating tables', { keepLevel: true })
+  logger.log('Creating tables')
+  logger.log('Creating table <user>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE users (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER AUTO_INCREMENT,
       email VARCHAR(255) NOT NULL,
-      password VARCHAR(255) NOT NULL
+      password VARCHAR(255) NOT NULL,
+      PRIMARY KEY (id)
     )
   `)
+  logger.log('Creating table <users_settings>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE users_settings (
-      id INT PRIMARY KEY AUTO_INCREMENT,
-      id_user INT NOT NULL,
-      key VARCHAR(255) NOT NULL,
-      value TEXT NOT NULL
+    CREATE TABLE IF NOT EXISTS users_settings (
+      id INTEGER AUTO_INCREMENT,
+      id_user INTEGER NOT NULL,
+      setting_key VARCHAR(255) NOT NULL,
+      setting_value VARCHAR(255) NOT NULL,
+      PRIMARY KEY (id)
     )
   `)
+  logger.log('Creating table <users_stores>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE users_stores (
-      id_user INT NOT NULL,
-      id_store INT NOT NULL
+    CREATE TABLE IF NOT EXISTS users_stores (
+      id_user INTEGER NOT NULL,
+      id_store INTEGER NOT NULL
     )
   `)
+  logger.log('Creating table <stores>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE stores (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+    CREATE TABLE IF NOT EXISTS stores (
+      id INTEGER AUTO_INCREMENT,
       name VARCHAR(255) NOT NULL,
-      logo_url VARCHAR(255) NOT NULL
+      logo_url VARCHAR(255) NOT NULL,
+      PRIMARY KEY (id)
     )
   `)
+  logger.log('Creating table <products>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE products (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+    CREATE TABLE IF NOT EXISTS products (
+      id INTEGER AUTO_INCREMENT,
       name VARCHAR(255) NOT NULL,
       is_white_brand BOOLEAN NOT NULL,
-      id_category INT NOT NULL
+      id_category INTEGER NOT NULL,
+      id_brand INTEGER NOT NULL,
+      PRIMARY KEY (id)
     )
   `)
+  logger.log('Creating table <categories>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE categories (
-      id INT PRIMARY KEY AUTO_INCREMENT,
-      name VARCHAR(255) NOT NULL
+    CREATE TABLE IF NOT EXISTS categories (
+      id INTEGER AUTO_INCREMENT,
+      name VARCHAR(255) NOT NULL,
+      PRIMARY KEY (id)
     )
   `)
+  logger.log('Creating table <users_shopping_lists>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE users_shopping_lists (
-      id_user INT NOT NULL,
-      id_shopping_list INT NOT NULL,
+    CREATE TABLE IF NOT EXISTS users_shopping_lists (
+      id_user INTEGER NOT NULL,
+      id_shopping_list INTEGER NOT NULL,
       is_owner BOOLEAN NOT NULL,
       accepted BOOLEAN NOT NULL
     )
   `)
+  logger.log('Creating table <shopping_lists>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE shopping_lists (
-      id INT PRIMARY KEY AUTO_INCREMENT,
-      code VARCHAR(255)
+    CREATE TABLE IF NOT EXISTS shopping_lists (
+      id INTEGER AUTO_INCREMENT,
+      code VARCHAR(255),
+      PRIMARY KEY (id)
     )
   `)
+  logger.log('Creating table <shopping_lists_products>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE shopping_lists_products (
-      id_shopping_list INT NOT NULL,
-      id_product INT NOT NULL,
-      quantity INT NOT NULL
+    CREATE TABLE IF NOT EXISTS shopping_lists_products (
+      id_shopping_list INTEGER NOT NULL,
+      id_product INTEGER NOT NULL,
+      quantity INTEGER NOT NULL
     )
   `)
+  logger.log('Creating table <prices>', { keepLevel: true })
   await conn.query(`
-    CREATE TABLE prices (
-      id_product INT NOT NULL,
-      id_store INT NOT NULL,
+    CREATE TABLE IF NOT EXISTS prices (
+      id_product INTEGER NOT NULL,
+      id_store INTEGER NOT NULL,
       price FLOAT NOT NULL,
       price_per_unit FLOAT NOT NULL
     )
   `)
+  logger.log('Creating table <history_prices>', { subtractLevel: true })
   await conn.query(`
-    CREATE TABLE history_prices (
-      id_product INT NOT NULL,
-      id_store INT NOT NULL,
+    CREATE TABLE IF NOT EXISTS history_prices (
+      id_product INTEGER NOT NULL,
+      id_store INTEGER NOT NULL,
       price FLOAT NOT NULL,
       price_per_unit FLOAT NOT NULL,
       date DATETIME NOT NULL

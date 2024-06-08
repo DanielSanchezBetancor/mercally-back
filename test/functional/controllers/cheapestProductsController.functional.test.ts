@@ -8,7 +8,7 @@ describe("Cheapest Products Controller Test Suite", () => {
   it("should throw if no categories are send", async () => {
     // Given
     // When
-    const res = await executeEndpoint('cheapestProducts')
+    const { res } = await executeEndpoint('cheapestProducts')
 
     // Then
     expect(res).toBeDefined()
@@ -18,7 +18,7 @@ describe("Cheapest Products Controller Test Suite", () => {
   it("should return the cheapest products with the average price", async () => {
     // Given
     // When
-    const res = await executeEndpoint(`cheapestProducts?id_categories=1,2,3`)
+    const { res } = await executeEndpoint(`cheapestProducts?id_categories=1,2,3`)
 
     // Then
     expect(res).toBeDefined()
@@ -39,7 +39,7 @@ describe("Cheapest Products Controller Test Suite", () => {
   it("should return empty string if no products are found", async () => {
     // Given
     // When
-    const res = await executeEndpoint(`cheapestProducts?id_categories=999`)
+    const { res } = await executeEndpoint(`cheapestProducts?id_categories=999`)
 
     // Then
     expect(res).toBeDefined()
