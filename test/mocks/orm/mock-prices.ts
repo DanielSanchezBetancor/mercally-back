@@ -1,7 +1,7 @@
 import { ResultSetHeader } from "mysql2";
-import Price, { BiggestDifference } from "../../../orm/prices/Price";
+import Price, { BiggestDifference, CheapestProduct } from "../../../orm/prices/Price";
 
-function getMockPrices(): BiggestDifference[] {
+function getBiggestDifferenceMock(): BiggestDifference[] {
   return [{
     difference: 1,
     id_product: 1,
@@ -20,12 +20,31 @@ function getMockPrices(): BiggestDifference[] {
   }];
 }
 
-function mockPrices() {
-  const PriceMock = jest.spyOn(Price.prototype, "getBiggestDifference").mockImplementation(async () => {
-    return getMockPrices() as unknown as ResultSetHeader & BiggestDifference[];
-  });
-
-  return PriceMock;
+function getCheapestProductsMock(): CheapestProduct[] {
+  return [{
+    min_price: "0",
+    avg_price: "0",
+    id_product: 1
+  }, {
+    min_price: "0",
+    avg_price: "0",
+    id_product: 2
+  }, {
+    min_price: "0",
+    avg_price: "0",
+    id_product: 3
+  }];
 }
 
-export { getMockPrices, mockPrices };
+function mockPrices() {
+  const biggestDifferenceMock = jest.spyOn(Price.prototype, "getBiggestDifference").mockImplementation(async () => {
+    return getBiggestDifferenceMock() as unknown as ResultSetHeader & BiggestDifference[];
+  })
+  const cheapestProductsMock = jest.spyOn(Price.prototype, "getCheapestProducts").mockImplementation(async () => {
+    return getCheapestProductsMock() as unknown as ResultSetHeader & CheapestProduct[];
+  });
+
+  return { biggestDifferenceMock, cheapestProductsMock };
+}
+
+export { getBiggestDifferenceMock, mockPrices, getCheapestProductsMock };

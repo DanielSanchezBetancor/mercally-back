@@ -7,6 +7,12 @@ type BiggestDifference = {
   min_price: string;
 }
 
+type CheapestProduct = {
+  min_price: string;
+  avg_price: string;
+  id_product: number;
+}
+
 class Price extends PriceBase {
   private maxLimit = 3;
 
@@ -33,7 +39,26 @@ class Price extends PriceBase {
 
     return products;
   }
+
+  async getCheapestProducts(id_categories: number[]) {
+    const [products] = await this.query<CheapestProduct[]>(`
+      SELECT 
+        MIN(price) as min_price,
+        AVG(price) as avg_price,
+        id_product
+      FROM 
+        prices
+      WHERE id_product IN (
+        SELECT id_product FROM products WHERE id_category IN (${id_categories.join(", ")})
+      )
+      GROUP BY id_product
+      ORDER BY min_price
+      LIMIT ${this.maxLimit};
+    `)
+
+    return products;
+  }
 }
 
-export type { BiggestDifference }
+export type { BiggestDifference, CheapestProduct }
 export default Price
