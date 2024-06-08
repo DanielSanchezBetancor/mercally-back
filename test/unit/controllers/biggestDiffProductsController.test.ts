@@ -4,6 +4,10 @@ import { getMockPrices, mockPrices } from "../../mocks/orm/mock-prices";
 import { fillBiggestDiffProduct, mockProducts } from "../../mocks/orm/mock-products";
 
 describe("Biggest Diff Products Controller Test Suite", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.resetModules();
+  });
   it("should return the products with the biggest difference", async () => {
     // Given
     const { Request, Response } = mockExpress();

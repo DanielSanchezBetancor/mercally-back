@@ -1,5 +1,5 @@
 import { Store } from "../../data/types/store"
-const path = "../../../orm/stores/stores-orm";
+const path = "../../orm/stores/stores-orm";
 
 const mockStores: Store[] = [
   {

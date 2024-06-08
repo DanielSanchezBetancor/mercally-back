@@ -1,6 +1,6 @@
 import { User } from "../../data/types/user";
 
-const path = "../../../orm/user/user-orm";
+const path = "../../orm/user/user-orm";
 
 const defaultUser: User = {
   idUser: 1,

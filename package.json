@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.ts",
 	"scripts": {
-		"test": "jest",
+		"test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/functional", 
 		"dev": "tsx --watch ./index.ts",
 		"settings": "vscode-settings install",
 		"initDB": "tsx scripts/init.ts",

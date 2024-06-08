@@ -1,6 +1,10 @@
 import { executeEndpoint } from "../../utils"
 
 describe("Biggest Diff Products Controller Test Suite", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.resetModules();
+  });
   it("should return the products with the biggest difference", async () => {
     // Given
     // When
