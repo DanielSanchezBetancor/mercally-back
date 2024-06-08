@@ -35,7 +35,7 @@ class BaseQuery<T extends Fields> {
 
       return {
         ...acc,
-        [field]: value, 
+        [field]: value,
       }
     }, {});
 
@@ -51,7 +51,6 @@ class BaseQuery<T extends Fields> {
 
   async getByPk(pkValue: number | string) {
     const [primaryValue] = await this.query<T[]>(`SELECT * FROM ${this.table} WHERE ${this.primaryKey} = ${pkValue}`);
-    console.log('primaryValue', primaryValue)
 
     return primaryValue[0];
   }
