@@ -1,6 +1,6 @@
 import { ICategoriesRegex } from "../../../types/category";
 import CategoryPatterns, { convertToRegex } from "../category-regex";
-import { StoreRoomPatterns } from "./storeroom";
+import { StoreRoomPatterns } from "./storeroom/storeroom";
 
 const toys = "cord[oón]|juguete|pelota|hueso";
 const utils = "bowl";

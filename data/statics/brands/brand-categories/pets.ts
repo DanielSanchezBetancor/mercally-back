@@ -185,7 +185,7 @@ const PetsBrands: TBrand[] = [
   {
     // Marca de pasta, comida
     name: "Romero",
-    pattern: /(?<!con\s)romero(?!\sfrasco)/gi,
+    pattern: /(?<!con|de)(?:\s|^)romero(?!\sfrasco)/gi,
   },
   {
     name: "JR",
@@ -237,7 +237,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Valdes",
-    pattern: /valdes/gi,
+    pattern: /valdes(?:\s|$)/gi,
   },
   {
     name: "La Mia Grand",
@@ -274,6 +274,7 @@ const PetsBrands: TBrand[] = [
   {
     name: "Capsa Food",
     pattern: /capsa food|leche en polvo desnatada/gi,
+    priority: 2
   },
   {
     name: "Alitey",
@@ -546,7 +547,7 @@ const PetsBrands: TBrand[] = [
   },
   {
     name: "Mastrigo",
-    pattern: /mastrigo/gi,
+    pattern: /m[aá]s\s?trigo/gi,
   },
   {
     name: "Horno Tradicional",
@@ -777,10 +778,6 @@ const PetsBrands: TBrand[] = [
     pattern: /cortina/gi,
   },
   {
-    name: "El Gaitero",
-    pattern: /el gaitero/gi,
-  },
-  {
     name: "Via de la Plata",
     pattern: /via de la plata/gi,
   },
@@ -856,6 +853,10 @@ const PetsBrands: TBrand[] = [
     name: "Petit Cheri",
     pattern: /petit cheri/gi,
   },
+  {
+    name: "Jordans",
+    pattern: /jordans/gi,
+  }
 ];
 
 export default PetsBrands;

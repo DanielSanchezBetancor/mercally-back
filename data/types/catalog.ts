@@ -1,7 +1,7 @@
-import { TProduct } from "./product";
+import { Product } from "./product";
 
 type TNewCatalog = {
-  [category: string]: TProduct[];
+  [category: string]: Omit<Product, "idProduct">[];
 };
 
 export type { TNewCatalog };

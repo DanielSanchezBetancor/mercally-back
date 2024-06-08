@@ -1,6 +1,7 @@
-import { ICategoriesRegex } from "../../../types/category";
-import CategoryPatterns, { convertToRegex } from "../category-regex";
-import { HygienePatterns } from "./hygiene";
+import { ICategoriesRegex } from "../../../../types/category";
+import CategoryPatterns, { convertToRegex } from "../../category-regex";
+import { HygienePatterns } from "../hygiene";
+import StoreRoomMilksEggsPatterns from "./storeroom-milks-eggs";
 
 const chips = "(?:papa|patata)s? frita";
 const driedFruit = "frutos secos|cacahuete|anacardo|palomitas|ma[ií]z horneado";
@@ -18,6 +19,7 @@ const StoreRoomPatterns = {
   Atun: new RegExp(`${tuna}`, "gi"),
   Chocolates: new RegExp(`${chocolates}`, "gi"),
   Untable: new RegExp(`${spreadable}`, "gi"),
+  ...StoreRoomMilksEggsPatterns,
 };
 
 const StoreRoomRegex = convertToRegex(StoreRoomPatterns);

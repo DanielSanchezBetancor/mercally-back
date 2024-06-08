@@ -169,11 +169,11 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Málaga Virgen",
-    pattern: /(?:m[aá]laga\s|mal\.)virgen/gi,
+    pattern: /(?:m[aá]laga\s|mal\.)v[ií]rgen/gi,
   },
   {
     name: "Osborne Pedro Ximenez",
-    pattern: /osborne pedro ximenez/gi,
+    pattern: /(?:osborne\s)?pedro ximenez/gi,
   },
   {
     name: "Reccua",
@@ -201,7 +201,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "La Cocinera",
-    pattern: /la cocinera/gi,
+    pattern: /(?:la\s)?cocinera/gi,
   },
   {
     name: "Maheso",
@@ -280,8 +280,8 @@ const BabyBrands: TBrand[] = [
     pattern: /vegetanea/gi,
   },
   {
-    name: "Oatly",
-    pattern: /oatly/gi,
+    name: "Oat-Ly!",
+    pattern: /oat-?ly!?/gi,
   },
   {
     name: "Ovonatur",
@@ -402,6 +402,7 @@ const BabyBrands: TBrand[] = [
   {
     name: "Ideal",
     pattern: /ideal/gi,
+    priority: 2
   },
   {
     name: "Pastor de Aranda",
@@ -449,7 +450,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Kin",
-    pattern: /(?:\s|^)kin(?:\s|$)/gi,
+    pattern: /(?:\s|^)kin(?:\s|$|,)/gi,
   },
   {
     name: "Polident",
@@ -604,12 +605,12 @@ const BabyBrands: TBrand[] = [
     pattern: /alpen/gi,
   },
   {
-    name: "Kelloggs",
-    pattern: /kellogg[`']?s/gi,
+    name: "Kellogg's",
+    pattern: /kellogg[`'´]?s/gi,
   },
   {
-    name: "Kolln",
-    pattern: /kolln/gi,
+    name: "Kölln",
+    pattern: /k[oö]lln/gi,
   },
   {
     name: "Special K",
@@ -793,7 +794,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Hida",
-    pattern: /hida/gi,
+    pattern: /hida(?:\s|$|,)/gi,
   },
   {
     name: "J-Lek",
@@ -905,7 +906,7 @@ const BabyBrands: TBrand[] = [
   },
   {
     name: "Porto Tawny",
-    pattern: /porto tawny/gi,
+    pattern: /(?:porto|cruz|grahams)\stawny|grahams/gi,
   },
   {
     name: "Mar de Uvas",

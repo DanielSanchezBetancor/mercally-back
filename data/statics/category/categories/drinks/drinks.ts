@@ -1,5 +1,6 @@
-import { ICategoriesRegex } from "../../../types/category";
-import { convertToRegex } from "../category-regex";
+import { ICategoriesRegex } from "../../../../types/category";
+import { convertToRegex } from "../../category-regex";
+import VegetalDrinksPatterns from "./vegetal-drinks";
 
 const mixedJuices = "fruta + leche";
 const juice = "zumo|n[eé]ctar";
@@ -13,6 +14,7 @@ const DrinkPatterns = {
   Zumos: new RegExp(`${juice}|${mixedJuices}`, "gi"),
   Smoothie: new RegExp(`${smoothie}`, "gi"),
   Bebida: new RegExp(`${drinks}`, "gi"),
+  ...VegetalDrinksPatterns,
 };
 
 const DrinksRegex = convertToRegex(DrinkPatterns);

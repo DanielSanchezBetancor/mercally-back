@@ -3,13 +3,14 @@ import { TBrand } from "../../types/brand";
 import Categories from "../category/category";
 import BabyBrands from "./brand-categories/baby";
 import Beauty from "./brand-categories/beauty";
-import Drinks from "./brand-categories/drinks";
+import Cellar from "./brand-categories/cellar/cellar";
+import Drinks from "./brand-categories/drinks/drinks";
 import GeneralBrands from "./brand-categories/general";
+import MoreBrands from "./brand-categories/morebrands";
+import PerfumBrands from "./brand-categories/perfums";
 import PetsBrands from "./brand-categories/pets";
 import PreparedBrands from "./brand-categories/prepared";
 import StoreRoom from "./brand-categories/storeroom/storeroom";
-import PerfumBrands from "./brand-categories/perfums";
-import MoreBrands from "./brand-categories/morebrands";
 
 /**
  * Array with the possibles brands with their patterns
@@ -588,7 +589,7 @@ const BRANDS: TBrand[] = [
   },
   {
     name: "Whole Earth",
-    pattern: /^whole(?:\searth)?/gi,
+    pattern: /(?:\s|^)whole(?:\searth)?/gi,
   },
   {
     name: "Allos",
@@ -754,7 +755,7 @@ const BRANDS: TBrand[] = [
   {
     name: "La Casera",
     pattern:
-      /(?<!mexicana|croquetas|sobrasada|salsa|mayonesa)(?:la)?(?:\s|^)casera(?:\s|$)/gi,
+      /(?<!mexicana|croquetas|sobrasada|salsa|mayonesa)(?:la)?(?:\s|^)casera(?:\s|$|,)/gi,
   },
   {
     name: "TriNa",
@@ -1358,6 +1359,7 @@ const BRANDS: TBrand[] = [
   ...PreparedBrands,
   ...PerfumBrands,
   ...MoreBrands,
+  ...Cellar,
 ];
 
 // Esto ya lo llevare donde toque
@@ -1664,6 +1666,7 @@ const HOMEMADE_PATTERNS = [
   /coqueta/gi,
   /tortas/gi,
   /palitos/gi,
+  /ventilador/gi,
 ];
 
 const identifyBrand = (
@@ -1671,9 +1674,9 @@ const identifyBrand = (
   storeName: string
 ): TBrand | undefined => {
   const matchedBrands = BRANDS.filter((brandName) => {
-		const regex = new RegExp(brandName.pattern);
-		return regex.exec(productName);
-	});
+    const regex = new RegExp(brandName.pattern);
+    return regex.exec(productName);
+  });
 
   const hasBrand = matchedBrands.sort((a, b) => (a.priority || 1) - (b.priority || 1))[0];
 

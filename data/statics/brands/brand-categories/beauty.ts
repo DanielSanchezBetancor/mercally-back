@@ -303,7 +303,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Snatt's",
-    pattern: /snatt's/gi,
+    pattern: /snatt[`'¿]s/gi,
   },
   {
     name: "Pafritas",
@@ -1004,7 +1004,7 @@ const Beauty: TBrand[] = [
   },
   {
     name: "Juver",
-    pattern: /juver|(?!levite|sensación)(?:\s|^)bebida refrescante de/gi,
+    pattern: /juver|(?!levite|sensación)(?:\s|^)bebida refrescante de|disfruta/gi,
   },
   {
     name: "Lambda",

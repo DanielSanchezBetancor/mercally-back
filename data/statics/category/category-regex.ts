@@ -1,7 +1,7 @@
 const comidasFrias = "ensaladilla|ensalada|migas|gyoza|rosca|sobrasada";
 const platosCalientes =
   "menestra|salteado|parrillada|tempura|pisto|rollitos|croqueta|wok|yakisoba|pizza|piadina";
-const sopasYCaldos = "caldo|crema|sopa|fideos orientales|callos|fabada";
+// const sopasYCaldos = "caldo|crema|sopa|fideos orientales|callos|fabada";
 const tapasYEntrantes =
   "barquer?ta|salmorejo|hummus|pastel|s[aá]ndwich|gazpacho|tortilla|nuggets";
 const guarniciones = "patatas con all?ioli|untap[aá]n|tofu|tabul[eé]|tsatsiki";
@@ -14,7 +14,7 @@ const FOOD_WITH_SOMETHING =
 
 const CategoryPatterns = {
   Preparado: new RegExp(
-    `${comidasFrias}|${platosCalientes}|${sopasYCaldos}|${tapasYEntrantes}|${guarniciones}|${otrosPlatos}|${foodToTheSomething}|${FOOD_WITH_SOMETHING}`,
+    `${comidasFrias}|${platosCalientes}|${tapasYEntrantes}|${guarniciones}|${otrosPlatos}|${foodToTheSomething}|${FOOD_WITH_SOMETHING}`,
     "gi"
   ),
   Verduras: new RegExp(

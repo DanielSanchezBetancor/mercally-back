@@ -12,10 +12,12 @@ const getProductName = (productName: string, pattern: RegExp, unit: string) => {
 
   const productNameWithoutBrand = Object.values(productNameSplit)
     .map((productName) => {
-      const regex = new RegExp(pattern);
+      if (productName) {
+        const regex = new RegExp(pattern);
 
-      if (!regex.exec(productName)) {
-        return productName.trim();
+        if (!regex.exec(productName)) {
+          return productName.trim();
+        }
       }
 
       return "";
