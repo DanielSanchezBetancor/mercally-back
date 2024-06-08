@@ -1,5 +1,6 @@
 import { TBrand } from "../../../../types/brand";
 import StoreRoomSpreadableBrands from "./storeroom-spreadable";
+import StoreRoomMilksEggs from "./storeroom-milks-eggs";
 
 const StoreRoom: TBrand[] = [
   {
@@ -457,7 +458,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Societé",
-    pattern: /societ[ée]/gi,
+    pattern: /soci[ée]t[ée]/gi,
   },
   {
     name: "Zanetti",
@@ -524,8 +525,8 @@ const StoreRoom: TBrand[] = [
     pattern: /artiach/gi,
   },
   {
-    name: "Chiquilin",
-    pattern: /chiquilin/gi,
+    name: "Chiquilín",
+    pattern: /chiquil[ií]n/gi,
   },
   {
     name: "Dinosaurus",
@@ -601,7 +602,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Cuétara Galletas",
-    pattern: /cu[eé]tara\s?(?:galletas?|barquillos?)?/gi,
+    pattern: /cu[eé]tara\s?(?:galletas?|barquillos?)?|choco flakes/gi,
   },
   {
     name: "Fabián Martín",
@@ -786,7 +787,8 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Royal",
-    pattern: /royal(?:\s|$)(?!swan|greenland)/gi,
+    pattern: /royal(?:\s|$)/gi,
+    priority: 2,
   },
   {
     name: "Sour Patch Kids",
@@ -974,7 +976,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Family Biscuits",
-    pattern: /(?:^fb|family\s+biscuits)/gi,
+    pattern: /(?:^fb|family\s+biscuits)|tostakids/gi,
   },
   {
     name: "Lotus",
@@ -1131,7 +1133,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Bach",
-    pattern: /^bach/gi,
+    pattern: /(?:\s|^)bach/gi,
   },
   {
     name: "Conde de Caralt",
@@ -1550,7 +1552,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "El Coto",
-    pattern: /(?:el\s)?coto(?:\s|$)(?!imaz)/gi,
+    pattern: /(?:el\s)?coto(?:\s|$|,)(?!imaz)/gi,
   },
   {
     name: "Dinastía Vivanco",
@@ -1584,7 +1586,6 @@ const StoreRoom: TBrand[] = [
     name: "Lagunilla",
     pattern: /lagunilla/gi,
   },
-  ...StoreRoomSpreadableBrands,
   {
     name: "Lanzaga",
     pattern: /lanzaga/gi,
@@ -1618,8 +1619,8 @@ const StoreRoom: TBrand[] = [
     pattern: /marqu[eé]s\sde\smurrieta/gi,
   },
   {
-    name: "Marqués Riscal",
-    pattern: /(?:marqu[eé]s\s|marq\.)riscal/gi,
+    name: "Marqués de Riscal",
+    pattern: /(?:marqu[eé]s\s|marq\.)(?:de\s)?riscal/gi,
   },
   {
     name: "Martínez Lacuesta",
@@ -1735,7 +1736,7 @@ const StoreRoom: TBrand[] = [
   },
   {
     name: "Viña Izadi",
-    pattern: /(?:viña\s)?izadii?/gi,
+    pattern: /(?:viña\s)?izadii?(?:\s|$|,)(?:larrosa)?/gi,
   },
   {
     name: "Viña Pomal",
@@ -1969,6 +1970,8 @@ const StoreRoom: TBrand[] = [
     name: "Álvarez de toledo",
     pattern: /[aá]lvarez\sde\stoledo/gi,
   },
+  ...StoreRoomSpreadableBrands,
+  ...StoreRoomMilksEggs,
 ];
 
 export default StoreRoom;

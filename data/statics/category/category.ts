@@ -1,10 +1,11 @@
 import { ICategoriesRegex, TCategoryRegex } from "../../types/category";
 import BabyCategories from "./categories/baby";
-import DrinksCategories, { DrinkPatterns } from "./categories/drinks";
+import DrinksCategories, { DrinkPatterns } from "./categories/drinks/drinks";
 import FridgeCategories, { FridgePatterns } from "./categories/fridge";
 import HygieneCategories from "./categories/hygiene";
 import NutritionCategories, { NutritionPatterns } from "./categories/nutrition";
-import StoreRoomCategories, { StoreRoomPatterns } from "./categories/storeroom";
+import PantryCategories from "./categories/pantry/pantry";
+import StoreRoomCategories from "./categories/storeroom/storeroom";
 import CategoryPatterns from "./category-regex";
 
 const STATIC_CATEGORIES: ICategoriesRegex = {
@@ -31,6 +32,7 @@ const STATIC_CATEGORIES: ICategoriesRegex = {
   ...BabyCategories,
   ...HygieneCategories,
   ...NutritionCategories,
+  ...PantryCategories,
 };
 
 const CATEGORIES: ICategoriesRegex = {
@@ -39,14 +41,12 @@ const CATEGORIES: ICategoriesRegex = {
     pattern: CategoryPatterns.Verduras,
     excluders: [
       STATIC_CATEGORIES.Cereales.pattern,
-      STATIC_CATEGORIES.Salsas.pattern,
     ],
   },
   Preparado: {
     name: "Comida preparada",
     pattern: CategoryPatterns.Preparado,
     excluders: [
-      STATIC_CATEGORIES.Salsas.pattern,
       STATIC_CATEGORIES.Panaderia.pattern,
       CategoryPatterns.Verduras,
       NutritionPatterns.Aceitunas,
@@ -121,5 +121,31 @@ const identifyExcludedCategories = (excluders: RegExp[], data: string) => {
   return hasExcludedCategory;
 };
 
-export { identifyCategory, identifyExcludedCategories };
+const identifyAllPatterns = (data: string) => {
+  const identifiedCategories = Object.keys(Categories).filter((categoryKey) => {
+    const category = Categories[categoryKey];
+    const regex = new RegExp(category.pattern);
+    const categoryExists = regex.exec(data);
+
+    if (categoryExists) {
+      return true;
+    }
+
+    return false;
+  }).map((categoryKey) => {
+    const category = Categories[categoryKey];
+    const regex = new RegExp(category.pattern);
+    const categoryExists = regex.exec(data);
+
+    return {
+      category: category.name,
+      wordMatched: categoryExists![0],
+      priority: category.priority || 0
+    };
+  });
+
+  return identifiedCategories;
+}
+
+export { identifyCategory, identifyExcludedCategories, identifyAllPatterns };
 export default Categories;

@@ -11,7 +11,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Don Simón",
-    pattern: /(?:don|d\.)(?:\s|^)sim[oó]n/gi,
+    pattern: /(?:don|d\.)?(?:\s|^)sim[oó]n/gi,
   },
   {
     name: "Hiperdino",
@@ -601,7 +601,8 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Nestlé",
-    pattern: /nestl?[eé]|cono extreme|extreme (?:cono|cookie|mini)|(?<!lacasa chocolate\s|interdentales\s)extrafino|nativa|nidina|corn flakes harvest home/gi,
+    pattern: /nestl?[eé]|cono extreme|extreme (?:cono|cookie|mini)|(?<!lacasa chocolate\s|interdentales\s)extrafino|nativa|nidina|corn flakes harvest home|nan|go free/gi,
+    priority: 2,
   },
   {
     name: "Cini Minis",
@@ -862,7 +863,7 @@ const GeneralBrands: TBrand[] = [
   {
     name: "Santiveri",
     pattern:
-      /(?:(?:santiveri\s)?noglut|galletas?\s(?:digestive espelta|sesamo doble zero))/gi,
+      /(?:santiveri\s)?(?:noglut|galletas?\s(?:digestive espelta|sesamo doble zero)|provamel|promavel)/gi,
   },
   {
     name: "Pagesa",
@@ -1185,10 +1186,6 @@ const GeneralBrands: TBrand[] = [
   {
     name: "Vivesoy",
     pattern: /vivesoy/gi,
-  },
-  {
-    name: "Provamel",
-    pattern: /provamel|promavel/gi,
   },
   {
     name: "Vivibio",
@@ -1630,7 +1627,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Born",
-    pattern: /[\^\s]born[\$\s]/gi,
+    pattern: /(?:\s|^)born(?:\s|$)/gi,
   },
   {
     // I saw a case a 'ecoesta'...
@@ -1700,7 +1697,7 @@ const GeneralBrands: TBrand[] = [
   },
   {
     name: "Casa Amella",
-    pattern: /casa\s+amella/gi,
+    pattern: /casa\samella/gi,
   },
   {
     name: "Natur Compagnie",
@@ -1791,6 +1788,10 @@ const GeneralBrands: TBrand[] = [
     name: "Linwoods",
     pattern: /linwoods/gi,
   },
+  {
+    name: "Carrefour",
+    pattern: /de nuestra tierra|carrefour|geistluchs/gi,
+  }
 ];
 
 export default GeneralBrands;

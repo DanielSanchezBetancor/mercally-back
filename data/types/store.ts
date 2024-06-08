@@ -1,5 +1,6 @@
-type TStore = {
-  name: string;
+type Store = {
+  idStore: number;
+  storeName: string;
 };
 
-export type { TStore };
+export type { Store };

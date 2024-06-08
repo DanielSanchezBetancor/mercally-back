@@ -144,7 +144,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Hero",
-    pattern: /[\^\s]hero[\$\s]/gi,
+    pattern: /(?:\s|^)hero(?:\s|$)/gi,
   },
   {
     name: "Hero Baby",
@@ -400,7 +400,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Mum",
-    pattern: /mum/gi,
+    pattern: /(?:\s|^)mum/gi,
   },
   {
     name: "Axe",
@@ -580,7 +580,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Clea",
-    pattern: /clea/gi,
+    pattern: /clea(?:\s|$)/gi,
   },
   {
     name: "Finca Resalso",
@@ -756,12 +756,7 @@ const PreparedBrands: TBrand[] = [
   },
   {
     name: "Canals & Nubiola",
-    pattern: /c\.\snubiola/,
-  },
-
-  {
-    name: "Canals & Nubiola",
-    pattern: /c\.\snubiola/gi,
+    pattern: /(?:canals|c\.)\snubiola/,
   },
   {
     name: "Reymos",
@@ -810,6 +805,107 @@ const PreparedBrands: TBrand[] = [
   {
     name: "Staropramen",
     pattern: /staropramen/gi,
+  },
+
+  {
+    name: "Ribeto",
+    pattern: /ribeto/gi,
+  },
+  {
+    name: "Larsa",
+    pattern: /larsa/gi,
+  },
+  {
+    name: "Ambrosi",
+    pattern: /ambrosi/gi,
+  },
+  {
+    name: "Bleu D'Auvergne",
+    pattern: /bleu\sd[`'´]auvergne/gi,
+  },
+  {
+    name: "Dodoni",
+    pattern: /dodoni/gi,
+  },
+  {
+    name: "Milram",
+    pattern: /milram/gi,
+  },
+  {
+    name: "Albe",
+    pattern: /albe/gi,
+  },
+  {
+    name: "Tu Rulito",
+    pattern: /tu\srulito/gi,
+  },
+  {
+    name: "Mama Vaca",
+    pattern: /mam[aá]\svaca/gi,
+  },
+  {
+    name: "Islos",
+    pattern: /islos/gi,
+  },
+  {
+    name: "Sabanitas",
+    pattern: /sabanitas/gi,
+  },
+  {
+    name: "Milkimi",
+    pattern: /milkimi/gi,
+  },
+  {
+    name: "Fleur des Monts",
+    pattern: /fleur des monts/gi,
+  },
+  {
+    name: "Alambra",
+    pattern: /alambra/gi,
+  },
+  {
+    name: "Giovanni Ferrari",
+    pattern: /giovanni\sferrari/gi,
+  },
+  {
+    name: "Sojaisa",
+    pattern: /sojaisa/gi,
+  },
+  {
+    name: "Tio Resti",
+    pattern: /tio\sresti/gi,
+  },
+  {
+    name: "Gran Bavarese",
+    pattern: /gran\sbavarese/gi,
+  },
+  {
+    name: "Angulo",
+    pattern: /angulo/gi,
+  },
+  {
+    name: "Patros",
+    pattern: /patros/gi,
+  },
+  {
+    name: "Le Rustique",
+    pattern: /le\srustique/gi,
+  },
+  {
+    name: "Dulcemen",
+    pattern: /dulcemen/gi,
+  },
+  {
+    name: "Almond Breeze",
+    pattern: /almond\s?breeze/gi,
+  },
+  {
+    name: "Origens",
+    pattern: /origens/gi,
+  },
+  {
+    name: "Via Mia",
+    pattern: /via\s?mia/gi,
   },
 ];
 

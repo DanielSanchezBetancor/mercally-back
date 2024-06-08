@@ -91,7 +91,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Sol Natural",
-    pattern: /sol natural/gi,
+    pattern: /sol\s?natural/gi,
   },
   {
     name: "Captain kombucha",
@@ -315,7 +315,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Tropical",
-    pattern: /(?<!refresco|leche|zumo|sabor|ambientador)(?:\s|^)tropical(?!\srexona)/gi,
+    pattern: /(?<!refresco|leche|zumo|sabor|ambientador)(?:\s|^)tropical(?:\s|$)(?!rexona)/gi,
   },
   {
     name: "Abbaye D'aulne",
@@ -428,10 +428,6 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   {
     name: "Kopparberg",
     pattern: /kopparberg/gi,
-  },
-  {
-    name: "Ladrón de Manzanas",
-    pattern: /(?:ladr[oó]n de\s|l\.)manzanas/gi,
   },
   {
     name: "Magners",
@@ -615,7 +611,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Viña Sol",
-    pattern: /viña sol/gi,
+    pattern: /viña sol(?:\s|$)/gi,
   },
   {
     name: "Albariño de Fefiñanes",
@@ -1033,10 +1029,13 @@ const StoreRoomSpreadableBrands: TBrand[] = [
     name: "Castello",
     pattern: /castello/gi,
   },
+  // Diria que esto no es una marca
+  /*
   {
     name: "Toscanella",
     pattern: /toscanella/gi,
   },
+  */
   {
     name: "Ribera del Tajo",
     pattern: /ribera del tajo/gi,
@@ -1071,7 +1070,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Control",
-    pattern: /^control/gi,
+    pattern: /(?:\s|^)control/gi,
   },
   {
     name: "Family Natural",
@@ -1140,7 +1139,7 @@ const StoreRoomSpreadableBrands: TBrand[] = [
   },
   {
     name: "Tena",
-    pattern: /^tena/gi,
+    pattern: /(?:\s|^)tena/gi,
   },
   {
     name: "Pharmaline",

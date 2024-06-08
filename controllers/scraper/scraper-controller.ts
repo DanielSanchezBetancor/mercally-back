@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import { identifyBrand } from "../../data/statics/brands/brands";
-import Categories, {
-  identifyCategory,
-  identifyExcludedCategories,
+import {
+  identifyCategory
 } from "../../data/statics/category/category";
 import { getProductName, identifyUnits } from "../../data/statics/products";
 import { TNewCatalog } from "../../data/types/catalog";
+import { Product } from "../../data/types/product";
 import { logIntoFile, saveLogFile } from "../../helpers/monitor";
-import { TProduct } from "../../data/types/product";
+import { insertProduct } from "../../orm/base/products";
 
 interface ISaveCatalogRequest {
   catalog: string;
@@ -46,7 +46,7 @@ const stopExecution = (
   next();
 };
 
-const parseCatalog = (
+const parseCatalog = async (
   catalog: ISaveCatalogRequest["catalog"],
   storeName: string
 ) => {
@@ -63,10 +63,7 @@ const parseCatalog = (
     logIntoFile("Encontrado producto", productName, 1);
     logIntoFile("Analizando contenido", undefined, 1);
 
-    // for (let categoryKey of Object.keys(Categories)) {
-    //   processCategory(categoryKey, productName, newCatalog);
-    // }
-    processProduct(productName, newCatalog, storeName);
+    await processProduct(productName, newCatalog, storeName);
   }
 
   logIntoFile("Catálogo final", JSON.stringify(newCatalog));
@@ -74,15 +71,16 @@ const parseCatalog = (
   return saveLogFile();
 };
 
-const saveNewCatalog = (
+const saveNewCatalog = async (
   newCatalog: TNewCatalog,
   category: string,
   brand: string,
   product: string,
   unit: string
 ) => {
-  const newProduct: TProduct = {
-    name: product,
+  const newProduct: Omit<Product, 'idProduct'> = {
+    product,
+    category,
     brand,
     unit,
   };
@@ -94,8 +92,9 @@ const saveNewCatalog = (
   }
 
   newCatalog[category].push(newProduct);
+  await insertProduct(newProduct);
 };
-const processProduct = (
+const processProduct = async (
   productName: string,
   newCatalog: TNewCatalog,
   storeName: string
@@ -129,60 +128,7 @@ const processProduct = (
   logIntoFile("Encontrado peso: ", unit, 2);
   logIntoFile("Encontrado nombre: ", realProductName, 2);
 
-  saveNewCatalog(newCatalog, category.name, name, realProductName, unit);
-};
-
-const processCategory = (
-  categoryKey: string,
-  productName: string,
-  newCatalog: TNewCatalog,
-  storeName: string
-) => {
-  const brand = identifyBrand(productName, storeName);
-
-  if (brand) {
-    const { name, pattern, onlyCategory } = brand;
-    logIntoFile("Encontrada marca: ", name, 2);
-
-    const category = Categories[categoryKey];
-    const excluders = category.excluders ?? [];
-    const categoryExists = identifyCategory(
-      // category,
-      productName
-      // onlyCategory
-    );
-    const hasExcludedCategory = identifyExcludedCategories(
-      excluders,
-      productName
-    );
-
-    if (!hasExcludedCategory) {
-      const units = identifyUnits(productName);
-
-      if (categoryExists && units) {
-        const unit = units[0];
-        const realProductName = getProductName(productName, pattern, unit);
-
-        logIntoFile("Encontrada categoria: ", categoryKey, 2);
-        logIntoFile("Encontrado peso: ", unit, 2);
-        logIntoFile("Encontrado nombre: ", realProductName, 2);
-
-        saveNewCatalog(newCatalog, categoryKey, name, realProductName, unit);
-      } else {
-        logIntoFile(
-          "Categoria / unidad no encontrada",
-          {
-            category: categoryKey,
-            brand: brand?.name ?? "Unknown",
-            units,
-          },
-          2
-        );
-      }
-    } else {
-      logIntoFile("Categoria con exclusion. Saltamos.", undefined, 3);
-    }
-  }
+  await saveNewCatalog(newCatalog, category.name, name, realProductName, unit);
 };
 
 export { saveCatalog };

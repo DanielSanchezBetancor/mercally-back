@@ -384,7 +384,8 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Blanco",
-    pattern: /(?<!mosto|verm[uú]t|ron|vino|choco|dent[ií]frico|apio|chocolate|ojos|cocinar|tocino)(?:\s|^)blanco(?:\s|$)/gi,
+    pattern: /(?<!mosto|ron|vino|choco|dent[ií]frico|apio|chocolate|ojos|cocinar|tocino)(?:\s|^)blanco(?:\s|$)/gi,
+    priority: 2,
   },
   {
     name: "La Abuela",
@@ -457,10 +458,6 @@ const PerfumBrands: TBrand[] = [
   {
     name: "OR Xata",
     pattern: /or xata/gi,
-  },
-  {
-    name: "Central Lechera Asturiana",
-    pattern: /central lechera asturiana/gi,
   },
   {
     name: "Sveltesse",
@@ -589,6 +586,7 @@ const PerfumBrands: TBrand[] = [
   {
     name: "Nacional",
     pattern: /(?<!grano|c[aá]scara)(?:\s|^)nacional/gi,
+    priority: 2,
   },
   {
     name: "Esgir",
@@ -1036,7 +1034,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Igor",
-    pattern: /igor/gi,
+    pattern: /(?:\s|^)igor/gi,
   },
   {
     name: "Normandie",
@@ -1128,7 +1126,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "Pik Nik",
-    pattern: /pik nik/gi,
+    pattern: /pik[\s-]nik/gi,
   },
   {
     name: "Queixería Barral",
@@ -1176,7 +1174,7 @@ const PerfumBrands: TBrand[] = [
   },
   {
     name: "OB",
-    pattern: /(?:\s|^)ob(?:\s|$)/gi,
+    pattern: /(?:\s|^)ob(?:\s|$|,)/gi,
   },
   {
     name: "Vagisil",
@@ -1185,6 +1183,7 @@ const PerfumBrands: TBrand[] = [
   {
     name: "San",
     pattern: /(?:\s|^)san(?:\s|$)(?!jacobos?)/gi,
+    priority: 2,
   },
   {
     name: "Alin",

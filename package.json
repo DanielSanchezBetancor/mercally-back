@@ -2,24 +2,30 @@
 	"name": "shopping-cart-backend",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "index.ts",
 	"scripts": {
 		"test": "jest",
-		"dev": "nodemon ./index.ts",
-		"settings": "vscode-settings install"
+		"dev": "tsx --watch ./index.ts",
+		"settings": "vscode-settings install",
+		"initDB": "tsx scripts/init.ts",
+		"initDB:dummy": "tsx ./bin/init-seed.ts",
+		"initDB:dummy:debug": "tsx ./bin/init-seed.ts -- --debug"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@coding-flavour/logger": "^1.0.0",
-		"@coding-flavour/vscode-settings": "^1.0.0",
+		"@coding-flavour/logger": "^1.0.2",
 		"@types/cors": "^2.8.17",
 		"@types/express": "^4.17.21",
 		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
 		"express": "^4.18.2",
+		"mysql2": "^3.9.7",
 		"nodemon": "^3.0.2",
-		"ts-node": "^10.9.1"
+		"supertest": "^7.0.0",
+		"ts-node": "^10.9.1",
+		"tsx": "<4.13.0"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.5.12",

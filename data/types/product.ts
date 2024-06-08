@@ -1,9 +1,11 @@
-type TProduct = {
-  name: string;
+type Product = {
+  idProduct: number
+  product: string;
+  category: string;
   brand: string;
   unit: string;
 };
 
 
 
-export type { TProduct };
+export type { Product };

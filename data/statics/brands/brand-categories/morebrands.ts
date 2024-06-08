@@ -236,6 +236,7 @@ const MoreBrands: TBrand[] = [
   {
     name: "Maya",
     pattern: /maya|cepillo/gi,
+    priority: 2,
   },
   {
     name: "Airless",
@@ -395,7 +396,7 @@ const MoreBrands: TBrand[] = [
   },
   {
     name: "Sorianatural",
-    pattern: /sorianatural/gi,
+    pattern: /soria\s?natural/gi,
   },
   {
     name: "Bo de Debo",
@@ -454,67 +455,67 @@ const MoreBrands: TBrand[] = [
     pattern: /efi-protect/gi,
   },
   {
-    name:"Bichi-Ho",
+    name: "Bichi-Ho",
     pattern: /bichi-ho/gi,
   },
   {
-    name:"Relec",
+    name: "Relec",
     pattern: /relec/gi,
   },
   {
-    name:"Paranix",
+    name: "Paranix",
     pattern: /paranix/gi,
   },
   {
-    name:"Newell",
+    name: "Newell",
     pattern: /newell/gi,
   },
   {
-    name:"Byphasee",
+    name: "Byphasee",
     pattern: /byphasee/gi,
   },
   {
-    name:"Dermocracy",
+    name: "Dermocracy",
     pattern: /dermocracy/gi,
   },
   {
-    name:"Brüggen",
+    name: "Brüggen",
     pattern: /brüggen/gi,
   },
   {
-    name:"Belladieta",
+    name: "Belladieta",
     pattern: /belladieta/gi,
   },
   {
-    name:"Los Ibéricos",
+    name: "Los Ibéricos",
     pattern: /los ibéricos/gi,
   },
   {
-    name:"La Selva",
+    name: "La Selva",
     pattern: /la selva/gi,
   },
   {
-    name:"Soroa",
+    name: "Soroa",
     pattern: /soroa/gi,
   },
   {
-    name:"Can Duran",
+    name: "Can Duran",
     pattern: /can\sduran/gi,
   },
   {
-    name:"Embutidos España",
+    name: "Embutidos España",
     pattern: /emb\.\sespaña/gi,
   },
   {
-    name:"Gemi",
+    name: "Gemi",
     pattern: /gemi/gi,
   },
   {
-    name:"Ibher",
+    name: "Ibher",
     pattern: /ibher/gi,
   },
   {
-    name:"Entrecaños",
+    name: "Entrecaños",
     pattern: /entrecaños/gi,
   },
   {
@@ -588,6 +589,582 @@ const MoreBrands: TBrand[] = [
   {
     name: "Freskibo",
     pattern: /freskibo/gi,
+  },
+  {
+    name: "Albamonte",
+    pattern: /albamonte/gi,
+  },
+  {
+    name: "Hegemonia Mayor",
+    pattern: /hegemonia\smayor/gi,
+  },
+  {
+    name: "Cobos",
+    pattern: /cobos/gi,
+  },
+  {
+    name: "Valdespino",
+    pattern: /valdespino/gi,
+  },
+  {
+    name: "Dos Pasas",
+    pattern: /dos\spasas/gi,
+  },
+  {
+    name: "La Gitana",
+    pattern: /la\sgitana/gi,
+  },
+  {
+    name: "Orgullo",
+    pattern: /orgullo/gi,
+  },
+  {
+    name: "Solera",
+    pattern: /solera/gi,
+  },
+  {
+    name: "Dry Sack",
+    pattern: /dry\ssack/gi,
+  },
+  {
+    name: "Artesano",
+    pattern: /artesano/gi,
+  },
+  {
+    name: "Barañano",
+    pattern: /barañano/gi,
+  },
+  {
+    name: "Peñagoloso",
+    pattern: /peñagoloso/gi,
+  },
+  {
+    name: "Ochoa",
+    pattern: /ochoa/gi,
+  },
+  {
+    name: "Mari Gorri",
+    pattern: /mari\sgorri/gi,
+  },
+  {
+    name: "Angostura",
+    pattern: /angostura/gi,
+  },
+  {
+    name: "Cruz Ruby",
+    pattern: /cruz\sruby/gi,
+  },
+  {
+    name: "Heredad de Hidalgo",
+    pattern: /heredad\ de\ hidalgo/gi,
+  },
+  {
+    name: "Alfonso",
+    pattern: /alfonso(?!\si)/gi,
+  },
+  {
+    name: "Astobiza",
+    pattern: /astobiza/gi,
+  },
+  {
+    name: "Mari Zuri",
+    pattern: /mari\szuri/gi,
+  },
+  {
+    name: "Montecristo",
+    pattern: /montecristo/gi,
+  },
+  {
+    name: "Noilly Prat",
+    pattern: /noilly\sprat/gi,
+  },
+  {
+    name: "Txurrut",
+    pattern: /txurrut/gi,
+  },
+  {
+    name: "Old Porter",
+    pattern: /old\sporter/gi,
+  },
+  {
+    name: "Sandeman",
+    pattern: /sandeman/gi,
+  },
+  {
+    name: "Garvey",
+    pattern: /garvey/gi,
+  },
+  {
+    name: "La Copa",
+    pattern: /la\scopa/gi,
+  },
+  {
+    name: "Los Amigos",
+    pattern: /los\samigos/gi,
+  },
+  {
+    name: "Señorío de Sarria",
+    pattern: /señor[ií]o de sarria/gi,
+  },
+  {
+    name: "Bandeira",
+    pattern: /bandeira/gi,
+  },
+  {
+    name: "Fino Quinta",
+    pattern: /fino quinta/gi,
+  },
+  {
+    name: "Uva D'Or",
+    pattern: /uva\sd'or/gi,
+  },
+  {
+    name: "Castillo de Peñíscola",
+    pattern: /castillo de peñ[ií]scola/gi,
+  },
+  {
+    name: "Viña AB",
+    pattern: /viña ab/gi,
+  },
+  {
+    name: "Camilo Castilla",
+    pattern: /camilo castilla/gi,
+  },
+  {
+    name: "Sabanindas",
+    pattern: /sabanindas/gi,
+  },
+  {
+    name: "Eroski",
+    pattern: /eroski/gi,
+  },
+  {
+    name: "Addermis",
+    pattern: /addermis/gi,
+  },
+  {
+    name: "Nutriben",
+    pattern: /nutriben/gi,
+  },
+  {
+    name: "Almirón",
+    pattern: /almir[oó]n/gi,
+  },
+  {
+    name: "Blemil",
+    pattern: /blemil/gi,
+  },
+  {
+    name: "Suavinex",
+    pattern: /suavinex/gi,
+  },
+  {
+    name: "Mustela",
+    pattern: /mustela/gi,
+  },
+  {
+    name: "Senti2",
+    pattern: /senti2/gi,
+  },
+  {
+    name: "Isdin",
+    pattern: /(?:\s|^)isdin|Gel crema Fotoprotector FP50/gi,
+  },
+  {
+    name: "Blevit",
+    pattern: /blevit/gi,
+  },
+  {
+    name: "Narhinel",
+    pattern: /narhinel/gi,
+  },
+  {
+    name: "Medela",
+    pattern: /medela/gi,
+  },
+  {
+    name: "Talquistina",
+    pattern: /talquistina/gi,
+  },
+  {
+    name: "Klorane",
+    pattern: /klorane/gi,
+  },
+  {
+    name: "Avent",
+    pattern: /avent/gi,
+  },
+  {
+    name: "Chicco",
+    pattern: /chicco/gi,
+  },
+  {
+    name: "Polar",
+    pattern: /polar/gi,
+  },
+  {
+    name: "Ozturk",
+    pattern: /ozturk/gi,
+  },
+  {
+    name: "Croqueta y Presumida",
+    pattern: /croqueta y presumida/gi,
+  },
+  {
+    name: "Barrenetxe",
+    pattern: /barrenetxe/gi,
+  },
+  {
+    name: "La Sirena",
+    pattern: /la\ssirena/gi,
+  },
+  {
+    name: "Lacturale",
+    pattern: /lacturale/gi,
+  },
+  {
+    name: "Jordans",
+    pattern: /jordans/gi,
+  },
+  {
+    name: "Alcampo",
+    pattern: /producto\s(?:econ[óo]mico\s)?alcampo|alcampo (?:ecol[óo]gico|gourmet|cultivamos lo bueno)|auchan/gi,
+  },
+  {
+    name: "Elgorriaga",
+    pattern: /elgorriaga/gi,
+  },
+  {
+    name: "Rume",
+    pattern: /rume/gi,
+  },
+  {
+    name: "Polen",
+    pattern: /polen(?:\s|$)/gi,
+  },
+  {
+    name: "Diat Radisson",
+    pattern: /diat\sradisson/gi,
+  },
+  {
+    name: "Tejedor",
+    pattern: /tejedor/gi,
+  },
+  {
+    name: "Pick Up",
+    pattern: /pick\sup/gi,
+  },
+  {
+    name: "Festival",
+    pattern: /festival/gi,
+  },
+  {
+    name: "Birba",
+    pattern: /birba/gi,
+  },
+  {
+    name: "Zü",
+    pattern: /zü/gi,
+  },
+  {
+    name: "Petritegi",
+    pattern: /petritegi/gi,
+  },
+  {
+    name: "True Fruits",
+    pattern: /true\sfruits/gi,
+  },
+  {
+    name: "Ready",
+    pattern: /ready/gi,
+  },
+  {
+    name: "Parogencyl",
+    pattern: /parogencyl/gi,
+  },
+  {
+    name: "Pilexil",
+    pattern: /pilexil/gi,
+  },
+  {
+    name: "Clean & Lens",
+    pattern: /clean\s?&\s?lens/gi,
+  },
+  {
+    name: "ZZZQuil",
+    pattern: /zzzquil/gi,
+  },
+  {
+    name: "Vitis",
+    pattern: /vitis/gi,
+  },
+  {
+    name: "Pharamset",
+    pattern: /pharamset/gi,
+  },
+  {
+    name: "Ureadin",
+    pattern: /ureadin/gi,
+  },
+  {
+    name: "Neutrógena",
+    pattern: /neutr[oó]gena/gi,
+  },
+  {
+    name: "Colnatur",
+    pattern: /colnatur/gi,
+  },
+  {
+    name: "Avéne",
+    pattern: /av[éëè]ne/gi,
+  },
+  {
+    name: "Roha",
+    pattern: /roha/gi,
+  },
+  {
+    name: "Ensure",
+    pattern: /ensure/gi,
+  },
+  {
+    name: "La Roche Posay",
+    pattern: /la\sroche\sp[óo]say/gi,
+  },
+  {
+    name: "Bexident",
+    pattern: /bexident/gi,
+  },
+  {
+    name: "Cerave",
+    pattern: /cerave/gi,
+  },
+  {
+    name: "Oralkin",
+    pattern: /oralkin/gi,
+  },
+  {
+    name: "Germisdin",
+    pattern: /germisdin/gi,
+  },
+  {
+    name: "Inibisa",
+    pattern: /inibisa/gi,
+  },
+  {
+    name: "Devor-Olor",
+    pattern: /devor-olor/gi,
+  },
+  {
+    name: "La Roche Posay",
+    pattern: /lrp\santhelios/gi,
+  },
+  {
+    name: "Nutrivigor",
+    pattern: /nutrivigor/gi,
+  },
+  {
+    name: "Multicentrum",
+    pattern: /multicentrum/gi,
+  },
+  {
+    name: "Ana Maria Lajusticia",
+    pattern: /(?:ana|a\.)\s?(?:maria|m\.)?\s+lajusticia/gi,
+  },
+  {
+    name: "La Gavilla",
+    pattern: /la\sgavilla/gi,
+  },
+  {
+    name: "Andrés",
+    pattern: /andr[eé]s/gi,
+  },
+  {
+    name: "Crifill",
+    pattern: /crifill/gi,
+  },
+  {
+    name: "Veritas",
+    pattern: /veritas/gi,
+  },
+  {
+    name: "Barnhouse",
+    pattern: /barnhouse/gi,
+  },
+  {
+    name: "Equimercado",
+    pattern: /equimercado/gi,
+  },
+  {
+    name: "Grillon D'Or",
+    pattern: /grillon\sd'or/gi,
+  },
+  {
+    name: "Moulin Piver",
+    pattern: /moulin\spiver/gi,
+  },
+  {
+    name: "Wikana",
+    pattern: /wikana/gi,
+  },
+  {
+    name: "Lima",
+    pattern: /instant[aá]neo\slima/gi,
+  },
+  {
+    name: "Abellán",
+    pattern: /abell[áa]n/gi,
+  },
+  {
+    name: "Gozo Gozoa",
+    pattern: /gozo\sgozoa/gi,
+  },
+  {
+    name: "Gure Eztia",
+    pattern: /gure\seztia/gi,
+  },
+  {
+    name: "Pedro Luis",
+    pattern: /pedro\sluis/gi,
+  },
+  {
+    name: "Coop. Agrícola",
+    pattern: /coop\.\sagricola/gi,
+  },
+  {
+    name: "Viña Solana",
+    pattern: /viña\ssolana/gi,
+  },
+  {
+    name: "Coto Elosegi",
+    pattern: /coto\selosegi/gi,
+  },
+  {
+    name: "Don Paulo",
+    pattern: /don\spaulo/gi,
+  },
+  {
+    name: "Vegas del Rivilla",
+    pattern: /vegas\sdel\srivilla/gi,
+  },
+  {
+    name: "Coyanza",
+    pattern: /coyanza/gi,
+  },
+  {
+    name: "Sabino",
+    pattern: /sabino/gi,
+  },
+  {
+    name: "Don Hugo",
+    pattern: /don\shugo/gi,
+  },
+  {
+    name: "Cresta Rosado",
+    pattern: /cresta\rosado/gi,
+  },
+  {
+    name: "Vite Selvate",
+    pattern: /vite\sselvate/gi,
+  },
+  {
+    name: "Pleno",
+    pattern: /pleno/gi,
+  },
+  {
+    name: "Echave",
+    pattern: /echave/gi,
+  },
+  {
+    name: "Sant'Orsola",
+    pattern: /s\.\sorsola/gi,
+  },
+  {
+    name: "Arnalte",
+    pattern: /arnalte/gi,
+  },
+  {
+    name: "Solar de Estraunza",
+    pattern: /solar de estraunza/gi,
+  },
+  {
+    name: "Mendiondo",
+    pattern: /mendiondo/gi,
+  },
+  {
+    name: "Inurrieta",
+    pattern: /inurrieta/gi,
+  },
+  {
+    name: "Eguren Ugarte",
+    pattern: /eguren ugarte/gi,
+  },
+  {
+    name: "Sadeyes",
+    pattern: /sadeyes/gi,
+  },
+  {
+    name: "Tierra Leal",
+    pattern: /tierra leal/gi,
+  },
+  {
+    name: "Amats",
+    pattern: /amats/gi,
+  },
+  {
+    name: "Viña del Mar",
+    pattern: /viña del mar/gi,
+  },
+  {
+    name: "Viñas de Anna",
+    pattern: /viñas de anna/gi,
+  },
+  {
+    name: "Las Campanas",
+    pattern: /las campanas/gi,
+  },
+  {
+    name: "De Casta",
+    pattern: /de casta/gi,
+  },
+  {
+    name: "Principe de Viana",
+    pattern: /p\. de viana/gi,
+  },
+  {
+    name: "Valdelosfrailes",
+    pattern: /valdelosfrailes/gi,
+  },
+  {
+    name: "Viña Tito",
+    pattern: /viña tito/gi,
+  },
+  {
+    name: "Vega Cubillas",
+    pattern: /vega cubillas/gi,
+  },
+  {
+    name: "Irache",
+    pattern: /irache/gi,
+  },
+  {
+    name: "Caldirola",
+    pattern: /caldirola/gi,
+  },
+  {
+    name: "Val Condes",
+    pattern: /val condes/gi,
+  },
+  {
+    name: "Monte Ory",
+    pattern: /monte ory/gi,
+  },
+  {
+    name: "Win",
+    pattern: /win/gi,
+  },
+  {
+    name: "Castillo San Javier",
+    pattern: /castillo san javier/gi,
   },
 ];
 

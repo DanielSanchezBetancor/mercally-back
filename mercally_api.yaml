@@ -1,0 +1,441 @@
+openapi: 3.0.0
+info:
+  title: Coding Flavour Shopping Cart
+  description: Available endpoints for the Shopping Cart project
+  version: 1.0.0
+host: localhost:3000
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  ApiKeyAuth:
+    type: "apiKey"
+    in: header
+    name: X-API-KEY
+paths:
+  /search:
+    get:
+      tags: [GET]
+      description: Searches for products
+      parameters:
+        - $ref: '#/parameters/storeIds'
+        - name: productName
+          in: query
+          schema:
+            type: string
+          description: "Product name."
+          example: "jamon"
+        - name: minPrice
+          in: query
+          schema:
+            type: number
+          description: "Minimum product price."
+          example: 100
+        - name: maxPrice
+          in: query
+          schema:
+            type: number
+          description: "Maximum product price."
+          example: 55000
+        - name: minPricePerKg
+          in: query
+          schema:
+            type: number
+          description: "Minimum product price per kilogram."
+          example: 100
+        - name: maxPricePerKg
+          in: query
+          schema:
+            type: number
+          description: "Maximum product price per kilogram."
+          example: 55000
+        - name: isWhiteBrand
+          in: query
+          schema:
+            type: boolean
+          description: Flag to search for or exclude white label products.
+          example: false
+        - in: query
+          name: brands
+          description: "IDs of the brands."
+          schema:
+            type: array
+            items:
+              type: number
+          example:
+            - 1
+            - 2
+            - 3
+      responses:
+        200:
+          $ref: "#/responses/common200"
+  /suggestions:
+    get:
+      tags: [GET]
+      description: Returns budget-friendly alternative suggestions
+      parameters:
+        - name: productList
+          in: query
+          description: "Product IDs as an array."
+          schema:
+            type: array
+            items:
+              type: number
+          example:
+            - 17
+            - 29
+            - 3092
+          required: true
+        - $ref: '#/parameters/storeIds'
+      responses:
+        200:
+          description: "Returns a '200' status code and an array of suggested products."
+          content: 
+            application/json: 
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/productInProduct"
+  /stores:
+    get:
+      tags: [GET]
+      description: Gets all stores
+      responses:
+        200:
+          description: "Returns a '200' status code and an array of stores."
+          content: 
+            application/json: 
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/store"
+      security:
+        - ApiKeyAuth: []
+  /biggestDiffProducts:
+    get:
+      description: Returns top 3 products with the biggest price difference
+      tags: [GET]
+      responses:
+        200:
+          $ref: "#/responses/common200"
+  /topCheapest:
+    get:
+      description: Returns top 3 products with the cheapest price
+      tags: [GET]
+      responses:
+        200:
+          $ref: "#/responses/common200"
+  /listByCode:
+    get:
+      tags: [GET]
+      description: Retrieves a shopping list by code
+      parameters:
+        - in: query
+          name: code
+          description: "Identifier for the shopping list."
+          schema:
+            type: string
+          example: "X25RCJ"
+          required: true
+      responses:
+        200:
+          $ref: "#/responses/common200"
+  /generateListCode:
+    get:
+      tags: [GET]
+      description: Generates an identifier for the user shopping list
+      responses:
+        200:
+          description: "Returns a '200' status code and a string that identifies the user shopping list."
+          content: 
+            application/json: 
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+      security:
+        - ApiKeyAuth: []
+  /searchSuggestion:
+    get:
+      description: Generates a suggestion for a product containing the input string
+      tags: [GET]
+      parameters:
+        - name: input
+          in: query
+          schema:
+            type: string
+          example: huevos de
+      responses:
+        200:
+          $ref: "#/responses/common200"
+  /autocomplete:
+    get:
+      description: Generates an autocomplete string for a product containing the input string
+      tags: [GET]
+      parameters:
+        - name: input
+          in: query
+          schema:
+            type: string
+          example: huevos de
+      responses:
+        200:
+          description: Autocompleted String
+          content: 
+            application/json: 
+              schema: 
+                type: string
+                example: huevos de gallina
+  /productDetails:
+    get:
+      description: Get's all the details for a given product
+      tags: [GET]
+      parameters:
+        - name: productId
+          in: query
+          schema:
+            type: number
+          example: 25
+      responses:
+        200:
+          description: All the details regarding the product
+          content: 
+            application/json: 
+              schema:
+                $ref: "#/definitions/product"
+  /productHistory:
+    get:
+      description: Get's all the prices and date for a given product
+      tags: [GET]
+      parameters:
+        - name: productId
+          in: query
+          schema:
+            type: number
+          example: 25
+      responses:
+        200:
+          description: Array of dates and prices
+          content: 
+            application/json: 
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date: 
+                      type: string
+                    price: 
+                      type: number
+  /totalPrice:
+    get:
+      description: Calculates current list for a given store. Optional array of products for non registered users
+      tags: [GET]
+      parameters:
+        - name: storeId
+          in: query
+          required: true
+          schema:
+            type: number
+          example: 3
+        - name: productList
+          in: query
+          schema:
+            type: array
+            items:
+              type: number
+            example: [25, 123, 1555]
+      responses:
+        200:
+          description: Total price
+          content: 
+            application/json: 
+              schema: 
+                type: number
+                example: 250.99
+  /shoppingListRequests:
+    get:
+      description: Retrieves all requests to join a list for a host user
+      tags: [GET]
+      responses:
+        200:
+          description: All requests for the host
+          content:
+            application/json: 
+              schema: 
+                type: array
+                items:
+                  type: object
+                  properties:
+                    shoppingListId:
+                      type: number
+                    requestedUserId:
+                      type: number
+  # POST
+  /createList:
+    post:
+      tags: [POST]
+      description: Creates a new list for the user
+      responses:
+        200:
+          $ref: '#/definitions/empty'
+  # PUT
+  /modifyStoreFavorite:
+    put:
+      tags: [PUT]
+      description: Modifies user favorites stores
+      parameters:
+        - name: storeId
+          description: Store ID
+          schema: 
+            type: integer
+          required: true
+      responses:
+        200:
+          $ref: '#/definitions/empty'
+  /savePreferences:
+    put:
+      tags: [PUT]
+      description: Save user preferences
+      parameters:
+        - name: body
+          schema:
+            type: object
+            properties:
+              password:
+                type: string
+                example: Current user password
+              theme:
+                type: object
+                enum:
+                  - "THEME1"
+                  - "THEME2"
+                  - "THEME3"
+                example: String with an enum of the theme
+              newUsername:
+                type: string
+                example: "New name of the user."
+              newPassword:
+                type: string
+                example: "New password of the user."
+              newEmail:
+                type: string
+                example: "New email of the user."
+            required:
+              - password
+      responses:
+        200:
+          $ref: "#/definitions/empty"
+      security:
+        - ApiKeyAuth: []
+  /modifyList:
+    put:
+      description: Modify the user shopping list
+      tags: [PUT]
+      parameters:
+        - name: product
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          $ref: "#/definitions/empty"
+      security:
+        - ApiKeyAuth: []
+  /handleShoppingListRequest:
+    put:
+      description: Handles host action on a list request
+      tags: [PUT]
+      parameters:
+        - name: idShoppingList
+          required: true
+          schema:
+            type: number
+          example: 2
+        - name: accepted
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        200:
+          $ref: "#/definitions/empty"
+  # DELETE
+  /eraseList:
+    delete:
+      tags: [DELETE]
+      description: Erases a given list of the user
+      parameters:
+        - name: shoppingListId
+          required: true
+          schema:
+            type: number
+          example: 3
+      responses:
+        200:
+          $ref: '#/definitions/empty'
+
+# Object definitions
+definitions:
+  productInProduct:
+    type: object
+    properties:
+      productId:
+        $ref: "#/definitions/product"
+  product:
+    type: object
+    properties:
+      productId:
+        type: number
+      name:
+        type: string
+      price:
+        type: number
+      brandId:
+        type: number
+      isWhiteBrand:
+        type: boolean
+  store:
+    type: object
+    properties:
+      storeId:
+        type: number
+      name:
+        type: string
+  empty:
+    description: "Empty response"
+
+# Descriptions
+descriptions:
+  common:
+    code200: "Returns a '200' status code and an array of products"
+
+# Responses
+responses:
+  common200:
+    description:
+      $ref: "#/descriptions/common/code200"
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/product"
+
+# Parameters
+parameters:
+  storeIds:
+    in: query
+    name: storeIds
+    description: "IDs of the requested supermarkets \n <i>Example</i>:"
+    type: array
+    required: true
+    schema:
+      type: number
+      example:
+        - 3
+        - 7
+        - 9
