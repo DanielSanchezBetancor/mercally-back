@@ -3,6 +3,8 @@ import Price from "../../orm/prices/Price";
 import Products from "../../orm/products/Products";
 
 async function cheapestProductsController(req: Request, res: Response) {
+  if (!req.query) return res.status(400).json({ error: 'Missing query' })
+
   const { id_categories } = req.query;
 
   if (!id_categories) return res.status(400).json({ error: 'Missing id_categories' });

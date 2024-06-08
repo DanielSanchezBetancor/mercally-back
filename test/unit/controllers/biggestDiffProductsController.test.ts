@@ -1,7 +1,7 @@
 import { biggestDiffProductsController } from "../../../controllers/products/biggestDiffProductsController";
 import { mockExpress } from "../../mocks/mock-express";
-import { getMockPrices, mockPrices } from "../../mocks/orm/mock-prices";
-import { fillBiggestDiffProduct, mockProducts } from "../../mocks/orm/mock-products";
+import { getBiggestDifferenceMock, mockPrices } from "../../mocks/orm/mock-prices";
+import { fillWithOriginalProductMock, mockProducts } from "../../mocks/orm/mock-products";
 
 describe("Biggest Diff Products Controller Test Suite", () => {
   afterEach(() => {
@@ -11,22 +11,22 @@ describe("Biggest Diff Products Controller Test Suite", () => {
   it("should return the products with the biggest difference", async () => {
     // Given
     const { Request, Response } = mockExpress();
-    const Prices = mockPrices();
+    const { biggestDifferenceMock } = mockPrices();
     const Products = mockProducts();
-    const actual = fillBiggestDiffProduct(getMockPrices());
+    const actual = fillWithOriginalProductMock(getBiggestDifferenceMock());
     // When
     await biggestDiffProductsController(Request, Response);
     // Then
-    expect(Prices).toHaveBeenCalledTimes(1);
+    expect(biggestDifferenceMock).toHaveBeenCalledTimes(1);
     expect(Products).toHaveBeenCalledTimes(3);
     expect(Response.json.mock.calls[0][0]).toStrictEqual(actual);
   });
   // Hay que moverlo a los tests de orm/products/Products.test.ts
   it.skip("should fill with original product", async () => {
     // Given
-    const products = getMockPrices();
+    const products = getBiggestDifferenceMock();
     const Products = mockProducts();
-    const actual = fillBiggestDiffProduct(products);
+    const actual = fillWithOriginalProductMock(products);
     // When
     // const result = await fillWithOriginalProduct(products);
     // Then

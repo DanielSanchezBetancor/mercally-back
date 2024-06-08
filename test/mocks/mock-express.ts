@@ -1,4 +1,6 @@
-function mockExpress() {
+import { Request } from "express";
+
+function mockExpress(request: Partial<Request> | typeof jest.fn = jest.fn()) {
   jest.mock("express", () => {
     const actualModule = jest.requireActual("express");
 
@@ -8,7 +10,7 @@ function mockExpress() {
 
     return {
       ...actualModule,
-      Request: jest.fn(),
+      Request: request,
       Response: {
         ...actualModule.Response,
         send,

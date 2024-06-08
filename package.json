@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "npm run test:unit && npm run test:integration",
     "test:unit": "jest test/unit",
-    "test:integration": "jest test/functional", 
+    "test:integration": "jest test/functional --runInBand", 
 		"dev": "tsx --watch ./index.ts",
 		"settings": "vscode-settings install",
 		"initDB": "tsx scripts/init.ts",
