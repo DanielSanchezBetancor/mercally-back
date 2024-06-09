@@ -31,17 +31,18 @@ describe("Autocomplete Controller Test Suite", () => {
   });
   it("should return correct products", async () => {
     // Given
+    const expected = 'autocompleted-product';
     const { Request, Response } = mockExpress({
       query: {
         query: "product"
       }
     });
-    const { autocompleteSpy } = mockProducts()
+    const { autocompleteSpy } = mockProducts(expected)
     // When
     await autocompleteController(Request, Response);
     // Then
     expect(autocompleteSpy).toHaveBeenCalledTimes(1);
-    expect(Response.json.mock.calls[0][0]).toBe<string>('autocompleted-product')
+    expect(Response.json.mock.calls[0][0]).toBe<string>(expected)
   });
   it("should return error if search term is too short", async () => {
     // Given

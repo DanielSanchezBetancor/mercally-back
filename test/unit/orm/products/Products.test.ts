@@ -4,6 +4,10 @@ import { getBiggestDifferenceMock } from "../../../mocks/orm/mock-prices";
 import { fillWithOriginalProductMock, getOriginalProductMock } from "../../../mocks/orm/mock-products";
 
 describe("Products Test Suite", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.resetModules();
+  });
   it("should return empty array if no products are provided", async () => {
     // Given
     const originalProducts = new Products();
