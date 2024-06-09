@@ -13,6 +13,10 @@ const DATES: string[] = [
   '2021-01-02',
   '2021-01-03',
 ]
+const SHOPPING_LIST = {
+  id: 1,
+  code: '123456',
+}
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
@@ -47,4 +51,4 @@ function randomBoolean() {
   return Math.random() < 0.5 ? 0 : 1
 }
 
-export { PRICES, PRODUCTS, HISTORY_PRICES };
+export { PRICES, PRODUCTS, HISTORY_PRICES, SHOPPING_LIST };
