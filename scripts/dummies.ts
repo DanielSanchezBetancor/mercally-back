@@ -1,4 +1,7 @@
 import { HistoryPrice } from "../orm/HistoryPrices/HistoryPricesBase";
+import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase";
+import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
+import { UserShoppingList } from "../orm/UserShoppingLists/UserShoppingListsBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
 
@@ -13,15 +16,23 @@ const DATES: string[] = [
   '2021-01-02',
   '2021-01-03',
 ]
-const SHOPPING_LIST = {
+const SHOPPING_LIST: ShoppingList = {
   id: 1,
   code: '123456',
+}
+const SHOPPING_LIST_PRODUCTS: ProductsShoppingList[] = []
+const USER_SHOPPING_LIST: UserShoppingList = {
+  id_user: 1,
+  id_shopping_list: 1,
+  is_active: true,
+  is_accepted: true,
+  is_owner: true,
 }
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
     PRICES.push({
-      id: PRICES.length,
+      id: PRICES.length + 1,
       id_product: idProduct,
       id_store: idStore,
       price: (Math.random() * 10).toFixed(2),
@@ -45,10 +56,15 @@ ID_PRODUCTS.forEach(idProduct => {
     id_category: 1,
     id_brand: 1,
   })
+  SHOPPING_LIST_PRODUCTS.length < 3 && SHOPPING_LIST_PRODUCTS.push({
+    id_shopping_list: 1,
+    id_product: idProduct,
+    quantity: idProduct,
+  })
 })
 
 function randomBoolean() {
   return Math.random() < 0.5 ? 0 : 1
 }
 
-export { PRICES, PRODUCTS, HISTORY_PRICES, SHOPPING_LIST };
+export { PRICES, PRODUCTS, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST };
