@@ -86,4 +86,20 @@ describe("Products Test Suite", () => {
     `);
     expect(result).not.toBeDefined();
   });
+  it("should query the table by field", async () => {
+    // Given
+    const originalProduct = new Products();
+    const {
+      querySpy
+    } = mockBase()
+    const field = 'is_white_brand';
+    const value = '1';
+    const actual = [getOriginalProductMock(0), getOriginalProductMock(1), getOriginalProductMock(2)]
+    // When
+    const result = await originalProduct.getAllByField(field, value, undefined);
+    // Then
+    expect(querySpy).toHaveBeenCalledTimes(1);
+    expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM products WHERE ${field} = '${value}' `);
+    expect(result).toStrictEqual(actual);
+  })
 });

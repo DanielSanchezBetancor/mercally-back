@@ -41,4 +41,14 @@ describe("Products Test Suite", () => {
     // Then
     expect(result).not.toBeDefined();
   });
+  it("should get product details by field", async () => {
+    // Given
+    const { products } = await buildTestDB();
+    const originalProduct = new Products();
+    const expected = products.filter((product) => product.is_white_brand === 1)
+    // When
+    const result = await originalProduct.getAllByField("is_white_brand", 1, undefined)
+    // Then
+    expect(result).toEqual(expected);
+  });
 });

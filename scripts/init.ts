@@ -1,7 +1,6 @@
 import { getConnection } from "../orm/base/connection"
 import Logger from "@coding-flavour/logger"
 
-console.log("Hola?")
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
 const tables = [
   'users',

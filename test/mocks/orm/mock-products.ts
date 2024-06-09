@@ -46,7 +46,6 @@ function mockProducts(value?: string) {
     return value as unknown as ResultSetHeader & string;
   });
 
-
   return { getByPkSpy, searchSpy, searchSuggestionSpy, autocompleteSpy };
 }
 

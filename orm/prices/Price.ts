@@ -1,4 +1,4 @@
-import PriceBase from "./base";
+import PricesBase from "./base";
 
 type BiggestDifference = {
   difference: number;
@@ -13,7 +13,7 @@ type CheapestProduct = {
   id_product: number;
 }
 
-class Price extends PriceBase {
+class Prices extends PricesBase {
   private maxLimit = 3;
 
   constructor() {
@@ -61,4 +61,4 @@ class Price extends PriceBase {
 }
 
 export type { BiggestDifference, CheapestProduct }
-export default Price
+export default Prices
