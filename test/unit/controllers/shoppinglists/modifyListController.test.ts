@@ -1,7 +1,7 @@
-import { modifyListController } from "../../../controllers/shoppinglists/modifyListController";
-import { mockExpress } from "../../mocks/mock-express";
-import { mockProductsShoppingLists } from "../../mocks/orm/mock-products-shopping-lists";
-import { getOriginalUserShoppingLists, mockUserShoppingLists } from "../../mocks/orm/mock-user-shopping-lists";
+import { modifyListController } from "../../../../controllers/shoppinglists/modifyListController";
+import { mockExpress } from "../../../mocks/mock-express";
+import { mockProductsShoppingLists } from "../../../mocks/orm/mock-products-shopping-lists";
+import { getOriginalUserShoppingLists, mockUserShoppingLists } from "../../../mocks/orm/mock-user-shopping-lists";
 
 describe("Modify List Controller Test Suite", () => {
   afterEach(() => {

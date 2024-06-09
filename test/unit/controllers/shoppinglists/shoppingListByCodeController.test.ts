@@ -1,6 +1,6 @@
-import { shoppingListByCodeController } from "../../../controllers/shoppinglists/shoppingListByCodeController";
-import { mockExpress } from "../../mocks/mock-express";
-import { getOriginalShoppingListMock, mockShoppingList } from "../../mocks/orm/mock-shopping-list";
+import { shoppingListByCodeController } from "../../../../controllers/shoppinglists/shoppingListByCodeController";
+import { mockExpress } from "../../../mocks/mock-express";
+import { getOriginalShoppingListMock, mockShoppingList } from "../../../mocks/orm/mock-shopping-list";
 
 describe("Shopping List By Code Controller Test Suite", () => {
   afterEach(() => {
