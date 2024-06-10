@@ -5,11 +5,10 @@ type ShoppingList = {
   code?: string,
 }
 
-type ShoppingListFields = Omit<ShoppingList, 'id'>;
-
-class ShoppingListsBase extends BaseQuery<ShoppingListFields> {
+class ShoppingListsBase extends BaseQuery<ShoppingList> {
   protected table = 'shopping_lists';
-  protected fields: ShoppingListFields = {
+  protected fields: ShoppingList = {
+    id: 0,
     code: '',
   };
   protected primaryKey: string = 'id';
@@ -19,5 +18,5 @@ class ShoppingListsBase extends BaseQuery<ShoppingListFields> {
   }
 }
 
-export { ShoppingList, ShoppingListFields }
+export { ShoppingList }
 export default ShoppingListsBase;

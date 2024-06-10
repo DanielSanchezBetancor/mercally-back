@@ -46,7 +46,7 @@ describe("Product Details Controller Test Suite", () => {
           price_per_unit: Number(price.price_per_unit),
         }
       })
-      .filter((product) => product.id === Number(keyword))
+      .filter((product) => product.id_product === Number(keyword))
       .toSorted((a, b) => a.price - b.price)
 
     // When
@@ -79,7 +79,7 @@ describe("Product Details Controller Test Suite", () => {
           price_per_unit: Number(price.price_per_unit),
         }
       })
-      .filter((product) => product.id === Number(keyword))
+      .filter((product) => product.id_product === Number(keyword))
       .toSorted((a, b) => b.price - a.price)
 
     // When
