@@ -4,6 +4,10 @@ import { getBiggestDifferenceMock } from "../../../mocks/orm/mock-prices";
 import { fillWithOriginalProductMock, getOriginalProductMock } from "../../../mocks/orm/mock-products";
 
 describe("Products Test Suite", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.resetModules();
+  });
   it("should return empty array if no products are provided", async () => {
     // Given
     const originalProducts = new Products();
@@ -86,4 +90,20 @@ describe("Products Test Suite", () => {
     `);
     expect(result).not.toBeDefined();
   });
+  it("should query the table by field", async () => {
+    // Given
+    const originalProduct = new Products();
+    const {
+      querySpy
+    } = mockBase()
+    const field = 'is_white_brand';
+    const value = '1';
+    const actual = [getOriginalProductMock(0), getOriginalProductMock(1), getOriginalProductMock(2)]
+    // When
+    const result = await originalProduct.getAllByField(field, value, undefined);
+    // Then
+    expect(querySpy).toHaveBeenCalledTimes(1);
+    expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM products WHERE ${field} = '${value}' `);
+    expect(result).toStrictEqual(actual);
+  })
 });

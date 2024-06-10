@@ -1,6 +1,7 @@
 import { FieldPacket, ResultSetHeader } from "mysql2";
 import BaseQuery from "../../../orm/base/BaseQuery";
 import { getOriginalProductMock } from "./mock-products";
+import { getOriginalPriceMock } from "./mock-prices";
 
 function mockBase() {
   const getByPkSpy = jest.spyOn(BaseQuery.prototype, "getByPk").mockImplementation(async (id: string | number) => {
@@ -22,6 +23,14 @@ function mockAutosuggested(value?: string) {
   return { autosuggestedSpy };
 }
 
+function mockQueryPrice() {
+  const querySpy = jest.spyOn(BaseQuery.prototype, "query").mockImplementation(async (_query: string) => {
+    return [getOriginalPriceMock(0)] as unknown as [ResultSetHeader, FieldPacket[]];
+  });
 
-export { mockAutosuggested }
+  return { querySpy };
+}
+
+
+export { mockAutosuggested, mockQueryPrice }
 export default mockBase;

@@ -1,11 +1,6 @@
 import Price from "../prices/Price";
+import { SortBy } from "../prices/base";
 import ProductsBase from "./base";
-
-enum SearchBy {
-  cheapest = 'cheapest',
-  bestRatio = 'bestRatio',
-  expensive = 'expensive',
-}
 
 type OverchargedUnknown = unknown & { id_product: number }
 
@@ -19,7 +14,7 @@ type SearchParams = {
   is_white_brand?: boolean;
   id_brands?: number[];
   limit?: number;
-  sort_by?: SearchBy;
+  sort_by?: SortBy;
 }
 type QueryResultItem = Products['fields'] & Price['fields']
 
@@ -53,13 +48,13 @@ class Products extends ProductsBase {
     is_white_brand,
     id_brands,
     limit = 10,
-    sort_by = SearchBy.cheapest
+    sort_by = SortBy.cheapest
   }: SearchParams) {
     const queryMaxPrice = max_price > 0 ? `AND price <= ${max_price}` : '';
     const queryMaxPricePerUnit = max_price_per_unit > 0 ? `AND price_per_unit <= ${max_price_per_unit}` : '';
     const queryIsWhiteBrand = is_white_brand !== undefined ? `AND is_white_brand = ${is_white_brand == true}` : '';
     const queryIdBrand = id_brands ? `AND id_brand IN (${id_brands.join(',')})` : '';
-    const orderBy = this.getOrderBy(sort_by)
+    const orderBy = new Price().getOrderBy(sort_by)
 
     const [products] = await this.query<QueryResultItem[]>(`
       SELECT * 
@@ -81,18 +76,7 @@ class Products extends ProductsBase {
     return products;
   }
 
-  private getOrderBy(sortBy: SearchBy) {
-    switch (sortBy) {
-      case SearchBy.cheapest:
-        return 'ORDER BY price ASC'
-      case SearchBy.bestRatio:
-        return 'ORDER BY price_per_unit ASC'
-      case SearchBy.expensive:
-        return 'ORDER BY price DESC'
-      default:
-        return 'ORDER BY price ASC'
-    }
-  }
+
 
   async searchSuggestion(searchProduct: string) {
     const [products] = await this.query<QueryResultItem[]>(`
@@ -119,5 +103,5 @@ class Products extends ProductsBase {
   }
 }
 
-export type { QueryResultItem, SearchBy }
+export type { QueryResultItem }
 export default Products
