@@ -1,11 +1,9 @@
 import mysql, { Pool } from 'mysql2';
-import dotenv from 'dotenv';
 
 let pool: Pool;
-dotenv.config();
 
 const getConnection = () => {
-	try {
+  try {
 		if (!pool) {
 			pool = mysql.createPool({
 				connectionLimit: 10,

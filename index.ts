@@ -4,7 +4,7 @@ import { scraperEndpoints } from "./endpoints/scraper/scraper-endpoints";
 import cors from "cors";
 import dotenv from 'dotenv';
 import { storesEndpoints } from "./endpoints/scraper/stores-endpoints";
-import { productsEndpoints } from "./endpoints/scraper/products.endpoints";
+import { productsEndpoints } from "./endpoints/scraper/products-endpoints";
 
 const app = express();
 app.use(express.json());

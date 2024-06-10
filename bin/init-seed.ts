@@ -2,8 +2,6 @@ import Logger from "@coding-flavour/logger"
 import init from "../scripts/init-seed"
 import dotenv from 'dotenv'
 
-
-
 (async () => {
   dotenv.config()
   const args = process.argv.slice(2)

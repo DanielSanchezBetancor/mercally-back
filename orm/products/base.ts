@@ -1,12 +1,14 @@
 import BaseQuery from "../base/BaseQuery";
 
-type ProductsFields = {
-  id?: number;
+type Product = {
+  id: number;
   name: string;
   is_white_brand: number;
   id_category: number;
   id_brand: number;
-}
+};
+
+type ProductsFields = Omit<Product, "id">;
 
 class ProductsBase extends BaseQuery<ProductsFields> {
   protected table = 'products';
@@ -23,4 +25,5 @@ class ProductsBase extends BaseQuery<ProductsFields> {
   }
 }
 
+export type { Product, ProductsFields };
 export default ProductsBase
