@@ -59,7 +59,7 @@ class BaseQuery<T extends Fields> {
     return typeof value === 'string' || value === 0 ? `'${value}'` : value;
   }
 
-  async getAllByField(field: keyof T, value: string | number, orderBy: unknown) {
+  async getAllByField(field: keyof T, value: string | number, orderBy?: unknown) {
     const [rows] = await this.query<T[]>(`SELECT * FROM ${this.table} WHERE ${String(field)} = ${this.cleanValue(value)} ${this.getOrderBy(orderBy)}`);
 
     return rows;

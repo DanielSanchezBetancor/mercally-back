@@ -8,7 +8,7 @@ type Price = {
   price_per_unit: string;
 }
 
-type PriceFields = Omit<Price, "id">;
+type PricesFields = Omit<Price, "id">;
 
 enum SortBy {
   cheapest = 'cheapest',
@@ -16,10 +16,10 @@ enum SortBy {
   expensive = 'expensive',
 }
 
-class PricesBase extends BaseQuery<PriceFields> {
+class PricesBase extends BaseQuery<PricesFields> {
   protected table = 'prices';
   protected primaryKey = "id";
-  protected fields: PriceFields = {
+  protected fields: PricesFields = {
     id_product: 0,
     id_store: 0,
     price: "0.00",
@@ -44,5 +44,5 @@ class PricesBase extends BaseQuery<PriceFields> {
   }
 }
 
-export { SortBy, Price };
+export { SortBy, Price, PricesFields };
 export default PricesBase

@@ -1,8 +1,13 @@
 import Logger from "@coding-flavour/logger"
 import { getConnection } from "../orm/base/connection"
-import Price from "../orm/prices/base"
+import Price, { PricesFields } from "../orm/prices/base"
 import Products from "../orm/products/Products"
-import { PRICES, PRODUCTS } from "./dummies"
+import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST } from "./dummies"
+import { ProductsFields } from "../orm/products/base"
+import { HistoryPricesFields } from "../orm/HistoryPrices/HistoryPricesBase"
+import HistoryPrice from "../orm/HistoryPrices/HistoryPrices"
+import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase"
+import ShoppingLists from "../orm/ShoppingLists/ShoppingLists"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
 const tables = [
@@ -122,17 +127,19 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
   logger.log('Creating table <history_prices>', { subtractLevel: true })
   await conn.query(`
     CREATE TABLE IF NOT EXISTS history_prices (
+      id INTEGER AUTO_INCREMENT,
       id_product INTEGER NOT NULL,
       id_store INTEGER NOT NULL,
       price FLOAT NOT NULL,
       price_per_unit FLOAT NOT NULL,
-      date DATETIME NOT NULL
+      date DATETIME NOT NULL,
+      PRIMARY KEY (id)
     )
   `)
   logger.log('Tables created', { keepLevel: true })
 }
 
-async function insertDummyData(conn: ReturnType<typeof getConnection>, products: ReturnType<Products["getFields"]>[], prices: ReturnType<Price["getFields"]>[]) {
+async function insertDummyData(conn: ReturnType<typeof getConnection>, products: ProductsFields[], prices: PricesFields[], historyPrices: HistoryPricesFields[], shoppingList: ShoppingList) {
   logger.log('Inserting dummy data', { keepLevel: true })
   await conn.query(`
     INSERT INTO users (email, password) VALUES
@@ -149,19 +156,17 @@ async function insertDummyData(conn: ReturnType<typeof getConnection>, products:
   for (const product of products) {
     await new Products().insert(product)
   }
-  await conn.query(`
-    INSERT INTO shopping_lists (code) VALUES
-      ('123456')`)
+  await new ShoppingLists().insert(shoppingList)
   await conn.query(`
     INSERT INTO shopping_lists_products (id_shopping_list, id_product, quantity) VALUES
       (1, 1, 5)`)
   for (const price of prices) {
-    console.log('price', price)
     await new Price().insert(price)
   }
-  await conn.query(`
-    INSERT INTO history_prices (id_product, id_store, price, price_per_unit, date) VALUES
-      (1, 1, 1.5, 0.3, '2021-01-01')`)
+  for (const historyPrice of historyPrices) {
+    await new HistoryPrice().insert(historyPrice)
+  }
+
   await conn.query(`
     INSERT INTO users_stores (id_user, id_store) VALUES
       (1, 1)`)
@@ -171,12 +176,12 @@ async function insertDummyData(conn: ReturnType<typeof getConnection>, products:
   logger.log('Dummy data inserted', { subtractLevel: true })
 }
 
-async function init(products = PRODUCTS, prices = PRICES) {
+async function init(products = PRODUCTS, prices = PRICES, historyPrices = HISTORY_PRICES, shoppingList = SHOPPING_LIST) {
   logger.log('Initializing database with dummy data')
   const conn = getConnection()
   await dropTables(conn)
   await createTables(conn)
-  await insertDummyData(conn, products, prices)
+  await insertDummyData(conn, products, prices, historyPrices, shoppingList)
   logger.log('Database initialized')
 }
 

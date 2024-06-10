@@ -7,6 +7,7 @@ import { searchController } from "../../controllers/products/searchController";
 import { searchSuggestionController } from "../../controllers/products/searchSuggestionController";
 import { autocompleteController } from "../../controllers/products/autocompleteController";
 import { productDetailsController } from "../../controllers/products/productDetailsController";
+import { productHistoryController } from "../../controllers/products/productHistoryController";
 
 const productsEndpoints = (app: Express) => {
   app.get("/getProducts", getProductsController);
@@ -17,6 +18,7 @@ const productsEndpoints = (app: Express) => {
   app.get("/searchSuggestion", searchSuggestionController)
   app.get("/autocomplete", autocompleteController)
   app.get("/productDetails", productDetailsController)
+  app.get("/productHistory", productHistoryController)
 };
 
 export { productsEndpoints };
