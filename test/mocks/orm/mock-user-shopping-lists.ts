@@ -1,4 +1,6 @@
+import { ResultSetHeader } from "mysql2";
 import { UserShoppingLists } from "../../../orm/UserShoppingLists/UserShoppingLists";
+import { UserShoppingList } from "../../../orm/UserShoppingLists/UserShoppingListsBase";
 
 function getOriginalUserShoppingLists() {
   return {
@@ -15,7 +17,11 @@ function mockUserShoppingLists() {
     return getOriginalUserShoppingLists().id_shopping_list;
   });
 
-  return { getActiveShoppingListIdSpy };
+  const getRequestsSpy = jest.spyOn(UserShoppingLists.prototype, "getRequests").mockImplementation(async (_activeShoppingList: number) => {
+    return [getOriginalUserShoppingLists()] as unknown as ResultSetHeader & UserShoppingList[];
+  });
+
+  return { getActiveShoppingListIdSpy, getRequestsSpy };
 }
 
 export { getOriginalUserShoppingLists, mockUserShoppingLists };

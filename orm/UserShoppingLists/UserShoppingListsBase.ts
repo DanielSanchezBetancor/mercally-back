@@ -1,11 +1,17 @@
 import BaseQuery from "../base/BaseQuery";
 
+enum UserShoppingListRequest {
+  PENDING = "PENDING",
+  ACCEPTED = "ACCEPTED",
+  REJECTED = "REJECTED",
+}
+
 type UserShoppingList = {
   id_user: number;
   id_shopping_list: number;
-  is_active: boolean;
-  is_owner: boolean;
-  is_accepted: boolean;
+  is_active: number;
+  is_owner: number;
+  is_accepted: UserShoppingListRequest;
 }
 
 class UserShoppingListsBase extends BaseQuery<UserShoppingList> {
@@ -13,9 +19,9 @@ class UserShoppingListsBase extends BaseQuery<UserShoppingList> {
   protected fields: UserShoppingList = {
     id_user: 0,
     id_shopping_list: 0,
-    is_active: false,
-    is_owner: false,
-    is_accepted: false,
+    is_active: 0,
+    is_owner: 0,
+    is_accepted: UserShoppingListRequest.PENDING,
   };
 
   constructor() {
@@ -23,4 +29,4 @@ class UserShoppingListsBase extends BaseQuery<UserShoppingList> {
   }
 }
 
-export { UserShoppingListsBase, UserShoppingList };
+export { UserShoppingListsBase, UserShoppingList, UserShoppingListRequest };

@@ -1,7 +1,7 @@
 import { HistoryPrice } from "../orm/HistoryPrices/HistoryPricesBase";
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase";
 import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
-import { UserShoppingList } from "../orm/UserShoppingLists/UserShoppingListsBase";
+import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
 
@@ -24,9 +24,9 @@ const SHOPPING_LIST_PRODUCTS: ProductsShoppingList[] = []
 const USER_SHOPPING_LIST: UserShoppingList = {
   id_user: 1,
   id_shopping_list: 1,
-  is_active: true,
-  is_accepted: true,
-  is_owner: true,
+  is_active: 1,
+  is_accepted: UserShoppingListRequest.ACCEPTED,
+  is_owner: 1,
 }
 
 ID_PRODUCTS.forEach(idProduct => {

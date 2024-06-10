@@ -10,7 +10,7 @@ import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase"
 import ShoppingLists from "../orm/ShoppingLists/ShoppingLists"
 import { ProductsShoppingLists } from "../orm/ProductsShoppingLists/ProductsShoppingLists"
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase"
-import { UserShoppingList } from "../orm/UserShoppingLists/UserShoppingListsBase"
+import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase"
 import { UserShoppingLists } from "../orm/UserShoppingLists/UserShoppingLists"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
@@ -100,7 +100,7 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
       id_user INTEGER NOT NULL,
       id_shopping_list INTEGER NOT NULL,
       is_owner BOOLEAN NOT NULL,
-      is_accepted BOOLEAN NOT NULL,
+      is_accepted ENUM('${Object.keys(UserShoppingListRequest).join("','")}') NOT NULL,
       is_active BOOLEAN NOT NULL
     )
   `)

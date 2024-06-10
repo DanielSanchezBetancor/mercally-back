@@ -1,4 +1,4 @@
-import { buildTestDB, executeEndpoint } from "../../utils";
+import { buildTestDB, executeEndpoint } from "../../../utils";
 
 describe("Shopping List By Code Controller Test Suite", () => {
   afterEach(() => {
