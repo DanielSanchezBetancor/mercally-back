@@ -25,7 +25,7 @@ const USER_SHOPPING_LIST: UserShoppingList = {
   id_user: 1,
   id_shopping_list: 1,
   is_active: 1,
-  is_accepted: UserShoppingListRequest.ACCEPTED,
+  is_accepted: UserShoppingListRequest.PENDING,
   is_owner: 1,
 }
 

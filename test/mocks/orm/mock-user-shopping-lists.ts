@@ -17,11 +17,13 @@ function mockUserShoppingLists() {
     return getOriginalUserShoppingLists().id_shopping_list;
   });
 
-  const getRequestsSpy = jest.spyOn(UserShoppingLists.prototype, "getRequests").mockImplementation(async (_activeShoppingList: number) => {
+  const getPendingRequestsSpy = jest.spyOn(UserShoppingLists.prototype, "getPendingRequests").mockImplementation(async (_activeShoppingList: number) => {
     return [getOriginalUserShoppingLists()] as unknown as ResultSetHeader & UserShoppingList[];
   });
 
-  return { getActiveShoppingListIdSpy, getRequestsSpy };
+  const updateIsAcceptedByShoppingListIdSpy = jest.spyOn(UserShoppingLists.prototype, "updateIsAcceptedByShoppingListId")
+
+  return { getActiveShoppingListIdSpy, getPendingRequestsSpy, updateIsAcceptedByShoppingListIdSpy };
 }
 
 export { getOriginalUserShoppingLists, mockUserShoppingLists };

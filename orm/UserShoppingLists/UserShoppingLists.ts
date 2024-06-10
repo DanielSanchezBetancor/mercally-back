@@ -11,10 +11,14 @@ class UserShoppingLists extends UserShoppingListsBase {
     return activeShoppingList[0].id_shopping_list;
   }
 
-  async getRequests(activeShoppingList: number) {
+  async getPendingRequests(activeShoppingList: number) {
     const [requests] = await this.query<UserShoppingList[]>(`SELECT * FROM ${this.table} WHERE id_shopping_list = ${activeShoppingList} and is_accepted = '${UserShoppingListRequest.PENDING}'`);
 
     return requests;
+  }
+
+  async updateIsAcceptedByShoppingListId(userId: number, idShoppingList: number, isAccepted: UserShoppingListRequest) {
+    await this.query<UserShoppingList[]>(`UPDATE ${this.table} SET is_accepted = '${isAccepted}' WHERE id_user = ${userId} AND id_shopping_list = ${idShoppingList}`);
   }
 }
 

@@ -23,10 +23,20 @@ describe("User Shopping Lists Test Suite", () => {
     const originalShoppingListId = getOriginalUserShoppingListsMock(1)
     const { querySpy } = mockUserShoppingListsQuery();
     // When
-    const requests = await new UserShoppingLists().getRequests(originalShoppingListId.id_shopping_list);
+    const requests = await new UserShoppingLists().getPendingRequests(originalShoppingListId.id_shopping_list);
     // Then
     expect(querySpy).toHaveBeenCalledTimes(1);
     expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM users_shopping_lists WHERE id_shopping_list = ${originalShoppingListId.id_shopping_list} and is_accepted = '${UserShoppingListRequest.PENDING}'`);
     expect(requests).toEqual([originalShoppingListId]);
+  });
+  it("should try to update the accepted value for the shopping list", async () => {
+    // Given
+    const originalShoppingListId = getOriginalUserShoppingListsMock(1)
+    const { querySpy } = mockUserShoppingListsQuery();
+    // When
+    await new UserShoppingLists().updateIsAcceptedByShoppingListId(1, originalShoppingListId.id_shopping_list, UserShoppingListRequest.ACCEPTED);
+    // Then
+    expect(querySpy).toHaveBeenCalledTimes(1);
+    expect(querySpy).toHaveBeenCalledWith(`UPDATE users_shopping_lists SET is_accepted = '${UserShoppingListRequest.ACCEPTED}' WHERE id_user = 1 AND id_shopping_list = ${originalShoppingListId.id_shopping_list}`);
   });
 })

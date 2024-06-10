@@ -10,13 +10,13 @@ describe("Shopping List Requests Controller Test Suite", () => {
   it("should return all requests for user's active shopping list", async () => {
     // Given
     const { Request, Response } = mockExpress();
-    const { getActiveShoppingListIdSpy, getRequestsSpy } = mockUserShoppingLists();
+    const { getActiveShoppingListIdSpy, getPendingRequestsSpy } = mockUserShoppingLists();
     const originalShoppingList = getOriginalUserShoppingLists().id_shopping_list;
     // When
     await shoppingListRequestsController(Request, Response);
     // Then
     expect(getActiveShoppingListIdSpy).toHaveBeenCalledWith(1);
-    expect(getRequestsSpy).toHaveBeenCalledWith(originalShoppingList);
+    expect(getPendingRequestsSpy).toHaveBeenCalledWith(originalShoppingList);
     expect(Response.json).toHaveBeenCalledWith({ requests: [getOriginalUserShoppingLists()] });
   });
 });
