@@ -1,24 +1,24 @@
 import express from "express";
 import { productsEndpoints } from "../endpoints/scraper/products.endpoints";
-import { mockEnv } from "./mocks/mock-env";
+import init from "../scripts/init-seed";
+
 
 async function buildTestDB() {
-  await import('../scripts/init-seed')
+  await init()
 }
 
 async function executeEndpoint(endpoint: string) {
+  const randomPort = Math.floor(Math.random() * 1000) + 8000
   const app = express()
   productsEndpoints(app);
-  const server = app.listen(9000, () => console.log('Server running on port 9000'))
-  process = mockEnv()
-  await buildTestDB()
+  const server = app.listen(randomPort, () => console.log(`Server running on port ${randomPort}`))
 
-  const data = await fetch(`http://localhost:9000/${endpoint}`)
+  const data = await fetch(`http://localhost:${randomPort}/${endpoint}`)
   const res = await data.json()
 
   server.close()
-  
-  return res
+
+  return { data, res }
 }
 
-export { buildTestDB, executeEndpoint }
+export { buildTestDB, executeEndpoint };

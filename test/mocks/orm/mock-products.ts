@@ -1,4 +1,5 @@
-import Products from "../../../orm/products/Products";
+import { ResultSetHeader } from "mysql2";
+import Products, { QueryResultItem } from "../../../orm/products/Products";
 
 type OverchargedUnknown = unknown & { id_product: number }
 
@@ -7,7 +8,8 @@ function getOriginalProductMock(idProduct: number): Products['fields'] {
     id: idProduct,
     name: `Product ${idProduct}`,
     is_white_brand: 0,
-    id_category: 0
+    id_category: 0,
+    id_brand: 0
   }
 }
 
@@ -27,11 +29,15 @@ function fillWithOriginalProductMock(products: OverchargedUnknown[]) {
 }
 
 function mockProducts() {
-  const ProductsMock = jest.spyOn(Products.prototype, "getByPk").mockImplementation(async (id: string | number) => {
+  const getByPkSpy = jest.spyOn(Products.prototype, "getByPk").mockImplementation(async (id: string | number) => {
     return getOriginalProductMock(Number(id));
   })
 
-  return ProductsMock;
+  const searchSpy = jest.spyOn(Products.prototype, "search").mockImplementation(async () => {
+    return [getOriginalProductMock(0)] as unknown as ResultSetHeader & QueryResultItem[];
+  })
+
+  return { getByPkSpy, searchSpy };
 }
 
 export { fillWithOriginalProductMock, mockProducts, getOriginalProductMock };
