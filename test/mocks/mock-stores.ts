@@ -1,26 +1,26 @@
-import { Store } from "../../data/types/store"
-const path = "../../orm/stores/stores-orm";
+import { ResultSetHeader } from "mysql2";
+import { Stores } from "../../orm/stores/Stores";
+import { Store } from "../../orm/stores/base/StoresBase";
 
-const mockStores: Store[] = [
-  {
-    idStore: 1,
-    storeName: "Store 1",
-  },
-  {
-    idStore: 2,
-    storeName: "Store 2",
+function getOriginalStoreMock(id: number): Store {
+  return {
+    id,
+    name: `Store ${id}`,
+    logo_url: "original-store.com"
   }
-];
-
-function mockGetStores() {
-  jest.mock(path, () => {
-    const actualModule = jest.requireActual(path);
-
-    return {
-      ...actualModule,
-      getStores: jest.fn(() => mockStores),
-    }
-  })
 }
 
-export { mockStores, mockGetStores };
+function mockStores() {
+  const getAllSpy = jest.spyOn(Stores.prototype, 'getAll').mockImplementation(async () => {
+    return [getOriginalStoreMock(0), getOriginalStoreMock(1), getOriginalStoreMock(2)] as unknown as ResultSetHeader & Store[];
+  })
+
+  return {
+    getAllSpy
+  }
+}
+
+export {
+  mockStores,
+  getOriginalStoreMock
+}

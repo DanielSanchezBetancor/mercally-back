@@ -45,4 +45,22 @@ describe("Base Query Test Suite", () => {
     // Then
     expect(actual).rejects.toThrow('Field id is required in base table')
   })
+  it("should get the fields", () => {
+    // Given
+    const { MockClass } = getMockClass()
+    // When
+    const actual = new MockClass().getFields();
+    // Then
+    expect(actual).toEqual({ id: 0 });
+  })
+  it("should try to query for all with no where", async () => {
+    // Given
+    await buildTestDBWithBaseTest()
+    const { MockClass } = getMockClass()
+    // When
+    const actual = await new MockClass().getAll();
+    // Then
+    expect(actual.length).toBe(1)
+    expect(actual).toEqual([{ id: 1 }])
+  })
 })

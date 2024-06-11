@@ -5,7 +5,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
   it("should throw if no store id is provided", async () => {
     // Given
     // When
-    const { data, res } = await executeEndpoint(`savePreferredStore`, 'post', { id_store: null })
+    const { data, res } = await executeEndpoint(`handlePreferredStore`, 'post', { id_store: null })
     // Then
     expect(data.status).toBe(500);
     expect(res).toBeDefined()
@@ -17,7 +17,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
     const newIdStore = 999;
     const { usersStores } = await buildTestDB();
     // When
-    const { data, res } = await executeEndpoint(`savePreferredStore`, 'POST', { "id_store": newIdStore })
+    const { data, res } = await executeEndpoint(`handlePreferredStore`, 'POST', { "id_store": newIdStore })
     const newValue = await new UsersStores().getAllByField("id_user", 1);
     // Then
     expect(data.status).toBe(200);
@@ -29,7 +29,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
     // Given
     const { usersStores } = await buildTestDB();
     // When
-    const { data, res } = await executeEndpoint(`savePreferredStore`, 'post', { id_store: 1 })
+    const { data, res } = await executeEndpoint(`handlePreferredStore`, 'post', { id_store: 1 })
     const newValue = await new UsersStores().getAllByField("id_user", 1);
     // Then
     expect(data.status).toBe(200);

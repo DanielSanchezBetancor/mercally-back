@@ -62,7 +62,8 @@ class BaseQuery<T extends Fields> {
       }
     }, {});
 
-    const deleteQuery = `DELETE FROM ${tableName} WHERE ${Object.keys(newPair).map(field => `${field} = ${newPair[field]}`).join(" AND ")}`;
+    const whereTemplate = Object.keys(newPair).map(field => `${field} = ${newPair[field]}`).join(" AND ");
+    const deleteQuery = `DELETE FROM ${tableName} WHERE ${whereTemplate}`;
     this.logger.debug('Generated query', { generatedQuery: deleteQuery })
 
     return await this.connection.query(deleteQuery);
@@ -88,8 +89,14 @@ class BaseQuery<T extends Fields> {
     return rows;
   }
 
-  getOrderBy(sortBy: unknown) {
+  getOrderBy(_sortBy: unknown) {
     return ''
+  }
+
+  async getAll() {
+    const [data] = await this.query<T[]>(`SELECT * FROM ${this.table}`);
+
+    return data;
   }
 }
 

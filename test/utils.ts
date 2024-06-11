@@ -7,6 +7,7 @@ import {
   PRODUCTS,
   SHOPPING_LIST,
   SHOPPING_LIST_PRODUCTS,
+  STORES,
   USER_SHOPPING_LIST,
   USERS_STORES
 } from "../scripts/dummies";
@@ -14,7 +15,7 @@ import init, { createTableBaseTest } from "../scripts/init-seed";
 import { storesEndpoints } from "../endpoints/scraper/stores-endpoints";
 
 async function buildTestDB() {
-  await init(PRODUCTS, PRICES, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES)
+  await init(PRODUCTS, PRICES, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES)
 
   return {
     products: PRODUCTS,
@@ -23,7 +24,8 @@ async function buildTestDB() {
     shoppingList: SHOPPING_LIST,
     shoppingListProducts: SHOPPING_LIST_PRODUCTS,
     userShoppingList: USER_SHOPPING_LIST,
-    usersStores: USERS_STORES
+    usersStores: USERS_STORES,
+    stores: STORES
   }
 }
 

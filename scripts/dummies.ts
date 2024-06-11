@@ -5,6 +5,7 @@ import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLi
 import { UserStore } from "../orm/UsersStores/UsersStoresBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
+import { Store } from "../orm/stores/base/StoresBase";
 
 const ID_PRODUCTS = [1, 2, 3, 4, 5]
 const ID_STORES = [1, 2, 3]
@@ -39,6 +40,11 @@ const USERS_STORES: UserStore[] = [
     id_store: 2,
   }
 ]
+const STORES: Store[] = ID_STORES.map(id => ({
+  id,
+  logo_url: '',
+  name: `Store ${id}`,
+}))
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
@@ -79,11 +85,12 @@ function randomBoolean() {
 }
 
 export {
+  HISTORY_PRICES,
   PRICES,
   PRODUCTS,
-  HISTORY_PRICES,
   SHOPPING_LIST,
   SHOPPING_LIST_PRODUCTS,
+  USERS_STORES,
   USER_SHOPPING_LIST,
-  USERS_STORES
+  STORES
 };

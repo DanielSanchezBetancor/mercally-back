@@ -1,4 +1,4 @@
-import { savePreferredStoreController } from "../../../../controllers/stores/savePreferredStoreController";
+import { handlePreferredStoreController } from "../../../../controllers/stores/handlePreferredStoreController";
 import { mockExpress } from "../../../mocks/mock-express";
 import { mockUsersStores } from "../../../mocks/orm/mock-users-stores";
 
@@ -11,7 +11,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
     // Given
     const { Request, Response } = mockExpress();
     // When
-    await savePreferredStoreController(Request, Response);
+    await handlePreferredStoreController(Request, Response);
     // Then
     expect(Response.status).toHaveBeenCalledTimes(1);
     expect(Response.status).toHaveBeenCalledWith(500);
@@ -24,7 +24,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
       body: {}
     });
     // When
-    await savePreferredStoreController(Request, Response);
+    await handlePreferredStoreController(Request, Response);
     // Then
     expect(Response.status).toHaveBeenCalledTimes(1);
     expect(Response.status).toHaveBeenCalledWith(500);
@@ -41,7 +41,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
     });
     const { insertSpy } = mockUsersStores();
     // When
-    await savePreferredStoreController(Request, Response);
+    await handlePreferredStoreController(Request, Response);
     // Then
     expect(insertSpy).toHaveBeenCalledTimes(1);
     expect(insertSpy).toHaveBeenCalledWith({ id_store: newIdStore, id_user: 1 });
@@ -55,7 +55,7 @@ describe("Save Preferred Store Controller Test Suite", () => {
     });
     const { deleteSpy } = mockUsersStores();
     // When
-    await savePreferredStoreController(Request, Response);
+    await handlePreferredStoreController(Request, Response);
     // Then
     expect(deleteSpy).toHaveBeenCalledTimes(1);
     expect(deleteSpy).toHaveBeenCalledWith({ id_store: 1, id_user: 1 });

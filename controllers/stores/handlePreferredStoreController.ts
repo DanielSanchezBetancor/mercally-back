@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Store } from "../../data/types/store";
 import { UsersStores } from "../../orm/UsersStores/UsersStores";
+import { Store } from "../../orm/stores/base/StoresBase";
 
 const fakeUser = {
   idUser: 1,
@@ -12,11 +12,7 @@ const fakeUser = {
   isPremium: false
 };
 
-async function savePreferredStoreController(req: Request<Store>, res: Response) {
-  // console.log('req', req)
-  console.log('req.body', req.body)
-  console.log('req.params', req.params)
-  console.log('req.query', req.query)
+async function handlePreferredStoreController(req: Request<Store>, res: Response) {
   if (!req.body) {
     return res.status(500).json({ error: "No body detected" });
   }
@@ -53,5 +49,5 @@ function removeAction(idUser: number, idStore: number) {
   });
 }
 
-export { savePreferredStoreController };
+export { handlePreferredStoreController };
 
