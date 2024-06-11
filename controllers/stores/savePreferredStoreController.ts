@@ -1,34 +1,57 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { Store } from "../../data/types/store";
-import { getUser, insertStoreToUser, removeStoreFromUser } from "../../orm/user/user-orm";
+import { UsersStores } from "../../orm/UsersStores/UsersStores";
 
-async function savePreferredStoreController(req: Request<Store>, res: Response, _next: NextFunction) {
+const fakeUser = {
+  idUser: 1,
+  preferredStores: [1, 2],
+  username: "user",
+  password: "password",
+  email: "dsanchez",
+  idRole: 1,
+  isPremium: false
+};
+
+async function savePreferredStoreController(req: Request<Store>, res: Response) {
+  // console.log('req', req)
+  console.log('req.body', req.body)
+  console.log('req.params', req.params)
+  console.log('req.query', req.query)
   if (!req.body) {
-    return res.status(500).send("No store detected");
+    return res.status(500).json({ error: "No body detected" });
   }
 
-  const { idStore } = req.body;
+  const { id_store } = req.body;
   const idUser = 1;
 
-  if (!idStore) {
-    return res.status(500).send("No store detected");
+  if (!id_store) {
+    return res.status(500).json({ error: "No store detected" });
   }
 
-  const user = await getUser(idUser);
+  const user = fakeUser;
   const { preferredStores, isPremium } = user
-  const userHasStore = user.preferredStores.includes(idStore);
+  const userHasStore = user.preferredStores.includes(id_store);
+  const action = userHasStore ? removeAction : saveAction;
+  await action(idUser, id_store, preferredStores, isPremium);
 
-  if (userHasStore) {
-    await removeStoreFromUser(idUser, idStore);
+  return res.status(200).json({});
+}
 
-    return res.send();
-  }
-
+async function saveAction(idUser: number, idStore: number, preferredStores: number[], isPremium: boolean) {
   if (isPremium || preferredStores.length < 3) {
-    await insertStoreToUser(idUser, idStore);
+    await new UsersStores().insert({
+      id_user: idUser,
+      id_store: idStore,
+    });
   }
+}
 
-  return res.send();
+function removeAction(idUser: number, idStore: number) {
+  return new UsersStores().delete({
+    id_user: idUser,
+    id_store: idStore,
+  });
 }
 
 export { savePreferredStoreController };
+

@@ -2,6 +2,7 @@ import { HistoryPrice } from "../orm/HistoryPrices/HistoryPricesBase";
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase";
 import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
 import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase";
+import { UserStore } from "../orm/UsersStores/UsersStoresBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
 
@@ -28,6 +29,16 @@ const USER_SHOPPING_LIST: UserShoppingList = {
   is_accepted: UserShoppingListRequest.PENDING,
   is_owner: 1,
 }
+const USERS_STORES: UserStore[] = [
+  {
+    id_user: 1,
+    id_store: 1,
+  },
+  {
+    id_user: 1,
+    id_store: 2,
+  }
+]
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
@@ -67,4 +78,12 @@ function randomBoolean() {
   return Math.random() < 0.5 ? 0 : 1
 }
 
-export { PRICES, PRODUCTS, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST };
+export {
+  PRICES,
+  PRODUCTS,
+  HISTORY_PRICES,
+  SHOPPING_LIST,
+  SHOPPING_LIST_PRODUCTS,
+  USER_SHOPPING_LIST,
+  USERS_STORES
+};
