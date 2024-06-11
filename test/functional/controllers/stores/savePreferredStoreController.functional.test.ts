@@ -18,8 +18,6 @@ describe("Save Preferred Store Controller Test Suite", () => {
     const { usersStores } = await buildTestDB();
     // When
     const { data, res } = await executeEndpoint(`savePreferredStore`, 'POST', { "id_store": newIdStore })
-    // console.log('data', data)
-    console.log('res', res)
     const newValue = await new UsersStores().getAllByField("id_user", 1);
     // Then
     expect(data.status).toBe(200);
