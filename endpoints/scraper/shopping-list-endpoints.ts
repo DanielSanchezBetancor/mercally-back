@@ -4,6 +4,7 @@ import { modifyListController } from "../../controllers/shoppinglists/modifyList
 import { generateListCodeController } from "../../controllers/shoppinglists/generateListCodeController";
 import { shoppingListRequestsController } from "../../controllers/shoppinglists/shoppingListRequestsController";
 import { handleShoppingListRequestController } from "../../controllers/shoppinglists/handleShoppingListRequestController";
+import { handleCreateNewShoppingListController } from "../../controllers/shoppinglists/handleCreateNewShoppingListController";
 
 const shoppingListEndpoints = (app: Express) => {
   app.get("/shoppingListByCode", shoppingListByCodeController)
@@ -11,6 +12,7 @@ const shoppingListEndpoints = (app: Express) => {
   app.post("/generateListCode", generateListCodeController)
   app.get("/shoppingListRequests", shoppingListRequestsController)
   app.put("/handleShoppingListRequest", handleShoppingListRequestController)
+  app.post("/newShoppingList", handleCreateNewShoppingListController)
 };
 
 export { shoppingListEndpoints };
