@@ -32,7 +32,7 @@ const saveCatalog = (
   }
 
   return parseCatalog(catalog, storeName).then(() => {
-    return res.sendStatus(200);
+    return res.status(200);
   });
 };
 

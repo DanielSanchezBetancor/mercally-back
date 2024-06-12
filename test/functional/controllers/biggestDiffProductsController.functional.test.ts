@@ -1,4 +1,4 @@
-import { executeEndpoint } from "../../utils"
+import { buildTestDB, executeEndpoint } from "../../utils"
 
 describe("Biggest Diff Products Controller Test Suite", () => {
   afterEach(() => {
@@ -7,10 +7,11 @@ describe("Biggest Diff Products Controller Test Suite", () => {
   });
   it("should return the products with the biggest difference", async () => {
     // Given
+    await buildTestDB()
     // When
-    const { res } = await executeEndpoint('biggestDiffProducts')
-
+    const { data, res } = await executeEndpoint('biggestDiffProducts')
     // Then
+    expect(data.status).toBe(200)
     expect(res).toBeDefined()
     expect(res).toHaveLength(3)
     expect(res[0]).toHaveProperty('max_price')
@@ -24,5 +25,3 @@ describe("Biggest Diff Products Controller Test Suite", () => {
     expect(res[1].difference).toBeGreaterThan(res[2].difference)
   })
 })
-
-

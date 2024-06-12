@@ -26,19 +26,7 @@ class BaseQuery<T extends Fields> {
   async insert(values: T) {
     const tableName = this.table;
 
-    const newPair = Object.keys(this.getFields()).reduce((acc, field) => {
-      const value = this.cleanValue(values[field]);
-
-      if (!value) {
-        throw new Error(`Field ${field} is required in ${tableName} table`);
-      }
-
-      return {
-        ...acc,
-        [field]: value,
-      }
-    }, {});
-
+    const newPair = this.buildNewPair(values);
     const insertQuery = `INSERT INTO ${tableName} (${Object.keys(newPair).join(", ")}) VALUES (${Object.values(newPair).join(", ")})`;
     this.logger.debug('Generated query', { generatedQuery: insertQuery })
 
@@ -49,19 +37,7 @@ class BaseQuery<T extends Fields> {
   async delete(values: T) {
     const tableName = this.table;
 
-    const newPair: { [key: string]: string } = Object.keys(this.getFields()).reduce((acc, field) => {
-      const value = this.cleanValue(values[field]);
-
-      if (!value) {
-        throw new Error(`Field ${field} is required in ${tableName} table`);
-      }
-
-      return {
-        ...acc,
-        [field]: value,
-      }
-    }, {});
-
+    const newPair = this.buildNewPair(values);
     const whereTemplate = Object.keys(newPair).map(field => `${field} = ${newPair[field]}`).join(" AND ");
     const deleteQuery = `DELETE FROM ${tableName} WHERE ${whereTemplate}`;
     this.logger.debug('Generated query', { generatedQuery: deleteQuery })
@@ -97,6 +73,21 @@ class BaseQuery<T extends Fields> {
     const [data] = await this.query<T[]>(`SELECT * FROM ${this.table}`);
 
     return data;
+  }
+
+  private buildNewPair(values: T): Fields {
+    return Object.keys(this.getFields()).reduce((acc, field) => {
+      const value = this.cleanValue(values[field]);
+
+      if (!value) {
+        throw new Error(`Field ${field} is required in ${this.table} table`);
+      }
+
+      return {
+        ...acc,
+        [field]: value,
+      }
+    }, {});
   }
 }
 

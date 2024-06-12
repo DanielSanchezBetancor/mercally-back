@@ -9,13 +9,26 @@ import {
   SHOPPING_LIST_PRODUCTS,
   STORES,
   USER_SHOPPING_LIST,
-  USERS_STORES
+  USERS_STORES,
+  USER_PREFERENCES,
+  USER
 } from "../scripts/dummies";
 import init, { createTableBaseTest } from "../scripts/init-seed";
 import { storesEndpoints } from "../endpoints/scraper/stores-endpoints";
+import { userEndpoints } from "../endpoints/scraper/user-endpoints";
 
 async function buildTestDB() {
-  await init(PRODUCTS, PRICES, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES)
+  await init(PRODUCTS,
+    PRICES,
+    HISTORY_PRICES,
+    SHOPPING_LIST,
+    SHOPPING_LIST_PRODUCTS,
+    USER_SHOPPING_LIST,
+    USERS_STORES,
+    STORES,
+    USER_PREFERENCES,
+    USER
+  )
 
   return {
     products: PRODUCTS,
@@ -25,7 +38,9 @@ async function buildTestDB() {
     shoppingListProducts: SHOPPING_LIST_PRODUCTS,
     userShoppingList: USER_SHOPPING_LIST,
     usersStores: USERS_STORES,
-    stores: STORES
+    stores: STORES,
+    userPreferences: USER_PREFERENCES,
+    user: USER
   }
 }
 
@@ -39,6 +54,7 @@ function injectEndpoints(app: Express) {
   productsEndpoints(app);
   shoppingListEndpoints(app);
   storesEndpoints(app);
+  userEndpoints(app)
 }
 
 async function executeEndpoint(endpoint: string, method: string = 'GET', body: any = {}) {

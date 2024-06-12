@@ -2,7 +2,7 @@ import Logger from "@coding-flavour/logger"
 import { getConnection } from "../orm/base/connection"
 import Price, { PricesFields } from "../orm/prices/base"
 import Products from "../orm/products/Products"
-import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES } from "./dummies"
+import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES, USER_PREFERENCES, USER } from "./dummies"
 import { ProductsFields } from "../orm/products/base"
 import { HistoryPricesFields } from "../orm/HistoryPrices/HistoryPricesBase"
 import HistoryPrice from "../orm/HistoryPrices/HistoryPrices"
@@ -16,6 +16,10 @@ import { UserStore } from "../orm/UsersStores/UsersStoresBase"
 import { UsersStores } from "../orm/UsersStores/UsersStores"
 import { Store } from "../orm/stores/base/StoresBase"
 import { Stores } from "../orm/stores/Stores"
+import { User } from "../orm/users/UsersBase"
+import { Users } from "../orm/users/Users"
+import { UserSetting } from "../orm/UsersSettings/UsersSettingsBase"
+import { UsersSettings } from "../orm/UsersSettings/UsersSettings"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
 const tables = [
@@ -159,15 +163,14 @@ async function insertDummyData(
   productsShoppingLists: ProductsShoppingList[],
   userShoppingLists: UserShoppingList,
   usersStores: UserStore[],
-  stores: Store[]
+  stores: Store[],
+  userPreferences: UserSetting,
+  user: User
 ) {
   logger.log('Inserting dummy data', { keepLevel: true })
-  await conn.query(`
-    INSERT INTO users (email, password) VALUES
-      ('example@example.com', '123456')`)
-  await conn.query(`
-    INSERT INTO users_settings (id_user, setting_key, setting_value) VALUES
-      (1, 'theme', 'dark')`)
+
+  await new Users().insert(user)
+  await new UsersSettings().insert(userPreferences)
 
   for (const store of stores) {
     await new Stores().insert(store)
@@ -228,13 +231,26 @@ async function init(
   productsShoppingLists = SHOPPING_LIST_PRODUCTS,
   userShoppingLists = USER_SHOPPING_LIST,
   usersStores = USERS_STORES,
-  stores = STORES
+  stores = STORES,
+  userPreferences = USER_PREFERENCES,
+  user = USER
 ) {
   logger.log('Initializing database with dummy data')
   const conn = getConnection()
   await dropTables(conn)
   await createTables(conn)
-  await insertDummyData(conn, products, prices, historyPrices, shoppingList, productsShoppingLists, userShoppingLists, usersStores, stores)
+  await insertDummyData(conn,
+    products,
+    prices,
+    historyPrices,
+    shoppingList,
+    productsShoppingLists,
+    userShoppingLists,
+    usersStores,
+    stores,
+    userPreferences,
+    user
+  )
   logger.log('Database initialized')
 }
 

@@ -21,7 +21,7 @@ function mockUserShoppingLists() {
     return [getOriginalUserShoppingLists()] as unknown as ResultSetHeader & UserShoppingList[];
   });
 
-  const updateIsAcceptedByShoppingListIdSpy = jest.spyOn(UserShoppingLists.prototype, "updateIsAcceptedByShoppingListId")
+  const updateIsAcceptedByShoppingListIdSpy = jest.spyOn(UserShoppingLists.prototype, "updateIsAcceptedByShoppingListId").mockImplementation(async () => undefined)
 
   return { getActiveShoppingListIdSpy, getPendingRequestsSpy, updateIsAcceptedByShoppingListIdSpy };
 }
