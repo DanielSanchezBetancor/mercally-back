@@ -2,8 +2,10 @@ import { HistoryPrice } from "../orm/HistoryPrices/HistoryPricesBase";
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase";
 import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
 import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase";
+import { UserStore } from "../orm/UsersStores/UsersStoresBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
+import { Store } from "../orm/stores/base/StoresBase";
 
 const ID_PRODUCTS = [1, 2, 3, 4, 5]
 const ID_STORES = [1, 2, 3]
@@ -28,6 +30,21 @@ const USER_SHOPPING_LIST: UserShoppingList = {
   is_accepted: UserShoppingListRequest.PENDING,
   is_owner: 1,
 }
+const USERS_STORES: UserStore[] = [
+  {
+    id_user: 1,
+    id_store: 1,
+  },
+  {
+    id_user: 1,
+    id_store: 2,
+  }
+]
+const STORES: Store[] = ID_STORES.map(id => ({
+  id,
+  logo_url: '',
+  name: `Store ${id}`,
+}))
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
@@ -67,4 +84,13 @@ function randomBoolean() {
   return Math.random() < 0.5 ? 0 : 1
 }
 
-export { PRICES, PRODUCTS, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST };
+export {
+  HISTORY_PRICES,
+  PRICES,
+  PRODUCTS,
+  SHOPPING_LIST,
+  SHOPPING_LIST_PRODUCTS,
+  USERS_STORES,
+  USER_SHOPPING_LIST,
+  STORES
+};

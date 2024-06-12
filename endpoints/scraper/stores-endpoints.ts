@@ -1,10 +1,10 @@
 import { Express } from "express";
-import { getStoreController } from "../../controllers/stores/getStoreController";
-import { savePreferredStoreController } from "../../controllers/stores/savePreferredStoreController";
+import { getStoresController } from "../../controllers/stores/getStoresController";
+import { handlePreferredStoreController } from "../../controllers/stores/handlePreferredStoreController";
 
 const storesEndpoints = (app: Express) => {
-  app.get("/getStores", getStoreController);
-  app.post("/savePreferredStore", savePreferredStoreController);
+  app.get("/getStores", getStoresController);
+  app.post("/handlePreferredStore", handlePreferredStoreController);
 };
 
 export { storesEndpoints };

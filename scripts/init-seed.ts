@@ -2,7 +2,7 @@ import Logger from "@coding-flavour/logger"
 import { getConnection } from "../orm/base/connection"
 import Price, { PricesFields } from "../orm/prices/base"
 import Products from "../orm/products/Products"
-import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST } from "./dummies"
+import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES } from "./dummies"
 import { ProductsFields } from "../orm/products/base"
 import { HistoryPricesFields } from "../orm/HistoryPrices/HistoryPricesBase"
 import HistoryPrice from "../orm/HistoryPrices/HistoryPrices"
@@ -12,6 +12,10 @@ import { ProductsShoppingLists } from "../orm/ProductsShoppingLists/ProductsShop
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase"
 import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase"
 import { UserShoppingLists } from "../orm/UserShoppingLists/UserShoppingLists"
+import { UserStore } from "../orm/UsersStores/UsersStoresBase"
+import { UsersStores } from "../orm/UsersStores/UsersStores"
+import { Store } from "../orm/stores/base/StoresBase"
+import { Stores } from "../orm/stores/Stores"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
 const tables = [
@@ -153,7 +157,9 @@ async function insertDummyData(
   historyPrices: HistoryPricesFields[],
   shoppingList: ShoppingList,
   productsShoppingLists: ProductsShoppingList[],
-  userShoppingLists: UserShoppingList
+  userShoppingLists: UserShoppingList,
+  usersStores: UserStore[],
+  stores: Store[]
 ) {
   logger.log('Inserting dummy data', { keepLevel: true })
   await conn.query(`
@@ -162,9 +168,11 @@ async function insertDummyData(
   await conn.query(`
     INSERT INTO users_settings (id_user, setting_key, setting_value) VALUES
       (1, 'theme', 'dark')`)
-  await conn.query(`
-    INSERT INTO stores (name, logo_url) VALUES
-      ('Mercadona', 'https://mercadona.es/logo.png')`)
+
+  for (const store of stores) {
+    await new Stores().insert(store)
+  }
+
   await conn.query(`
     INSERT INTO categories (name) VALUES
       ('Fruit')`)
@@ -188,9 +196,9 @@ async function insertDummyData(
     await new HistoryPrice().insert(historyPrice)
   }
 
-  await conn.query(`
-    INSERT INTO users_stores (id_user, id_store) VALUES
-      (1, 1)`)
+  for (const userStore of usersStores) {
+    await new UsersStores().insert(userStore)
+  }
 
   await new UserShoppingLists().insert(userShoppingLists)
 
@@ -198,21 +206,37 @@ async function insertDummyData(
   logger.log('Dummy data inserted', { subtractLevel: true })
 }
 
+async function createTableBaseTest() {
+  const conn = getConnection()
+
+  await conn.query(`DROP TABLE IF EXISTS base`)
+  await conn.query(`
+    CREATE TABLE IF NOT EXISTS base (
+      id INTEGER AUTO_INCREMENT,
+      PRIMARY KEY (id)
+  )`)
+
+  await conn.query(`
+    INSERT INTO base (id) VALUES (1)`
+  )
+}
 async function init(
   products = PRODUCTS,
   prices = PRICES,
   historyPrices = HISTORY_PRICES,
   shoppingList = SHOPPING_LIST,
   productsShoppingLists = SHOPPING_LIST_PRODUCTS,
-  userShoppingLists = USER_SHOPPING_LIST
+  userShoppingLists = USER_SHOPPING_LIST,
+  usersStores = USERS_STORES,
+  stores = STORES
 ) {
   logger.log('Initializing database with dummy data')
   const conn = getConnection()
   await dropTables(conn)
   await createTables(conn)
-  await insertDummyData(conn, products, prices, historyPrices, shoppingList, productsShoppingLists, userShoppingLists)
+  await insertDummyData(conn, products, prices, historyPrices, shoppingList, productsShoppingLists, userShoppingLists, usersStores, stores)
   logger.log('Database initialized')
 }
 
-
+export { createTableBaseTest }
 export default init

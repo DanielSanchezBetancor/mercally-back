@@ -14,8 +14,8 @@ class BaseQuery<T extends Fields> {
   private connection: Pool;
   private logger;
 
-  constructor() {
-    this.connection = getConnection();
+  constructor(connectFn = getConnection) {
+    this.connection = connectFn();
     this.logger = Logger();
   }
 
@@ -45,6 +45,30 @@ class BaseQuery<T extends Fields> {
     return await this.connection.query(insertQuery);
   }
 
+  // Lets make sure the developer wants to erase by asking for all fields
+  async delete(values: T) {
+    const tableName = this.table;
+
+    const newPair: { [key: string]: string } = Object.keys(this.getFields()).reduce((acc, field) => {
+      const value = this.cleanValue(values[field]);
+
+      if (!value) {
+        throw new Error(`Field ${field} is required in ${tableName} table`);
+      }
+
+      return {
+        ...acc,
+        [field]: value,
+      }
+    }, {});
+
+    const whereTemplate = Object.keys(newPair).map(field => `${field} = ${newPair[field]}`).join(" AND ");
+    const deleteQuery = `DELETE FROM ${tableName} WHERE ${whereTemplate}`;
+    this.logger.debug('Generated query', { generatedQuery: deleteQuery })
+
+    return await this.connection.query(deleteQuery);
+  }
+
   async query<T>(query: string) {
     return await this.connection.query<ResultSetHeader & T>(query);
   }
@@ -65,8 +89,14 @@ class BaseQuery<T extends Fields> {
     return rows;
   }
 
-  getOrderBy(sortBy: unknown) {
+  getOrderBy(_sortBy: unknown) {
     return ''
+  }
+
+  async getAll() {
+    const [data] = await this.query<T[]>(`SELECT * FROM ${this.table}`);
+
+    return data;
   }
 }
 
