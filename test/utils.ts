@@ -3,7 +3,6 @@ import { productsEndpoints } from "../endpoints/scraper/products-endpoints";
 import { shoppingListEndpoints } from "../endpoints/scraper/shopping-list-endpoints";
 import { HISTORY_PRICES, PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST } from "../scripts/dummies";
 import init from "../scripts/init-seed";
-import { shoppingListEndpoints } from "../endpoints/scraper/shopping-list-endpoints";
 
 async function buildTestDB() {
   await init(PRODUCTS, PRICES, HISTORY_PRICES, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST)

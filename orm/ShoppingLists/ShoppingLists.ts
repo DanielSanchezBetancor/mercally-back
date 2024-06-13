@@ -6,7 +6,7 @@ class ShoppingLists extends ShoppingListsBase {
     super();
   }
 
-  async createNewCodeList() {
+  async createNewList() {
     const [ { insertId } ] = await this.query(`INSERT INTO ${this.table} VALUES()`)
 
     return insertId

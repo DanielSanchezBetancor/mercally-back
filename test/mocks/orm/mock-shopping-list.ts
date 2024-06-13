@@ -11,13 +11,15 @@ function getOriginalShoppingListMock(id: number): ShoppingList {
 
 function mockShoppingList(value?: ShoppingList) {
   const shoppingListSpy = jest.spyOn(ShoppingLists.prototype, "getAllByField").mockImplementation(async () => {
-    const returnValue = value ? [value] : []
+    const returnValue = value ? [ value ] : []
     return returnValue as unknown as ResultSetHeader & ShoppingList[];
   });
 
   const updateListCodeSpy = jest.spyOn(ShoppingLists.prototype, "updateListCode")
 
-  return { shoppingListSpy, updateListCodeSpy };
+  const createNewListSpy = jest.spyOn(ShoppingLists.prototype, "createNewList")
+
+  return { shoppingListSpy, updateListCodeSpy, createNewListSpy };
 }
 
 function mockQuery() {
