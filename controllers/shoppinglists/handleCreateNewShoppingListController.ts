@@ -11,7 +11,7 @@ async function handleCreateNewShoppingListController(req: Request, res: Response
 
   await new UserShoppingLists().insert({ id_user: fakeUserId, is_owner: 1, id_shopping_list: newIdShoppingList, is_accepted: UserShoppingListRequest.ACCEPTED, is_active: 0 })
 
-  return res.sendStatus(200);
+  return res.status(200).json({})
 }
 
 export { handleCreateNewShoppingListController };
