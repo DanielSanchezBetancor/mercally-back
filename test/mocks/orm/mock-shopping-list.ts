@@ -15,13 +15,13 @@ function mockShoppingList(value?: ShoppingList) {
     return returnValue as unknown as ResultSetHeader & ShoppingList[];
   });
 
-  const updateListCodeSpy = jest.spyOn(ShoppingLists.prototype, "updateListCode")
+  const updateListCodeSpy = jest.spyOn(ShoppingLists.prototype, "updateListCode").mockImplementation(async () => undefined as any);
 
   return { shoppingListSpy, updateListCodeSpy };
 }
 
 function mockQuery() {
-  const querySpy = jest.spyOn(ShoppingLists.prototype, "query")
+  const querySpy = jest.spyOn(ShoppingLists.prototype, "query").mockImplementation(async () => undefined as any);
 
   return { querySpy };
 }

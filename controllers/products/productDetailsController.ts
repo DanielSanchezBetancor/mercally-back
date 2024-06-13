@@ -19,7 +19,7 @@ async function productDetailsController(req: Request, res: Response) {
 
   const product = await new Products().getByPk(searchProduct);
 
-  if (!product) return res.json({});
+  if (!product) return res.json([]);
 
   const productWithPrices = await new Price().getAllByField('id_product', searchProduct, order_by);
 

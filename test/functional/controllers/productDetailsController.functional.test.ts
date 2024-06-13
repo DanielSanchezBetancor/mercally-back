@@ -63,7 +63,7 @@ describe("Product Details Controller Test Suite", () => {
     // Then
     expect(data.status).toBe(200);
     expect(productDetails).toBeDefined()
-    expect(productDetails).toEqual({})
+    expect(productDetails).toEqual([])
   });
   it("should retrieve correct products, ordered by the expensive ones", async () => {
     // Given

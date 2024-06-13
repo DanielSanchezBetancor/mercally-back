@@ -2,10 +2,14 @@ import { HistoryPrice } from "../orm/HistoryPrices/HistoryPricesBase";
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase";
 import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
 import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase";
+import { UserSetting, UserSettingKeys, THEMES } from "../orm/UsersSettings/UsersSettingsBase";
 import { UserStore } from "../orm/UsersStores/UsersStoresBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
 import { Store } from "../orm/stores/base/StoresBase";
+import { User } from "../orm/users/UsersBase";
+
+
 
 const ID_PRODUCTS = [1, 2, 3, 4, 5]
 const ID_STORES = [1, 2, 3]
@@ -45,6 +49,16 @@ const STORES: Store[] = ID_STORES.map(id => ({
   logo_url: '',
   name: `Store ${id}`,
 }))
+const USER_PREFERENCES: UserSetting = {
+  id_user: 1,
+  setting_key: UserSettingKeys.THEME,
+  setting_value: THEMES.LIGHT,
+}
+const USER: User = {
+  id: 1,
+  email: 'email',
+  password: 'password',
+}
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
@@ -89,8 +103,6 @@ export {
   PRICES,
   PRODUCTS,
   SHOPPING_LIST,
-  SHOPPING_LIST_PRODUCTS,
-  USERS_STORES,
-  USER_SHOPPING_LIST,
-  STORES
+  SHOPPING_LIST_PRODUCTS, STORES, USER, USERS_STORES, USER_PREFERENCES, USER_SHOPPING_LIST
 };
+

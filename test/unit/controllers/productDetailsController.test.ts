@@ -26,8 +26,8 @@ describe("Product Details Controller Test Suite", () => {
     // When
     await productDetailsController(Request, Response);
     // Then
-    expect(Response.json.mock.calls[0][0]).toHaveProperty("error");
     expect(Response.status).toHaveBeenCalledWith(500);
+    expect(Response.json.mock.calls[0][0]).toHaveProperty("error");
     expect(Response.json.mock.calls[0][0].error).toBe("No product detected")
   });
   it("should return correct products", async () => {
@@ -38,7 +38,7 @@ describe("Product Details Controller Test Suite", () => {
         id_product: expectedProductId
       }
     });
-    const { getByPkSpy } = mockProducts()
+    const { getByPkSpy } = mockProducts('', getOriginalProductMock(Number(expectedProductId)))
     const { getAllByFieldSpy } = mockPrices()
     const originalPrice = getOriginalPriceMock(expectedProductId)
     const expected = [{
@@ -100,7 +100,7 @@ describe("Product Details Controller Test Suite", () => {
         order_by: expectedOrderedBy
       }
     });
-    const { getByPkSpy } = mockProducts()
+    const { getByPkSpy } = mockProducts('', getOriginalProductMock(Number(expectedProductId)))
     const { getAllByFieldSpy } = mockPrices()
     const originalPrice = getOriginalPriceMock(expectedProductId)
     const expected = [{

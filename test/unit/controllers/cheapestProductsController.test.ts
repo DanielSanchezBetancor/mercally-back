@@ -34,14 +34,17 @@ describe("Cheapest Products Controller Test Suite", () => {
         id_categories: "1,2,3"
       }
     });
-    const { cheapestProductsMock } = mockPrices();
-    const { getByPkSpy } = mockProducts();
     const actual = fillWithOriginalProductMock(getCheapestProductsMock());
+    const { cheapestProductsMock } = mockPrices();
+    const { fillWithOriginalProductSpy } = mockProducts();
     // When
     await cheapestProductsController(Request, Response);
     // Then
     expect(cheapestProductsMock).toHaveBeenCalledTimes(1);
-    expect(getByPkSpy).toHaveBeenCalledTimes(3);
+    expect(cheapestProductsMock).toHaveBeenCalledWith([1, 2, 3]);
+    expect(fillWithOriginalProductSpy).toHaveBeenCalledTimes(1);
+    expect(fillWithOriginalProductSpy).toHaveBeenCalledWith(getCheapestProductsMock());
     expect(Response.json.mock.calls[0][0]).toStrictEqual(actual);
+
   });
 });
