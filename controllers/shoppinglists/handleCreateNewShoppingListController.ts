@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { UserShoppingLists } from '../../orm/UserShoppingLists/UserShoppingLists';
 import ShoppingLists from '../../orm/ShoppingLists/ShoppingLists';
 import { UserShoppingListRequest } from '../../orm/UserShoppingLists/UserShoppingListsBase';

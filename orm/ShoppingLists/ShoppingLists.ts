@@ -15,6 +15,10 @@ class ShoppingLists extends ShoppingListsBase {
   async updateListCode(shoppingListId: number, listCode: string) {
     await this.query(`UPDATE ${this.table} SET code = '${listCode}' WHERE id = ${shoppingListId}`);
   }
+
+  async deleteList(shoppingListId: number) {
+    await this.query(`DELETE FROM ${this.table} WHERE id = ${shoppingListId}`)
+  }
 }
 
 export default ShoppingLists;
