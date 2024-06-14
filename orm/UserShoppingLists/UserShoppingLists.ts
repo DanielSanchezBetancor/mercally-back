@@ -22,11 +22,11 @@ class UserShoppingLists extends UserShoppingListsBase {
   }
 
   async deleteUserLinkToList(idShoppingList: number) {
-    await this.query(`DELETE FROM ${this.table} WHERE id = ${idShoppingList}`)
+    await this.query(`DELETE FROM ${this.table} WHERE id_shopping_list = ${idShoppingList}`)
   }
 
   async getIsOwner(userId: number, idShoppingList: number) {
-    const [ isOwner ] = await this.query<UserShoppingList[]>(`SELECT isOwner FROM ${this.table} WHERE id_user = ${userId} AND id_shopping_list = ${idShoppingList}`)
+    const [ isOwner ] = await this.query<UserShoppingList[]>(`SELECT is_owner FROM ${this.table} WHERE id_user = ${userId} AND id_shopping_list = ${idShoppingList}`)
 
     return isOwner[ 0 ].is_owner
   }
