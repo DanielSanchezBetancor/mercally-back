@@ -44,7 +44,7 @@ class BaseQuery<T extends Fields> {
     }, {});
 
     const insertQuery = `INSERT INTO ${tableName} (${Object.keys(newPair).join(", ")}) VALUES (${Object.values(newPair).join(", ")})`;
-    // this.logger.debug('Generated query', { generatedQuery: insertQuery })
+    this.logger.debug('Generated query', { generatedQuery: insertQuery })
 
     return await this.connection.query(insertQuery);
   }
