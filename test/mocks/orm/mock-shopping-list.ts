@@ -19,7 +19,9 @@ function mockShoppingList(value?: ShoppingList) {
 
   const createNewListSpy = jest.spyOn(ShoppingLists.prototype, "createNewList")
 
-  return { shoppingListSpy, updateListCodeSpy, createNewListSpy };
+  const deleteList = jest.spyOn(ShoppingLists.prototype, "deleteList")
+
+  return { shoppingListSpy, updateListCodeSpy, createNewListSpy, deleteList };
 }
 
 function mockQuery() {
