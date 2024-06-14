@@ -1,6 +1,6 @@
-import { autocompleteController } from "../../../controllers/products/autocompleteController";
-import { mockExpress } from "../../mocks/mock-express";
-import { mockProducts } from "../../mocks/orm/mock-products";
+import { autocompleteController } from "../../../../controllers/products/autocompleteController";
+import { mockExpress } from "../../../mocks/mock-express";
+import { mockProducts } from "../../../mocks/orm/mock-products";
 
 describe("Autocomplete Controller Test Suite", () => {
   afterEach(() => {

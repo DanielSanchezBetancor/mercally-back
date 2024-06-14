@@ -12,7 +12,7 @@ function mockProductsShoppingLists(shoppingListHasProduct?: string) {
       return;
     });
 
-  const insertSpy = jest.spyOn(ProductsShoppingLists.prototype, "insert")
+  const insertSpy = jest.spyOn(ProductsShoppingLists.prototype, "insert").mockImplementation(async () => undefined as any);
 
   const getQuantityByProductIdAndShoppingListIdSpy = jest.spyOn(ProductsShoppingLists.prototype, "getQuantityByProductIdAndShoppingListId")
     .mockImplementation(async () => {

@@ -18,6 +18,7 @@ describe("Shopping List By Code Controller Test Suite", () => {
   it("should return correct structure if code is provided", async () => {
     // Given
     const code = "123456";
+    await buildTestDB();
     // When
     const { data, res: shoppingListByCode } = await executeEndpoint(`shoppingListByCode?code=${code}`);
     // Then

@@ -1,7 +1,7 @@
-import { biggestDiffProductsController } from "../../../controllers/products/biggestDiffProductsController";
-import { mockExpress } from "../../mocks/mock-express";
-import { getBiggestDifferenceMock, mockPrices } from "../../mocks/orm/mock-prices";
-import { fillWithOriginalProductMock, mockProducts } from "../../mocks/orm/mock-products";
+import { biggestDiffProductsController } from "../../../../controllers/products/biggestDiffProductsController";
+import { mockExpress } from "../../../mocks/mock-express";
+import { mockPrices, getBiggestDifferenceMock } from "../../../mocks/orm/mock-prices";
+import { mockProducts, fillWithOriginalProductMock } from "../../../mocks/orm/mock-products";
 
 describe("Biggest Diff Products Controller Test Suite", () => {
   afterEach(() => {
@@ -12,13 +12,14 @@ describe("Biggest Diff Products Controller Test Suite", () => {
     // Given
     const { Request, Response } = mockExpress();
     const { biggestDifferenceMock } = mockPrices();
-    const { getByPkSpy } = mockProducts();
+    const { fillWithOriginalProductSpy } = mockProducts();
     const actual = fillWithOriginalProductMock(getBiggestDifferenceMock());
     // When
     await biggestDiffProductsController(Request, Response);
     // Then
     expect(biggestDifferenceMock).toHaveBeenCalledTimes(1);
-    expect(getByPkSpy).toHaveBeenCalledTimes(3);
+    expect(fillWithOriginalProductSpy).toHaveBeenCalledTimes(1);
+    expect(fillWithOriginalProductSpy).toHaveBeenCalledWith(getBiggestDifferenceMock())
     expect(Response.json.mock.calls[0][0]).toStrictEqual(actual);
   });
 });

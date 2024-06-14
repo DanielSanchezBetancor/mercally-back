@@ -15,7 +15,7 @@ function mockShoppingList(value?: ShoppingList) {
     return returnValue as unknown as ResultSetHeader & ShoppingList[];
   });
 
-  const updateListCodeSpy = jest.spyOn(ShoppingLists.prototype, "updateListCode")
+  const updateListCodeSpy = jest.spyOn(ShoppingLists.prototype, "updateListCode").mockImplementation(async () => undefined as any);
 
   const createNewListSpy = jest.spyOn(ShoppingLists.prototype, "createNewList")
 
@@ -25,7 +25,7 @@ function mockShoppingList(value?: ShoppingList) {
 }
 
 function mockQuery() {
-  const querySpy = jest.spyOn(ShoppingLists.prototype, "query")
+  const querySpy = jest.spyOn(ShoppingLists.prototype, "query").mockImplementation(async () => undefined as any);
 
   return { querySpy };
 }
