@@ -8,8 +8,7 @@ import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
 import { Store } from "../orm/stores/base/StoresBase";
 import { User } from "../orm/users/UsersBase";
-
-
+import bcrypt from 'bcrypt';
 
 const ID_PRODUCTS = [1, 2, 3, 4, 5]
 const ID_STORES = [1, 2, 3]
@@ -56,8 +55,10 @@ const USER_PREFERENCES: UserSetting = {
 }
 const USER: User = {
   id: 1,
+  // username: 'username',
   email: 'email',
-  password: 'password',
+  password: bcrypt.hashSync('password', 10),
+  is_premium: false,
 }
 
 ID_PRODUCTS.forEach(idProduct => {

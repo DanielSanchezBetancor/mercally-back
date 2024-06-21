@@ -1,18 +1,20 @@
-import express from "express";
-import favicon from "./favicon";
-import { scraperEndpoints } from "./endpoints/scraper/scraper-endpoints";
 import cors from "cors";
 import dotenv from 'dotenv';
-import { storesEndpoints } from "./endpoints/scraper/stores-endpoints";
-import { productsEndpoints } from "./endpoints/scraper/products-endpoints";
-import { shoppingListEndpoints } from "./endpoints/scraper/shopping-list-endpoints";
-import { userEndpoints } from "./endpoints/scraper/user-endpoints";
+import express from "express";
+import { productsEndpoints } from "./endpoints/products/products-endpoints";
+import { scraperEndpoints } from "./endpoints/scraper/scraper-endpoints";
+import { shoppingListEndpoints } from "./endpoints/shoppinglists/shopping-list-endpoints";
+import { storesEndpoints } from "./endpoints/stores/stores-endpoints";
+import { userEndpoints } from "./endpoints/user/user-endpoints";
+import favicon from "./favicon";
+import { disableExpressHeaders } from "./helpers/security";
 
+dotenv.config();
 const app = express();
 app.use(express.json());
-dotenv.config();
 
 app.use(cors());
+disableExpressHeaders(app);
 
 scraperEndpoints(app);
 storesEndpoints(app);

@@ -16,5 +16,7 @@
     "Frias",
     "Herrs",
     "tener"
-  ]
+  ],
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
 }

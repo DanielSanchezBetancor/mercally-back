@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
 import Products from "../../orm/products/Products";
+import { getStoresForUser } from "../../helpers/stores";
+import { verifyAndDecodeToken } from "../../helpers/security";
 
 async function searchController(req: Request, res: Response) {
   if (!req.query) return res.status(400).json({ error: 'Missing query' })
 
-  const searchParam = req.query.search;
-  // const storesParam = req.query.stores;
-  if (!searchParam) {
+  const { search, stores: userStores } = req.query;
+
+  if (!search) {
     return res.status(500).json({ error: "No product detected" });
   }
 
-  const searchProduct = Array.isArray(searchParam) ? searchParam[0] : searchParam;
-  /* Aqui tendriamos que comprobar lo siguiente:
-  * 1. Si no hay usuario, ignoramos `stores` y pillamos los por defecto
-  * 2. Si hay usuario, comparar `stores` con los que tiene el usuario, los uqe no tenga, ignorarlos
-  */
-  const fakeStores = [1, 2, 4];
+  const token = verifyAndDecodeToken(req);
+  const searchProduct = Array.isArray(search) ? search[ 0 ] : search;
+  const arrayStores = Array.isArray(userStores) ? userStores : [ userStores ];
+  const parsedStores = arrayStores.map(String);
 
   if (typeof searchProduct !== "string") {
     return res.status(500).json({ error: "Invalid search" });
@@ -25,9 +25,12 @@ async function searchController(req: Request, res: Response) {
     return res.status(500).json({ error: "Search term too short" });
   }
 
+  const storesForUser = await getStoresForUser(parsedStores, token)
+  const stores = storesForUser.map(Number);
+
   const products = await new Products().search({
     ...req.query,
-    stores: fakeStores,
+    stores,
     searchProduct
   });
 

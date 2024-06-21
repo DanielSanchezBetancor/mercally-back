@@ -49,11 +49,14 @@ async function dropTables(conn: ReturnType<typeof getConnection>) {
 async function createTables(conn: ReturnType<typeof getConnection>) {
   logger.log('Creating tables')
   logger.log('Creating table <user>', { keepLevel: true })
+  // username VARCHAR(255) NOT NULL,
   await conn.query(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER AUTO_INCREMENT,
       email VARCHAR(255) NOT NULL,
       password VARCHAR(255) NOT NULL,
+      expiration VARCHAR(50),
+      is_premium BOOLEAN NOT NULL,
       PRIMARY KEY (id)
     )
   `)

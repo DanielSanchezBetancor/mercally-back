@@ -1,5 +1,4 @@
-import { User } from '../../data/types/user';
-import { UsersBase } from './UsersBase';
+import { User, UsersBase } from './UsersBase';
 
 class Users extends UsersBase {
   constructor() {
@@ -19,16 +18,33 @@ class Users extends UsersBase {
   }
 
   async getPassword(id: number) {
-    const [user] = await this.query<Pick<User, 'password'>[]>(`SELECT password FROM ${this.table} WHERE id = ${id}`);
+    const [ user ] = await this.query<Pick<User, 'password'>[]>(`SELECT password FROM ${this.table} WHERE id = ${id}`);
 
-    return user[0].password;
+    return user[ 0 ].password;
   }
 
   async getEmail(id: number) {
-    const [user] = await this.query<Pick<User, 'email'>[]>(`SELECT email FROM ${this.table} WHERE id = ${id}`);
+    const [ user ] = await this.query<Pick<User, 'email'>[]>(`SELECT email FROM ${this.table} WHERE id = ${id}`);
 
-    return user[0].email;
+    return user[ 0 ].email;
   }
+
+  async getByEmail(email: string) {
+    const [ user ] = await this.query<User[]>(`SELECT * FROM ${this.table} WHERE email = '${email}'`);
+
+    return user[ 0 ];
+  }
+
+  async updateExpiration(id: number, expiration: string) {
+    await this.query(`UPDATE ${this.table} SET expiration = '${expiration}' WHERE id = ${id}`)
+  }
+
+  async getExpiration(id: number) {
+    const [ user ] = await this.query<Pick<User, 'expiration'>[]>(`SELECT expiration FROM ${this.table} WHERE id = ${id}`);
+
+    return user[ 0 ].expiration;
+  }
+  
 }
 
 export { Users };

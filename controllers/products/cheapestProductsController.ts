@@ -9,6 +9,7 @@ async function cheapestProductsController(req: Request, res: Response) {
 
   if (!id_categories) return res.status(400).json({ error: 'Missing id_categories' });
 
+  // Check this type
   const idCategories = id_categories.toString().split(',').map(Number);
   const products = await new Price().getCheapestProducts(idCategories);
   const productsWithData = await new Products().fillWithOriginalProduct(products);

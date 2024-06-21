@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { UserShoppingLists } from '../../orm/UserShoppingLists/UserShoppingLists';
 import { UserShoppingListRequest } from '../../orm/UserShoppingLists/UserShoppingListsBase';
+import { verifyAndDecodeToken } from '../../helpers/security';
 
 async function handleShoppingListRequestController(req: Request, res: Response) {
   if (!req.query) return res.status(400).json({ error: 'Missing query' })
@@ -18,10 +19,10 @@ async function handleShoppingListRequestController(req: Request, res: Response) 
     return res.status(500).json({ error: "Invalid search" });
   }
 
-  // Aqui sacariamos el ID del usuario de la sesion
-  const userId = 1;
+  const token = verifyAndDecodeToken(req);
+  const { userId } = token!;
   const acceptedEnumValue = hasAccepted(isAccepted) ? UserShoppingListRequest.ACCEPTED : UserShoppingListRequest.REJECTED;
-  await new UserShoppingLists().updateIsAcceptedByShoppingListId(userId, Number(idShoppingList), acceptedEnumValue);
+  await new UserShoppingLists().updateIsAcceptedByShoppingListId(Number(userId), Number(idShoppingList), acceptedEnumValue);
 
   return res.status(200).json({});
 }

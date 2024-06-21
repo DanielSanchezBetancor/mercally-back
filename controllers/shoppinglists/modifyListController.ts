@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ProductsShoppingLists } from '../../orm/ProductsShoppingLists/ProductsShoppingLists';
 import { UserShoppingLists } from '../../orm/UserShoppingLists/UserShoppingLists';
+import { verifyAndDecodeToken } from '../../helpers/security';
 
 async function modifyListController(req: Request, res: Response) {
   if (!req.query) return res.status(400).json({ error: 'Missing query' })
@@ -16,10 +17,11 @@ async function modifyListController(req: Request, res: Response) {
   if (typeof productId !== "string") {
     return res.status(500).json({ error: "Invalid search" });
   }
-  // Aqui sacariamos el ID del usuario de la sesion
-  const userId = 1;
-  const activeShoppingListId = await new UserShoppingLists().getActiveShoppingListId(userId);
+  const token = verifyAndDecodeToken(req);
+  const { userId } = token!;
+  const activeShoppingListId = await new UserShoppingLists().getActiveShoppingListId(Number(userId));
   const shoppingListHasProduct = await new ProductsShoppingLists().getQuantityByProductIdAndShoppingListId(productId, activeShoppingListId);
+  // This can be improved
   const action = erase === "1" ? eraseAction : insertOrUpdateAction;
   await action(shoppingListHasProduct, productId, activeShoppingListId);
 

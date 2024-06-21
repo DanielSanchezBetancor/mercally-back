@@ -1,8 +1,9 @@
+import bcrypt from "bcrypt";
 import { Request, Response } from 'express';
-import { Users } from '../../orm/users/Users';
+import { verifyAndDecodeToken } from '../../helpers/security';
 import { UsersSettings } from '../../orm/UsersSettings/UsersSettings';
 import { THEMES, UserSettingKeys } from '../../orm/UsersSettings/UsersSettingsBase';
-
+import { Users } from '../../orm/users/Users';
 
 type Preferences = {
   theme?: string;
@@ -12,71 +13,92 @@ type Preferences = {
   new_email?: string;
 }
 
-//fake
-const id_user = 1;
-
-// Convendria algun tipo de update generico por Key?
-// La mayoria de validaciones vendran despues en una tarea concentrada en el usuario
-// Adicionalmente, habra otro desarrollo enfocado en la seguridad
 async function savePreferencesController(req: Request, res: Response) {
   const preferences: Preferences | null = req.body;
-  // El usuario debe estar logueado para poder cambiar sus preferencias
+  const token = verifyAndDecodeToken(req)
 
-  if (preferences?.theme) {
-    // Suponemos que el usuario siempre tendra este valor, o sea, que se lo rellenamos al crear el usuario?
-    const newTheme = preferences.theme !== THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
-    await new UsersSettings().updateUserPreference(id_user, UserSettingKeys.THEME, newTheme);
+  if (!token) {
+    return res.status(403).json({ error: 'Invalid token' });
   }
 
-  // if (preferences?.newUsername) {
+  if (!preferences) {
+    return res.status(200).json({})
+  }
+
+
+  const { theme, password, new_password, new_email } = preferences;
+  const { userId } = token;
+
+  updateTheme(userId, theme);
+
+  // Necesitamos esto?
+  // if (newUsername) {
   //   await new Users().updateUsername(id_user, preferences.newUsername);
   // }
 
-  if (preferences?.password) {
-    // Verificar que la contraseña sea correcta
-    if (preferences?.new_email) {
-      // Deberiamos enviar un email de confirmacion?
-      const currentEmail = await new Users().getEmail(id_user);
-      const error = emailValidations(currentEmail, preferences.new_email);
+  if (password) {
+    const error = await validatePassword(userId, password);
 
-      if (error) {
-        return res.status(500).json(error)
-      }
+    if (error) {
+      return res.status(500).json(error)
+    }
+    const emailError = updateEmail(Number(userId), new_email);
 
-      await new Users().updateEmail(id_user, preferences.new_email);
+    if (emailError) {
+      return res.status(500).json(emailError)
     }
 
-    if (preferences?.new_password) {
-      const currentPassword = await new Users().getPassword(id_user);
-      const error = passwordValidations(currentPassword, preferences.password, preferences.new_password);
+    const passwordError = await updatePassword(userId, new_password);
 
-      if (error) {
-        return res.status(500).json(error)
-      }
-
-      await new Users().updatePassword(id_user, preferences.new_password);
+    if (passwordError) {
+      return res.status(500).json(passwordError)
     }
   }
 
   res.status(200).json({})
 }
 
-function passwordValidations(currentPassword: string, password: string, newPassword: string) {
-  if (currentPassword !== password) {
+async function validatePassword(userId: string, password: string) {
+  const user = await new Users().getByPk(userId);
+  const isSamePassword = await bcrypt.compare(password, user.password);
+
+  if (!isSamePassword) {
     return { error: 'Password is incorrect' };
   }
-  if (password === newPassword) {
-    return { error: 'New password is the same as the old one' };
-  }
-
-  return null;
 }
 
-function emailValidations(currentEmail: string, email: string) {
-  if (currentEmail === email) {
-    return { error: 'New email is the same as the old one' };
-  }
+async function updateEmail(userId: number, newEmail?: string) {
+  if (newEmail) {
+    // Deberiamos enviar un email de confirmacion?
+    const currentEmail = await new Users().getEmail(userId);
 
-  return null;
+    if (currentEmail === newEmail) {
+      return { error: 'New email is the same as the old one' };
+    }
+
+    await new Users().updateEmail(userId, newEmail);
+  }
 }
-export { savePreferencesController }
+
+async function updatePassword(userId: string, newPassword?: string) {
+  if (newPassword) {
+    const currentPassword = await new Users().getPassword(Number(userId));
+    const isSameAsOldPassword = await bcrypt.compare(newPassword, currentPassword);
+
+    if (isSameAsOldPassword) {
+      return { error: 'New password is the same as the old one' };
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await new Users().updatePassword(Number(userId), hashedPassword);
+  }
+}
+
+async function updateTheme(userId: string, theme?: string) {
+  if (theme) {
+    const newTheme = theme !== THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
+    await new UsersSettings().updateUserPreference(Number(userId), UserSettingKeys.THEME, newTheme);
+  }
+}
+
+export { savePreferencesController };

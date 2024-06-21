@@ -1,6 +1,6 @@
 import express, { Express } from "express";
-import { productsEndpoints } from "../endpoints/scraper/products-endpoints";
-import { shoppingListEndpoints } from "../endpoints/scraper/shopping-list-endpoints";
+import { productsEndpoints } from "../endpoints/products/products-endpoints";
+import { shoppingListEndpoints } from "../endpoints/shoppinglists/shopping-list-endpoints";
 import {
   HISTORY_PRICES,
   PRICES,
@@ -14,8 +14,8 @@ import {
   USER
 } from "../scripts/dummies";
 import init, { createTableBaseTest } from "../scripts/init-seed";
-import { storesEndpoints } from "../endpoints/scraper/stores-endpoints";
-import { userEndpoints } from "../endpoints/scraper/user-endpoints";
+import { storesEndpoints } from "../endpoints/stores/stores-endpoints";
+import { userEndpoints } from "../endpoints/user/user-endpoints";
 
 async function buildTestDB() {
   await init(PRODUCTS,

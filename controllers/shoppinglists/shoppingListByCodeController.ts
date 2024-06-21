@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import ShoppingLists from '../../orm/ShoppingLists/ShoppingLists';
 
+// Should we protect this endpoint?
 async function shoppingListByCodeController(req: Request, res: Response) {
   if (!req.query) return res.status(400).json({ error: 'Missing query' })
 
