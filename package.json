@@ -8,6 +8,7 @@
     "test:unit": "jest test/unit --silent",
     "test:integration": "jest test/functional --runInBand --silent", 
 		"dev": "tsx --watch ./index.ts",
+    "dev:no-watch": "tsx ./index.ts",
 		"settings": "vscode-settings install",
 		"initDB": "tsx scripts/init.ts",
 		"initDB:dummy": "tsx ./bin/init-seed.ts",
