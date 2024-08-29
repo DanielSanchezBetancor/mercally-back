@@ -2,7 +2,7 @@ import Logger from "@coding-flavour/logger"
 import { getConnection } from "../orm/base/connection"
 import Price, { PricesFields } from "../orm/prices/base"
 import Products from "../orm/products/Products"
-import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES, USER_PREFERENCES, USER } from "./dummies"
+import { PRICES, HISTORY_PRICES, PRODUCTS, SHOPPING_LIST, SHOPPING_LIST_PRODUCTS, USER_SHOPPING_LIST, USERS_STORES, STORES, USER_PREFERENCES, USER, CATEGORIES } from "./dummies"
 import { ProductsFields } from "../orm/products/base"
 import { HistoryPricesFields } from "../orm/HistoryPrices/HistoryPricesBase"
 import HistoryPrice from "../orm/HistoryPrices/HistoryPrices"
@@ -20,6 +20,8 @@ import { User } from "../orm/users/UsersBase"
 import { Users } from "../orm/users/Users"
 import { UserSetting } from "../orm/UsersSettings/UsersSettingsBase"
 import { UsersSettings } from "../orm/UsersSettings/UsersSettings"
+import { CategoryTableData } from "../orm/categories/base/CategoriesBase"
+import Categories from "../orm/categories/Categories"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
 const tables = [
@@ -165,7 +167,8 @@ async function insertDummyData(
   usersStores: UserStore[],
   stores: Store[],
   userPreferences: UserSetting,
-  user: User
+  user: User,
+  categories: CategoryTableData[]
 ) {
   logger.log('Inserting dummy data', { keepLevel: true })
 
@@ -176,9 +179,9 @@ async function insertDummyData(
     await new Stores().insert(store)
   }
 
-  await conn.query(`
-    INSERT INTO categories (name) VALUES
-      ('Fruit')`)
+  for (const category of categories) {
+    await new Categories().insert(category)
+  }
 
   for (const product of products) {
     await new Products().insert(product)
@@ -233,7 +236,8 @@ async function init(
   usersStores = USERS_STORES,
   stores = STORES,
   userPreferences = USER_PREFERENCES,
-  user = USER
+  user = USER,
+  categories = CATEGORIES
 ) {
   logger.log('Initializing database with dummy data')
   const conn = getConnection()
@@ -249,7 +253,8 @@ async function init(
     usersStores,
     stores,
     userPreferences,
-    user
+    user,
+    categories
   )
   logger.log('Database initialized')
 }

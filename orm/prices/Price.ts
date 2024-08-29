@@ -20,13 +20,13 @@ class Prices extends PricesBase {
     super();
   }
 
-  async getBiggestDifference() {
+  async getBiggestDifference(offset: number) {
     const [products] = await this.query<BiggestDifference[]>(`
       SELECT * FROM (
         SELECT 
           MAX(maxPrice.price) as max_price,
           MIN(minPrice.price) as min_price,
-          MAX(maxPrice.price) - MIN(minPrice.price) as difference,
+          ROUND(MAX(maxPrice.price) - MIN(minPrice.price), 2) as difference,
           maxPrice.id_product as id_product
         FROM 
           prices maxPrice,
@@ -34,13 +34,14 @@ class Prices extends PricesBase {
         WHERE maxPrice.id_product = minPrice.id_product
         GROUP BY maxPrice.id_product) as calculatedPrices 
       ORDER BY difference desc
-      LIMIT ${this.maxLimit};
+      LIMIT ${this.maxLimit}
+      OFFSET ${offset};
     `)
 
     return products;
   }
 
-  async getCheapestProducts(id_categories: number[]) {
+  async getCheapestProducts(id_categories: number[], offset: number) {
     const [products] = await this.query<CheapestProduct[]>(`
       SELECT 
         MIN(price) as min_price,
@@ -53,7 +54,8 @@ class Prices extends PricesBase {
       )
       GROUP BY id_product
       ORDER BY min_price
-      LIMIT ${this.maxLimit};
+      LIMIT ${this.maxLimit + 1}
+      OFFSET ${offset};
     `)
 
     return products;

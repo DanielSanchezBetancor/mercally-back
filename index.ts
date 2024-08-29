@@ -7,6 +7,7 @@ import { storesEndpoints } from "./endpoints/scraper/stores-endpoints";
 import { productsEndpoints } from "./endpoints/scraper/products-endpoints";
 import { shoppingListEndpoints } from "./endpoints/scraper/shopping-list-endpoints";
 import { userEndpoints } from "./endpoints/scraper/user-endpoints";
+import { categoriesEndpoints } from "./endpoints/scraper/categories-endpoints";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ storesEndpoints(app);
 productsEndpoints(app);
 shoppingListEndpoints(app);
 userEndpoints(app);
+categoriesEndpoints(app);
 
 app.listen(4000, () => {
   favicon();

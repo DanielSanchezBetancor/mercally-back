@@ -6,7 +6,7 @@ const getStoresController = async (
   res: Response) => {
   const stores = await new Stores().getAll();
 
-  return res.status(200).send({ stores });
+  return res.status(200).send(stores);
 }
 
 export { getStoresController };

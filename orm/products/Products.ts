@@ -18,13 +18,15 @@ type SearchParams = {
 }
 type QueryResultItem = Products['fields'] & Price['fields']
 
+type A<T> = T & { id_product: number }
+
 class Products extends ProductsBase {
   constructor() {
     super();
   }
 
-  async fillWithOriginalProduct(products: OverchargedUnknown[]) {
-    const productsWithData = [];
+  async fillWithOriginalProduct<T>(products: A<T>[]) {
+    const productsWithData: T[] & QueryResultItem[] = [];
 
     for (const product of products) {
       const originalProduct = await this.getByPk(product.id_product);

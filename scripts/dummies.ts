@@ -4,13 +4,14 @@ import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
 import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase";
 import { UserSetting, UserSettingKeys, THEMES } from "../orm/UsersSettings/UsersSettingsBase";
 import { UserStore } from "../orm/UsersStores/UsersStoresBase";
+import { CategoryTableData } from "../orm/categories/base/CategoriesBase";
 import { Price } from "../orm/prices/base";
 import { Product } from "../orm/products/base";
 import { Store } from "../orm/stores/base/StoresBase";
 import { User } from "../orm/users/UsersBase";
 
-
-
+const STORE_NAMES = ['carrefour', 'mercadona', 'lidl', 'aldi', 'día']
+const CATEGORY_NAMES = ['Fruits', 'Vegetables', 'Meat', 'Fish', 'Dairy']
 const ID_PRODUCTS = [1, 2, 3, 4, 5]
 const ID_STORES = [1, 2, 3]
 const FRUITS = ['Apple', 'Banana', 'Orange', 'Strawberry', 'Watermelon']
@@ -47,8 +48,9 @@ const USERS_STORES: UserStore[] = [
 const STORES: Store[] = ID_STORES.map(id => ({
   id,
   logo_url: '',
-  name: `Store ${id}`,
+  name: STORE_NAMES[id - 1],
 }))
+
 const USER_PREFERENCES: UserSetting = {
   id_user: 1,
   setting_key: UserSettingKeys.THEME,
@@ -59,6 +61,11 @@ const USER: User = {
   email: 'email',
   password: 'password',
 }
+
+const CATEGORIES: CategoryTableData[] = CATEGORY_NAMES.map((name, id) => ({
+  id: id + 1,
+  name,
+}))
 
 ID_PRODUCTS.forEach(idProduct => {
   ID_STORES.forEach(idStore => {
@@ -85,7 +92,7 @@ ID_PRODUCTS.forEach(idProduct => {
     name: FRUITS[idProduct - 1],
     is_white_brand: randomBoolean(),
     id_category: 1,
-    id_brand: 1,
+    id_brand: randomNumber(STORES.length) + 1,
   })
   SHOPPING_LIST_PRODUCTS.length < 3 && SHOPPING_LIST_PRODUCTS.push({
     id_shopping_list: 1,
@@ -98,11 +105,16 @@ function randomBoolean() {
   return Math.random() < 0.5 ? 0 : 1
 }
 
+function randomNumber(max: number) {
+  return Math.floor(Math.random() * max)
+}
+
 export {
   HISTORY_PRICES,
   PRICES,
   PRODUCTS,
   SHOPPING_LIST,
-  SHOPPING_LIST_PRODUCTS, STORES, USER, USERS_STORES, USER_PREFERENCES, USER_SHOPPING_LIST
+  SHOPPING_LIST_PRODUCTS, STORES, USER, USERS_STORES, USER_PREFERENCES, USER_SHOPPING_LIST,
+  CATEGORIES
 };
 
