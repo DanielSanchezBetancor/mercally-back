@@ -39,11 +39,11 @@ describe("Handle Shopping List Request Controller Test Suite", () => {
     const [ { id: lastShoppingListId } ] = await new ShoppingLists().getAll('id', baseSortOptions.DESC, 1)
     // When
     const { data, res } = await executeEndpoint(`deleteShoppingList?id_shopping_list=${lastShoppingListId}&is_owner=1`, 'DELETE');
-    // Then
     expect(data.status).toBe(200);
     expect(res).toBeDefined();
     expect(res).toEqual({})
     const [ { id: newShoppingListId } ] = await new ShoppingLists().getAll('id', baseSortOptions.DESC, 1)
+    // Then
     expect(newShoppingListId).toBe(lastShoppingListId - 1)
   })
 })
