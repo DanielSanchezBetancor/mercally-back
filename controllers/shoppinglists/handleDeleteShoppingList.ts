@@ -14,8 +14,7 @@ async function handleDeleteShoppingList(req: Request, res: Response) {
     return res.status(500).json({ error: "No params detected" });
   }
 
-  const idShoppingListArray = Array.isArray(id_shopping_list) ? id_shopping_list[ 0 ] : id_shopping_list;
-  const idShoppingList = idShoppingListArray;
+  const idShoppingList = Array.isArray(id_shopping_list) ? id_shopping_list[ 0 ] : id_shopping_list;
 
   const isOwnerArray = Array.isArray(is_owner) ? is_owner[ 0 ] : is_owner;
   const isOwner = Number(isOwnerArray);
