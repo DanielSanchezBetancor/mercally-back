@@ -1,6 +1,7 @@
 import Price from "../prices/Price";
 import { SortBy } from "../prices/base";
-import ProductsBase from "./base";
+import { Stores } from "../stores/Stores";
+import ProductsBase, { Product } from "./base";
 
 type OverchargedUnknown = unknown & { id_product: number }
 
@@ -16,7 +17,7 @@ type SearchParams = {
   limit?: number;
   sort_by?: SortBy;
 }
-type QueryResultItem = Products['fields'] & Price['fields']
+type QueryResultItem = Products['fields'] & Price['fields'] & Stores['fields']
 
 type A<T> = T & { id_product: number }
 
@@ -58,12 +59,14 @@ class Products extends ProductsBase {
     const queryIdBrand = id_brands ? `AND id_brand IN (${id_brands.join(',')})` : '';
     const orderBy = new Price().getOrderBy(sort_by)
 
+    // Vamos a añadir tambien los datos de la store que necesito el nombre y se puedeusar en mas sitios
     const [products] = await this.query<QueryResultItem[]>(`
       SELECT * 
       FROM ${this.table} 
       JOIN prices ON prices.id_product = products.id
+      JOIN stores ON stores.id = prices.id_store
       WHERE 
-        name LIKE '%${searchProduct}%'
+        product_name LIKE '%${searchProduct}%'
         AND id_store IN (${stores.join(", ")})
         AND price >= ${min_price}
         ${queryMaxPrice}
@@ -94,14 +97,16 @@ class Products extends ProductsBase {
   }
 
   async autocomplete(searchProduct: string) {
-    const [suggestedProduct] = await this.query<string[]>(`
-      SELECT name
+    const [suggestedProduct] = await this.query<Product[] | undefined>(`
+      SELECT product_name
       FROM ${this.table}
-      WHERE name LIKE '%${searchProduct}%'
+      WHERE product_name LIKE '%${searchProduct}%'
       LIMIT 1
     `);
+      
+    const suggestedProductName = suggestedProduct[0]?.product_name ?? '';
 
-    return suggestedProduct[0];
+    return suggestedProductName;
   }
 }
 
