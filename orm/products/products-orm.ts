@@ -11,14 +11,6 @@ type Product = {
 
 type ProductPacket = ResultSetHeader & Product
 
-async function getProducts() {
-  const connection = getConnection();
-
-  const [products] = await connection.query("SELECT * FROM products");
-
-  return products;
-}
-
 async function getProductById(id: number) {
   const connection = getConnection();
 
@@ -68,4 +60,4 @@ async function getProductByFilters(filters: { idProduct: number, category: strin
   return products;
 }
 
-export { getProducts, getProductById, getProductByFilters };
+export { getProductById, getProductByFilters };

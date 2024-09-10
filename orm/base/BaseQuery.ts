@@ -89,6 +89,12 @@ class BaseQuery<T extends Fields> {
       }
     }, {});
   }
+
+  async getLastId() {
+    const [lastId] = await this.query<T[]>(`SELECT MAX(${this.primaryKey}) as id FROM ${this.table}`);
+
+    return lastId[0].id;
+  }
 }
 
 export default BaseQuery;

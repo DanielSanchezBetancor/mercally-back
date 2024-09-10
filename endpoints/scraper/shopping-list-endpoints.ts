@@ -4,12 +4,20 @@ import { modifyListController } from "../../controllers/shoppinglists/modifyList
 import { generateListCodeController } from "../../controllers/shoppinglists/generateListCodeController";
 import { shoppingListRequestsController } from "../../controllers/shoppinglists/shoppingListRequestsController";
 import { handleShoppingListRequestController } from "../../controllers/shoppinglists/handleShoppingListRequestController";
+import { getShoppingListByUserController } from "../../controllers/shoppinglists/getShoppingListByUserController";
+import { createShoppingListController } from "../../controllers/shoppinglists/createShoppingListController";
+import { getShoppingListByIdController } from "../../controllers/shoppinglists/getShoppingListByIdController";
+import { getShoppingListProductsByIdController } from "../../controllers/shoppinglists/getShoppingListProductsByIdController";
 
 const shoppingListEndpoints = (app: Express) => {
   app.get("/shoppingListByCode", shoppingListByCodeController)
-  app.put("/modifyList", modifyListController)
-  app.post("/generateListCode", generateListCodeController)
   app.get("/shoppingListRequests", shoppingListRequestsController)
+  app.get("/getShoppingListByUser", getShoppingListByUserController) 
+  app.get("/getShoppingListById", getShoppingListByIdController)
+  app.get("/getShoppingListProductsById", getShoppingListProductsByIdController);
+  app.post("/generateListCode", generateListCodeController)
+  app.post('/createShoppingList', createShoppingListController)
+  app.put("/modifyList", modifyListController)
   app.put("/handleShoppingListRequest", handleShoppingListRequestController)
 };
 

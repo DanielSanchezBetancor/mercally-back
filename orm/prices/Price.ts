@@ -1,3 +1,5 @@
+import Products from "../products/Products";
+import { Stores } from "../stores/Stores";
 import PricesBase from "./base";
 
 type BiggestDifference = {
@@ -12,6 +14,10 @@ type CheapestProduct = {
   avg_price: string;
   id_product: number;
 }
+
+type QueryResultItem = Products['fields'] & Prices['fields'] & Stores['fields']
+
+type A<T> = T & { id_product: number, id_store: number }
 
 class Prices extends PricesBase {
   private maxLimit = 3;
@@ -60,7 +66,31 @@ class Prices extends PricesBase {
 
     return products;
   }
+
+  async getPricesByProductAndStore(id_product: number, id_store: number) {
+    const [prices] = await this.query<Prices['fields'][]>(`
+      SELECT * FROM prices WHERE id_product = ${id_product} AND id_store = ${id_store};
+    `)
+
+    return prices[0];
+  }
+
+
+  async fillWithOriginalPrice<T>(products: A<T>[]) {
+    const productsWithData: T[] & QueryResultItem[] = [];
+
+    for (const product of products) {
+      const originalProduct = await this.getPricesByProductAndStore(product.id_product, product.id_store);
+
+      productsWithData.push({
+        ...product,
+        ...originalProduct,
+      })
+    }
+
+    return productsWithData;
+  }
 }
 
-export type { BiggestDifference, CheapestProduct }
+export type { BiggestDifference, CheapestProduct };
 export default Prices

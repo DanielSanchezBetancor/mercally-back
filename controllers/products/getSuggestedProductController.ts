@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { identifyAllPatterns } from "../../data/statics/category/category";
 import { getProductByFilters, getProductById } from "../../orm/products/products-orm";
 
+// Actualizar a nuevo ORM
 async function getSuggestedProductController(req: Request, res: Response, _next: Function) {
   const { idProduct: idProductQuery } = req.params;
 

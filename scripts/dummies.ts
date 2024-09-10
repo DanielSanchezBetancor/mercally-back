@@ -2,7 +2,7 @@ import { HistoryPrice } from "../orm/HistoryPrices/HistoryPricesBase";
 import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase";
 import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase";
 import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLists/UserShoppingListsBase";
-import { UserSetting, UserSettingKeys, THEMES } from "../orm/UsersSettings/UsersSettingsBase";
+import { THEMES, UserSetting, UserSettingKeys } from "../orm/UsersSettings/UsersSettingsBase";
 import { UserStore } from "../orm/UsersStores/UsersStoresBase";
 import { CategoryTableData } from "../orm/categories/base/CategoriesBase";
 import { Price } from "../orm/prices/base";
@@ -10,11 +10,13 @@ import { Product } from "../orm/products/base";
 import { Store } from "../orm/stores/base/StoresBase";
 import { User } from "../orm/users/UsersBase";
 
+/* Random data */
 const STORE_NAMES = ['carrefour', 'mercadona', 'lidl', 'aldi', 'día']
 const CATEGORY_NAMES = ['Fruits', 'Vegetables', 'Meat', 'Fish', 'Dairy']
 const ID_PRODUCTS = [1, 2, 3, 4, 5]
 const ID_STORES = [1, 2, 3]
 const FRUITS = ['Apple', 'Banana', 'Orange', 'Strawberry', 'Watermelon']
+/* Data tables */
 const PRICES: Price[] = []
 const HISTORY_PRICES: HistoryPrice[] = []
 const PRODUCTS: Product[] = []
@@ -23,18 +25,9 @@ const DATES: string[] = [
   '2021-01-02',
   '2021-01-03',
 ]
-const SHOPPING_LIST: ShoppingList = {
-  id: 1,
-  code: '123456',
-}
+const SHOPPING_LISTS: ShoppingList[] = []
 const SHOPPING_LIST_PRODUCTS: ProductsShoppingList[] = []
-const USER_SHOPPING_LIST: UserShoppingList = {
-  id_user: 1,
-  id_shopping_list: 1,
-  is_active: 1,
-  is_accepted: UserShoppingListRequest.PENDING,
-  is_owner: 1,
-}
+const USER_SHOPPING_LISTS: UserShoppingList[] = []
 const USERS_STORES: UserStore[] = [
   {
     id_user: 1,
@@ -89,7 +82,7 @@ ID_PRODUCTS.forEach(idProduct => {
   })
   PRODUCTS.push({
     id: idProduct,
-    name: FRUITS[idProduct - 1],
+    product_name: FRUITS[idProduct - 1],
     is_white_brand: randomBoolean(),
     id_category: 1,
     id_brand: randomNumber(STORES.length) + 1,
@@ -98,6 +91,20 @@ ID_PRODUCTS.forEach(idProduct => {
     id_shopping_list: 1,
     id_product: idProduct,
     quantity: idProduct,
+    id_store: randomNumber(STORES.length) + 1,
+  })
+  SHOPPING_LISTS.push({
+    id: idProduct,
+    name: `List ${idProduct}`,
+    id_background: idProduct,
+    code: `${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}`,
+  })
+  USER_SHOPPING_LISTS.push({
+    id_user: 1,
+    id_shopping_list: idProduct,
+    is_active: randomBoolean() ? 1 : 0,
+    is_owner: randomBoolean() ? 1 : 0,
+    is_accepted: randomBoolean() ? UserShoppingListRequest.ACCEPTED : UserShoppingListRequest.PENDING,
   })
 })
 
@@ -110,11 +117,8 @@ function randomNumber(max: number) {
 }
 
 export {
-  HISTORY_PRICES,
+  CATEGORIES, HISTORY_PRICES,
   PRICES,
-  PRODUCTS,
-  SHOPPING_LIST,
-  SHOPPING_LIST_PRODUCTS, STORES, USER, USERS_STORES, USER_PREFERENCES, USER_SHOPPING_LIST,
-  CATEGORIES
+  PRODUCTS, SHOPPING_LIST_PRODUCTS, SHOPPING_LISTS, STORES, USER, USER_PREFERENCES, USER_SHOPPING_LISTS, USERS_STORES
 };
 
