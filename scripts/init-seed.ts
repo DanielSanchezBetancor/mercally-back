@@ -89,7 +89,7 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
   await conn.query(`
     CREATE TABLE IF NOT EXISTS products (
       id INTEGER AUTO_INCREMENT,
-      name VARCHAR(255) NOT NULL,
+      product_name VARCHAR(255) NOT NULL,
       is_white_brand BOOLEAN NOT NULL,
       id_category INTEGER NOT NULL,
       id_brand INTEGER NOT NULL,
@@ -127,8 +127,9 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
   logger.log('Creating table <shopping_lists_products>', { keepLevel: true })
   await conn.query(`
     CREATE TABLE IF NOT EXISTS shopping_lists_products (
-      id_shopping_list INTEGER NOT NULL,
       id_product INTEGER NOT NULL,
+      id_shopping_list INTEGER NOT NULL,
+      id_store INTEGER NOT NULL,
       quantity INTEGER NOT NULL
     )
   `)
@@ -171,47 +172,58 @@ async function insertDummyData(
   user: User,
   categories: CategoryTableData[]
 ) {
-  logger.log('Inserting dummy data', { keepLevel: true })
+  logger.log('Inserting dummy data')
 
+  logger.log('Inserting User', { keepLevel: true })
   await new Users().insert(user)
+
+  logger.log('Inserting User Preferences', { keepLevel: true })
   await new UsersSettings().insert(userPreferences)
 
+  logger.log('Inserting Stores', { keepLevel: true })
   for (const store of stores) {
     await new Stores().insert(store)
   }
 
+  logger.log('Inserting Categories', { keepLevel: true })
   for (const category of categories) {
     await new Categories().insert(category)
   }
 
+  logger.log('Inserting Products', { keepLevel: true })
   for (const product of products) {
     await new Products().insert(product)
   }
 
+  logger.log('Inserting Shopping Lists', { keepLevel: true })
   for (const shoppingListRow of shoppingList) {
     await new ShoppingLists().insert(shoppingListRow)
   }
 
+  logger.log('Inserting Products Shopping Lists', { keepLevel: true })
   for (const productShoppingList of productsShoppingLists) {
     await new ProductsShoppingLists().insert(productShoppingList)
   }
 
+  logger.log('Inserting Prices', { keepLevel: true })
   for (const price of prices) {
     await new Price().insert(price)
   }
 
+  logger.log('Inserting History Prices', { keepLevel: true })
   for (const historyPrice of historyPrices) {
     await new HistoryPrice().insert(historyPrice)
   }
 
+  logger.log('Inserting User Stores', { keepLevel: true })
   for (const userStore of usersStores) {
     await new UsersStores().insert(userStore)
   }
 
+  logger.log('Inserting User Shopping Lists', { subtractLevel: true })
   for (const userShoppingList of userShoppingLists) {
     await new UserShoppingLists().insert(userShoppingList)
   }
-
 
   logger.log('Dummy data inserted', { subtractLevel: true })
 }
