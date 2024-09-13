@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Price, { BiggestDifference } from "../../orm/prices/Price";
 import Products from "../../orm/products/Products";
+import { Stores } from "../../orm/stores/Stores";
 
 async function biggestDiffProductsController(req: Request, res: Response) {
   const { offset } = req.query;
@@ -15,9 +16,11 @@ async function biggestDiffProductsController(req: Request, res: Response) {
 
   const offsetNumber = !!singleOffset ? parseInt(singleOffset) : 0;
   const products = await new Price().getBiggestDifference(offsetNumber);
+  
   const productsWithData = await new Products().fillWithOriginalProduct<BiggestDifference>(products);
+  const productsWithStores  = await new Stores().fillMinMaxWithOriginalStore<BiggestDifference>(productsWithData);
 
-  res.json(productsWithData);
+  res.json(productsWithStores);
 }
 
 export { biggestDiffProductsController };

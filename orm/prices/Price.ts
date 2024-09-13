@@ -2,11 +2,16 @@ import Products from "../products/Products";
 import { Stores } from "../stores/Stores";
 import PricesBase from "./base";
 
-type BiggestDifference = {
+type BiggestDifferenceQueryResult = {
   difference: number;
   id_product: number;
   max_price: string;
   min_price: string;
+}
+
+type BiggestDifference = BiggestDifferenceQueryResult & {
+  expensive_id_store: number;
+  cheap_id_store: number;
 }
 
 type CheapestProduct = {
@@ -27,7 +32,7 @@ class Prices extends PricesBase {
   }
 
   async getBiggestDifference(offset: number) {
-    const [products] = await this.query<BiggestDifference[]>(`
+    const [products] = await this.query<BiggestDifferenceQueryResult[]>(`
       SELECT * FROM (
         SELECT 
           MAX(maxPrice.price) as max_price,
@@ -44,7 +49,21 @@ class Prices extends PricesBase {
       OFFSET ${offset};
     `)
 
-    return products;
+    const productsWithStore: BiggestDifference[] = [];
+    const queryMinMax = (id_product: number, modifier: string = 'MAX') => `SELECT id_store FROM prices WHERE id_product = ${id_product} AND price = (SELECT ${modifier}(price) FROM prices WHERE id_product = ${id_product})`
+
+    for (const product of products) {
+      const [store] = await this.query<{ id_store: number }[]>(queryMinMax(product.id_product));
+      const [storeCheap] = await this.query<{ id_store: number }[]>(queryMinMax(product.id_product, 'MIN'));
+
+      productsWithStore.push({
+        ...product,
+        expensive_id_store: store[0].id_store,
+        cheap_id_store: storeCheap[0].id_store
+      })
+    }
+
+    return productsWithStore;
   }
 
   async getCheapestProducts(id_categories: number[], offset: number) {
@@ -92,5 +111,5 @@ class Prices extends PricesBase {
   }
 }
 
-export type { BiggestDifference, CheapestProduct };
+export type { BiggestDifferenceQueryResult, CheapestProduct, BiggestDifference };
 export default Prices
