@@ -1,6 +1,6 @@
 import { Store, StoresBase } from './base/StoresBase';
 
-type A<T> = T & { id_product: number, id_store: number }
+type A<T> = T & { id_store: number }
 type MinMaxStoreProduct<T> = T & { id_product: number, cheap_id_store: number, expensive_id_store: number }
 type QueryResultItem<A> = A & Store;
 

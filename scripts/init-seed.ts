@@ -20,7 +20,7 @@ import { UserShoppingList, UserShoppingListRequest } from "../orm/UserShoppingLi
 import { UsersSettings } from "../orm/UsersSettings/UsersSettings"
 import { UserSetting } from "../orm/UsersSettings/UsersSettingsBase"
 import { UsersStores } from "../orm/UsersStores/UsersStores"
-import { UserStore } from "../orm/UsersStores/UsersStoresBase"
+import { UsersStoreFields } from "../orm/UsersStores/UsersStoresBase"
 import { CATEGORIES, HISTORY_PRICES, PRICES, PRODUCTS, SHOPPING_LIST_PRODUCTS, SHOPPING_LISTS, STORES, USER, USER_PREFERENCES, USER_SHOPPING_LISTS, USERS_STORES } from "./dummies"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
@@ -166,7 +166,7 @@ async function insertDummyData(
   shoppingList: ShoppingList[],
   productsShoppingLists: ProductsShoppingListFields[],
   userShoppingLists: UserShoppingList[],
-  usersStores: UserStore[],
+  usersStores: UsersStoreFields[],
   stores: Store[],
   userPreferences: UserSetting,
   user: User,

@@ -95,6 +95,19 @@ class BaseQuery<T extends Fields> {
 
     return lastId[0].id;
   }
+
+  async update(values: T, where: T) {
+    const tableName = this.table;
+
+    const newPair = this.buildNewPair(values);
+    const wherePair = this.buildNewPair(where);
+    const setTemplate = Object.keys(newPair).map(field => `${field} = ${newPair[field]}`).join(", ");
+    const whereTemplate = Object.keys(wherePair).map(field => `${field} = ${wherePair[field]}`).join(" AND ");
+    const updateQuery = `UPDATE ${tableName} SET ${setTemplate} WHERE ${whereTemplate}`;
+    this.logger.debug('Generated query', { generatedQuery: updateQuery })
+
+    return await this.connection.query(updateQuery);
+  }
 }
 
 export default BaseQuery;
