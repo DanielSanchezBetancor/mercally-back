@@ -8,7 +8,7 @@ import Price, { PricesFields } from "../orm/prices/base"
 import { ProductsFields } from "../orm/products/base"
 import Products from "../orm/products/Products"
 import { ProductsShoppingLists } from "../orm/ProductsShoppingLists/ProductsShoppingLists"
-import { ProductsShoppingList } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase"
+import { ProductsShoppingListFields } from "../orm/ProductsShoppingLists/ProductsShoppingListsBase"
 import ShoppingLists from "../orm/ShoppingLists/ShoppingLists"
 import { ShoppingList } from "../orm/ShoppingLists/ShoppingListsBase"
 import { Store } from "../orm/stores/base/StoresBase"
@@ -107,8 +107,8 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
   logger.log('Creating table <users_shopping_lists>', { keepLevel: true })
   await conn.query(`
     CREATE TABLE IF NOT EXISTS users_shopping_lists (
-      id_user INTEGER NOT NULL,
-      id_shopping_list INTEGER NOT NULL,
+      id_user INTEGER NOT NULL PRIMARY KEY,
+      id_shopping_list INTEGER NOT NULL PRIMARY KEY,
       is_owner BOOLEAN NOT NULL,
       is_accepted ENUM('${Object.keys(UserShoppingListRequest).join("','")}') NOT NULL,
       is_active BOOLEAN NOT NULL
@@ -164,7 +164,7 @@ async function insertDummyData(
   prices: PricesFields[],
   historyPrices: HistoryPricesFields[],
   shoppingList: ShoppingList[],
-  productsShoppingLists: ProductsShoppingList[],
+  productsShoppingLists: ProductsShoppingListFields[],
   userShoppingLists: UserShoppingList[],
   usersStores: UserStore[],
   stores: Store[],

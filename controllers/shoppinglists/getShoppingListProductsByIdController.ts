@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { UserShoppingLists } from "../../orm/UserShoppingLists/UserShoppingLists";
 import { ProductsShoppingLists } from "../../orm/ProductsShoppingLists/ProductsShoppingLists";
-import Products from "../../orm/products/Products";
 import Prices from "../../orm/prices/Price";
+import Products from "../../orm/products/Products";
 import { Stores } from "../../orm/stores/Stores";
 
 async function getShoppingListProductsByIdController(req: Request, res: Response) {
@@ -34,4 +33,4 @@ async function getShoppingListProductsByIdController(req: Request, res: Response
 
 export {
   getShoppingListProductsByIdController
-}
+};

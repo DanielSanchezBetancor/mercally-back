@@ -18,7 +18,7 @@ const getShoppingListByIdController = async (req: Request, res: Response) => {
   const fakeUserId = 1;
   // Comprobar que el usuario tiene permisos para ver la lista
 
-  const userShoppingLists = await new UserShoppingLists().getAllByField('id_shopping_list', fakeUserId);
+  const userShoppingLists = await new UserShoppingLists().getAllByField('id_shopping_list', Number(id));
   // It should be a single value
   const shoppingList = Array.isArray(userShoppingLists) ? userShoppingLists[0] : userShoppingLists;
   const originalList = await new ShoppingLists().getByPk(shoppingList.id_shopping_list);
