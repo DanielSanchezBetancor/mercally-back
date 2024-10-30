@@ -17,16 +17,18 @@ const createShoppingListController = async (req: Request, res: Response) => {
   // Hay que arreglar el ORM para que no tenga en cuenta los opcionales y los meta como null en DB. Controlar esto antes de sacar a producción
   // Dado que el `code` es una String vacia, podria permitir otros endpoints que no sean el de crear lista de la compra entrar sin tener el codigo
   const lastId = await new ShoppingLists().getLastId();
+
   await new ShoppingLists().insert({
-    id: lastId.id + 1,
+    id: lastId + 1,
     code: '',
     name,
     id_background,
   });
-
+  
+  // This could be a SQL Trigger when inserting a new ShoppingList
   await new UserShoppingLists().insert({
     id_user: fakeUserId,
-    id_shopping_list: 0,
+    id_shopping_list: lastId + 1,
     is_accepted: UserShoppingListRequest.ACCEPTED,
     is_active: 0,
     is_owner: 1,
