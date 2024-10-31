@@ -1,13 +1,13 @@
 import BaseQuery from "../base/BaseQuery";
 
-type UserStore = {
+type UsersStoreFields = {
   id_user: number,
   id_store: number
 }
 
-class UsersStoresBase extends BaseQuery<UserStore> {
+class UsersStoresBase extends BaseQuery<UsersStoreFields> {
   protected table = 'users_stores';
-  protected fields: UserStore = {
+  protected fields: UsersStoreFields = {
     id_user: 0,
     id_store: 0
   }
@@ -16,5 +16,5 @@ class UsersStoresBase extends BaseQuery<UserStore> {
   }
 }
 
-export { UserStore }
+export { UsersStoreFields }
 export { UsersStoresBase }
