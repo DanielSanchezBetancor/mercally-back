@@ -1,13 +1,14 @@
-import express from "express";
-import favicon from "./favicon";
-import { scraperEndpoints } from "./endpoints/scraper/scraper-endpoints";
 import cors from "cors";
 import dotenv from 'dotenv';
-import { storesEndpoints } from "./endpoints/scraper/stores-endpoints";
-import { productsEndpoints } from "./endpoints/scraper/products-endpoints";
-import { shoppingListEndpoints } from "./endpoints/scraper/shopping-list-endpoints";
-import { userEndpoints } from "./endpoints/scraper/user-endpoints";
+import express from "express";
+import { brandsEndpoints } from "./endpoints/scraper/brands-endpoints";
 import { categoriesEndpoints } from "./endpoints/scraper/categories-endpoints";
+import { productsEndpoints } from "./endpoints/scraper/products-endpoints";
+import { scraperEndpoints } from "./endpoints/scraper/scraper-endpoints";
+import { shoppingListEndpoints } from "./endpoints/scraper/shopping-list-endpoints";
+import { storesEndpoints } from "./endpoints/scraper/stores-endpoints";
+import { userEndpoints } from "./endpoints/scraper/user-endpoints";
+import favicon from "./favicon";
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,7 @@ productsEndpoints(app);
 shoppingListEndpoints(app);
 userEndpoints(app);
 categoriesEndpoints(app);
+brandsEndpoints(app);
 
 app.listen(4000, () => {
   favicon();

@@ -1,4 +1,4 @@
-import { CategoriesBase } from './base/CategoriesBase';
+import CategoriesBase from './CategoriesBase';
 
 class Categories extends CategoriesBase {
   constructor() {

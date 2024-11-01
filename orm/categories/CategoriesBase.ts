@@ -1,4 +1,4 @@
-import BaseQuery from "../../base/BaseQuery";
+import BaseQuery from "../base/BaseQuery";
 
 type CategoryTableData = {
   id: number;
@@ -15,13 +15,7 @@ class CategoriesBase extends BaseQuery<CategoryTableData> {
   constructor() {
     super()
   }
-
-  async getCategories() {
-    const [categories] = await this.query('SELECT * FROM categories');
-
-    return categories;
-  }
 }
 
 export type { CategoryTableData };
-export { CategoriesBase };
+export default CategoriesBase;

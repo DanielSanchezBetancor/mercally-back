@@ -28,7 +28,7 @@ class BaseQuery<T extends Fields> {
 
     const newPair = this.buildNewPair(values);
     const insertQuery = `INSERT INTO ${tableName} (${Object.keys(newPair).join(", ")}) VALUES (${Object.values(newPair).join(", ")})`;
-    this.logger.debug('Generated query', { generatedQuery: insertQuery })
+    this.logger.debug('Generated query', { generatedQuery: insertQuery, keepLevel: true })
 
     return await this.connection.query(insertQuery);
   }
@@ -107,6 +107,12 @@ class BaseQuery<T extends Fields> {
     this.logger.debug('Generated query', { generatedQuery: updateQuery })
 
     return await this.connection.query(updateQuery);
+  }
+
+  async getPaginated(offset: number, limit: number) {
+    const [rows] = await this.query<T[]>(`SELECT * FROM ${this.table} LIMIT ${offset}, ${limit}`);
+
+    return rows;
   }
 }
 
