@@ -79,8 +79,6 @@ class Products extends ProductsBase {
     return products;
   }
 
-
-
   async searchSuggestion(searchProduct: string) {
     const [products] = await this.query<QueryResultItem[]>(`
       SELECT * 

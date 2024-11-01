@@ -1,7 +1,9 @@
 import Logger from "@coding-flavour/logger"
 import { getConnection } from "../orm/base/connection"
-import { CategoryTableData } from "../orm/categories/base/CategoriesBase"
+import Brands from "../orm/Brands/Brands"
+import { BrandsFields } from "../orm/Brands/BrandsBase"
 import Categories from "../orm/categories/Categories"
+import { CategoryTableData } from "../orm/categories/CategoriesBase"
 import HistoryPrice from "../orm/HistoryPrices/HistoryPrices"
 import { HistoryPricesFields } from "../orm/HistoryPrices/HistoryPricesBase"
 import Price, { PricesFields } from "../orm/prices/base"
@@ -21,7 +23,7 @@ import { UsersSettings } from "../orm/UsersSettings/UsersSettings"
 import { UserSetting } from "../orm/UsersSettings/UsersSettingsBase"
 import { UsersStores } from "../orm/UsersStores/UsersStores"
 import { UsersStoreFields } from "../orm/UsersStores/UsersStoresBase"
-import { CATEGORIES, HISTORY_PRICES, PRICES, PRODUCTS, SHOPPING_LIST_PRODUCTS, SHOPPING_LISTS, STORES, USER, USER_PREFERENCES, USER_SHOPPING_LISTS, USERS_STORES } from "./dummies"
+import { BRANDS, CATEGORIES, HISTORY_PRICES, PRICES, PRODUCTS, SHOPPING_LIST_PRODUCTS, SHOPPING_LISTS, STORES, USER, USER_PREFERENCES, USER_SHOPPING_LISTS, USERS_STORES } from "./dummies"
 
 // Lo suyo seria importar todos los 'base/orm' y recoger todos los 'tableNames' de cada uno, asi no acoplamos el script a las tablas
 const tables = [
@@ -35,7 +37,8 @@ const tables = [
   'shopping_lists',
   'shopping_lists_products',
   'prices',
-  'history_prices'
+  'history_prices',
+  'brands'
 ]
 const logger = Logger()
 
@@ -96,6 +99,14 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
       PRIMARY KEY (id)
     )
   `)
+  logger.log(`Creating table <brands>`, { keepLevel: true })
+  await conn.query(`
+    CREATE TABLE IF NOT EXISTS brands (
+      id INTEGER AUTO_INCREMENT,
+      name VARCHAR(255) NOT NULL,
+      PRIMARY KEY (id)
+    )
+  `)
   logger.log('Creating table <categories>', { keepLevel: true })
   await conn.query(`
     CREATE TABLE IF NOT EXISTS categories (
@@ -104,14 +115,16 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
       PRIMARY KEY (id)
     )
   `)
+
   logger.log('Creating table <users_shopping_lists>', { keepLevel: true })
   await conn.query(`
     CREATE TABLE IF NOT EXISTS users_shopping_lists (
-      id_user INTEGER NOT NULL PRIMARY KEY,
-      id_shopping_list INTEGER NOT NULL PRIMARY KEY,
+      id_user INTEGER NOT NULL,
+      id_shopping_list INTEGER NOT NULL,
       is_owner BOOLEAN NOT NULL,
       is_accepted ENUM('${Object.keys(UserShoppingListRequest).join("','")}') NOT NULL,
-      is_active BOOLEAN NOT NULL
+      is_active BOOLEAN NOT NULL,
+      primary key (id_user, id_shopping_list)
     )
   `)
   logger.log('Creating table <shopping_lists>', { keepLevel: true })
@@ -170,7 +183,8 @@ async function insertDummyData(
   stores: Store[],
   userPreferences: UserSetting,
   user: User,
-  categories: CategoryTableData[]
+  categories: CategoryTableData[],
+  brands: BrandsFields[]
 ) {
   logger.log('Inserting dummy data')
 
@@ -193,6 +207,11 @@ async function insertDummyData(
   logger.log('Inserting Products', { keepLevel: true })
   for (const product of products) {
     await new Products().insert(product)
+  }
+
+  logger.log('Inserting Brands', { keepLevel: true })
+  for (const brand of brands) {
+    await new Brands().insert(brand)
   }
 
   logger.log('Inserting Shopping Lists', { keepLevel: true })
@@ -253,7 +272,8 @@ async function init(
   stores = STORES,
   userPreferences = USER_PREFERENCES,
   user = USER,
-  categories = CATEGORIES
+  categories = CATEGORIES,
+  brands = BRANDS
 ) {
   logger.log('Initializing database with dummy data')
   const conn = getConnection()
@@ -270,7 +290,8 @@ async function init(
     stores,
     userPreferences,
     user,
-    categories
+    categories,
+    brands
   )
   logger.log('Database initialized')
 }

@@ -2,11 +2,19 @@ import { Request, Response } from "express";
 import { Stores } from "../../orm/stores/Stores";
 
 const getStoresController = async (
-  _req: Request<void>,
+  req: Request<void>,
   res: Response) => {
+  const { offset, limit } = req.query;
+
+  if (offset && limit) {
+    const stores = await new Stores().getPaginated(Number(offset), Number(limit));
+
+    return res.json(stores);
+  }
+
   const stores = await new Stores().getAll();
 
-  return res.status(200).send(stores);
+  return res.json(stores);
 }
 
 export { getStoresController };
