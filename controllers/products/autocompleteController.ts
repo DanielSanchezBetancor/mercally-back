@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import Products from '../../orm/products/Products';
 
-async function autocompleteController(req: Request, res: Response) {
+const autocompleteController = async (req: Request, res: Response) => {
   if (!req.query) return res.status(400).json({ error: 'Missing query' })
 
   const { query } = req.query;
