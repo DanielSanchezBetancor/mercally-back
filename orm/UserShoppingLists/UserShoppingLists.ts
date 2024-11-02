@@ -1,3 +1,4 @@
+import { User } from "../users/UsersBase";
 import { UserShoppingList, UserShoppingListRequest, UserShoppingListsBase } from "./UserShoppingListsBase";
 
 class UserShoppingLists extends UserShoppingListsBase {
@@ -19,6 +20,17 @@ class UserShoppingLists extends UserShoppingListsBase {
 
   async updateIsAcceptedByShoppingListId(userId: number, idShoppingList: number, isAccepted: UserShoppingListRequest) {
     await this.query<UserShoppingList[]>(`UPDATE ${this.table} SET is_accepted = '${isAccepted}' WHERE id_user = ${userId} AND id_shopping_list = ${idShoppingList}`);
+  }
+
+  async getFavoriteListId(userId: User['id']) {
+    const [favoriteList] = await this.query<{ id_shopping_list: number }[]>(`
+      SELECT id_shopping_list
+      FROM ${this.table}
+      WHERE is_favorite_list = 1 
+      AND id_user = ${userId}
+    `);
+
+    return favoriteList[0]?.id_shopping_list;
   }
 }
 

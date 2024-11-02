@@ -16,21 +16,27 @@ async function searchController(req: Request, res: Response) {
   * 1. Si no hay usuario, ignoramos `stores` y pillamos los por defecto
   * 2. Si hay usuario, comparar `stores` con los que tiene el usuario, los uqe no tenga, ignorarlos
   */
-  const fakeStores = [1, 2, 4];
+  const fakeStores = [1, 2, 5];
 
   if (searchProduct && typeof searchProduct !== "string") {
     return res.status(500).json({ error: "Invalid search" });
   }
 
-  if (searchProduct && searchProduct.length < 3) {
-    return res.status(500).json({ error: "Search term too short" });
-  }
+  /* En principio no vamos a poner un limite minimo de caracteres para la busqueda
+  *  El endpoint estaba planteado solo para ser ejecutado cuando en el Front se escribieran al menos 3 caracteres dado que era movil
+  * Pero el usuario ahora puede hacer la busqueda con 1 o 2 caracteres en escritorio
+  */
+  // if (searchProduct && searchProduct.length < 3) {
+  //   return res.status(500).json({ error: "Search term too short" });
+  // }
 
-  const products = await new Products().search({
+  const searchedProducts = await new Products().search({
     ...req.query,
     stores: fakeStores,
     searchProduct
   });
+
+  const products = await new Products().fillWithFavorites(searchedProducts)
 
   res.json(products);
 }

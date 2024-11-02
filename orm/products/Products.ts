@@ -1,3 +1,5 @@
+import { ProductsShoppingLists } from "../ProductsShoppingLists/ProductsShoppingLists";
+import { UserShoppingLists } from "../UserShoppingLists/UserShoppingLists";
 import Price from "../prices/Price";
 import { SortBy } from "../prices/base";
 import { Stores } from "../stores/Stores";
@@ -17,14 +19,15 @@ type SearchParams = {
 }
 type QueryResultItem = Products['fields'] & Price['fields'] & Stores['fields']
 
-type A<T> = T & { id_product: number }
+type UnknownWithProduct<T> = T & { id_product: number }
+type UnknownWithStore<T> = T & { id_store: number }
 
 class Products extends ProductsBase {
   constructor() {
     super();
   }
 
-  async fillWithOriginalProduct<T>(products: A<T>[]) {
+  async fillWithOriginalProduct<T>(products: UnknownWithProduct<T>[]) {
     const productsWithData: T[] & QueryResultItem[] = [];
 
     for (const product of products) {
@@ -37,6 +40,19 @@ class Products extends ProductsBase {
     }
 
     return productsWithData;
+  }
+
+  async fillWithFavorites<T>(products: (UnknownWithProduct<T> & UnknownWithStore<T>)[]) {
+    const favoriteUserListId = await new UserShoppingLists().getFavoriteListId(1);
+    const favoriteUserList = await new ProductsShoppingLists().getAllByField('id_shopping_list', favoriteUserListId);
+
+    const newProducts = products.reduce((acc, product) => {
+      const isFavorite = favoriteUserList.some((favorite) => favorite.id_product === product.id_product && favorite.id_store === product.id_store);
+
+      return [...acc, { ...product, is_favorite: isFavorite }];
+    }, [] as (T & UnknownWithProduct<T> & UnknownWithStore<T>)[]);
+
+    return newProducts;
   }
 
   async search({
@@ -99,12 +115,12 @@ class Products extends ProductsBase {
       WHERE product_name LIKE '%${searchProduct}%'
       LIMIT 1
     `);
-      
+
     const suggestedProductName = suggestedProduct[0]?.product_name ?? '';
 
     return suggestedProductName;
   }
 }
 
-export type { QueryResultItem }
+export type { QueryResultItem };
 export default Products
