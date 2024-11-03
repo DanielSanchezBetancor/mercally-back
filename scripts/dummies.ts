@@ -63,7 +63,7 @@ PRODUCT_NAMES.forEach((produtName, index) => {
   STORES.forEach(store => {
     PRICES.push({
       id: PRICES.length + 1,
-      id_product: index,
+      id_product: index + 1,
       id_store: store.id,
       price: (Math.random() * 10).toFixed(2),
       price_per_unit: (Math.random() * 2).toFixed(2),
