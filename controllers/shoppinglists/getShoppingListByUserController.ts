@@ -22,13 +22,16 @@ const getShoppingListByUserController = async (req: Request, res: Response) => {
 
   for (const userShoppingList of userShoppingLists) {
     const shoppingList = await new ShoppingLists().getByPk(userShoppingList.id_shopping_list);
-    const shoppingListProducts = await new ProductsShoppingLists().getAllByField('id_shopping_list', userShoppingList.id_shopping_list);
-    originalLists.push({
-      id: shoppingList.id,
-      name: shoppingList.name,
-      id_background: shoppingList.id_background,
-      quantity: shoppingListProducts.length,
-    });
+
+    if (shoppingList) {
+      const shoppingListProducts = await new ProductsShoppingLists().getAllByField('id_shopping_list', userShoppingList.id_shopping_list);
+      originalLists.push({
+        id: shoppingList.id,
+        name: shoppingList.name,
+        id_background: shoppingList.id_background,
+        quantity: shoppingListProducts.length,
+      });
+    }
   }
 
   return res.json(originalLists);

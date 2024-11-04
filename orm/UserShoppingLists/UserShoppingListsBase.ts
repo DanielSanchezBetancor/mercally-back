@@ -12,6 +12,7 @@ type UserShoppingList = {
   is_active: number;
   is_owner: number;
   is_accepted: UserShoppingListRequest;
+  is_favorite_list: number
 }
 
 class UserShoppingListsBase extends BaseQuery<UserShoppingList> {
@@ -22,6 +23,7 @@ class UserShoppingListsBase extends BaseQuery<UserShoppingList> {
     is_active: 0,
     is_owner: 0,
     is_accepted: UserShoppingListRequest.PENDING,
+    is_favorite_list: 0
   };
 
   constructor() {

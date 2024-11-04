@@ -124,6 +124,7 @@ async function createTables(conn: ReturnType<typeof getConnection>) {
       is_owner BOOLEAN NOT NULL,
       is_accepted ENUM('${Object.keys(UserShoppingListRequest).join("','")}') NOT NULL,
       is_active BOOLEAN NOT NULL,
+      is_favorite_list BOOLEAN NOT NULL,
       primary key (id_user, id_shopping_list)
     )
   `)

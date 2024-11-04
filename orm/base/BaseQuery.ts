@@ -49,8 +49,8 @@ class BaseQuery<T extends Fields> {
     return await this.connection.query<ResultSetHeader & T>(query);
   }
 
-  async getByPk(pkValue: number | string) {
-    const [primaryValue] = await this.query<T[]>(`SELECT * FROM ${this.table} WHERE ${this.primaryKey} = ${pkValue}`);
+  async getByPk(pkValue: number | string): Promise<T | undefined> {
+    const [primaryValue] = await this.query<T[]>(`SELECT * FROM ${this.table} WHERE ${this.primaryKey} = ${String(pkValue)}`);
 
     return primaryValue[0];
   }

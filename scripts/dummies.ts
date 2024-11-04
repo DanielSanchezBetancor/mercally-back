@@ -13,8 +13,7 @@ import { User } from "../orm/users/UsersBase";
 /* Random data */
 const STORE_NAMES = ['carrefour', 'mercadona', 'lidl', 'aldi', 'día']
 const CATEGORY_NAMES = ['Fruits', 'Vegetables', 'Meat', 'Fish', 'Dairy']
-const ID_PRODUCTS = [1, 2, 3, 4, 5]
-const FRUITS = ['Apple', 'Banana', 'Orange', 'Strawberry', 'Watermelon']
+const PRODUCT_NAMES = ['Manzana', 'Leche', ' Anacarados', 'Yogúr de fresa', 'Lechuga']
 const BRANDS_NAMES = ['Anita', 'Nestlé', 'ColaCao', 'Eidetesa', 'Danone']
 /* Data tables */
 const PRICES: Price[] = []
@@ -60,11 +59,11 @@ const CATEGORIES: CategoryTableData[] = CATEGORY_NAMES.map((name, id) => ({
   name,
 }))
 
-ID_PRODUCTS.forEach(idProduct => {
+PRODUCT_NAMES.forEach((produtName, index) => {
   STORES.forEach(store => {
     PRICES.push({
       id: PRICES.length + 1,
-      id_product: idProduct,
+      id_product: index + 1,
       id_store: store.id,
       price: (Math.random() * 10).toFixed(2),
       price_per_unit: (Math.random() * 2).toFixed(2),
@@ -72,7 +71,7 @@ ID_PRODUCTS.forEach(idProduct => {
     DATES.forEach(date => {
       HISTORY_PRICES.push({
         id: HISTORY_PRICES.length + 1,
-        id_product: idProduct,
+        id_product: index,
         id_store: store.id,
         price: (Math.random() * 10).toFixed(2),
         price_per_unit: (Math.random() * 2).toFixed(2),
@@ -81,30 +80,31 @@ ID_PRODUCTS.forEach(idProduct => {
     })
   })
   PRODUCTS.push({
-    id: idProduct,
-    product_name: FRUITS[idProduct - 1],
+    id: index,
+    product_name: PRODUCT_NAMES[index],
     is_white_brand: randomBoolean(),
     id_category: 1,
     id_brand: randomNumber(BRANDS_NAMES.length) + 1,
   })
   SHOPPING_LIST_PRODUCTS.length < 3 && SHOPPING_LIST_PRODUCTS.push({
     id_shopping_list: 1,
-    id_product: idProduct,
-    quantity: idProduct,
-    id_store: randomNumber(STORES.length) + 1,
+    id_product: index + 1,
+    quantity: index,
+    id_store: randomNumber(STORES.length) + 1
   })
   SHOPPING_LISTS.push({
-    id: idProduct,
-    name: `List ${idProduct}`,
-    id_background: idProduct,
+    id: 0,
+    name: `List ${index + 1}`,
+    id_background: index,
     code: `${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}${randomNumber(999999)}`,
   })
   USER_SHOPPING_LISTS.push({
     id_user: 1,
-    id_shopping_list: idProduct,
+    id_shopping_list: index + 1,
     is_active: randomBoolean() ? 1 : 0,
     is_owner: randomBoolean() ? 1 : 0,
     is_accepted: randomBoolean() ? UserShoppingListRequest.ACCEPTED : UserShoppingListRequest.PENDING,
+    is_favorite_list: 0
   })
 })
 
@@ -112,6 +112,22 @@ const BRANDS = BRANDS_NAMES.map((name, id) => ({
   id: id + 1,
   name,
 }))
+
+SHOPPING_LISTS.push({
+  id: 0,
+  name: 'Favorites',
+  id_background: 0,
+  code: '123456',
+})
+
+USER_SHOPPING_LISTS.push({
+  id_user: 1,
+  id_shopping_list: USER_SHOPPING_LISTS.length + 1,
+  is_active: 0,
+  is_owner: 1,
+  is_accepted: UserShoppingListRequest.ACCEPTED,
+  is_favorite_list: 1
+})
 
 function randomBoolean() {
   return Math.random() < 0.5 ? 0 : 1

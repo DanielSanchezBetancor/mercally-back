@@ -19,11 +19,11 @@ async function cheapestProductsController(req: Request, res: Response) {
 
   const offsetNumber = !!singleOffset ? parseInt(singleOffset) : 0;
   const idCategories = id_categories.toString().split(',').map(Number);
-  const products = await new Price().getCheapestProducts(idCategories, offsetNumber);
-  const productsWithData = await new Products().fillWithOriginalProduct(products);
+  const cheapestProducts = await new Price().getCheapestProducts(idCategories, offsetNumber);
+  const productsWithData = await new Products().fillWithOriginalProduct(cheapestProducts);
+  const products = await new Products().fillWithFavorites(productsWithData);
 
-  res.json(productsWithData);
+  res.json(products);
 }
-
 
 export { cheapestProductsController };

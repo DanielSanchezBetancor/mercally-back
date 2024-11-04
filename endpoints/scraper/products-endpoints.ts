@@ -8,6 +8,8 @@ import { searchSuggestionController } from "../../controllers/products/searchSug
 import { autocompleteController } from "../../controllers/products/autocompleteController";
 import { productDetailsController } from "../../controllers/products/productDetailsController";
 import { productHistoryController } from "../../controllers/products/productHistoryController";
+import { handleFavoriteController } from "../../controllers/products/handleFavoriteController";
+import { getFavoritesController } from "../../controllers/products/getFavoritesController";
 
 const productsEndpoints = (app: Express) => {
   app.get("/getProducts", getProductsController);
@@ -19,6 +21,8 @@ const productsEndpoints = (app: Express) => {
   app.get("/autocomplete", autocompleteController)
   app.get("/productDetails", productDetailsController)
   app.get("/productHistory", productHistoryController)
+  app.get("/getFavorites", getFavoritesController)
+  app.post("/handleFavorite", handleFavoriteController)
 };
 
 export { productsEndpoints };

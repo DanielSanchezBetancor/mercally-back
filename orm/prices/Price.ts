@@ -18,6 +18,7 @@ type CheapestProduct = {
   min_price: string;
   avg_price: string;
   id_product: number;
+  is_favorite: boolean;
 }
 
 type QueryResultItem = Products['fields'] & Prices['fields'] & Stores['fields']
@@ -71,13 +72,14 @@ class Prices extends PricesBase {
       SELECT 
         MIN(price) as min_price,
         AVG(price) as avg_price,
-        id_product
+        id_product,
+        id_store
       FROM 
         prices
       WHERE id_product IN (
         SELECT id_product FROM products WHERE id_category IN (${id_categories.join(", ")})
       )
-      GROUP BY id_product
+      GROUP BY id_product, id_store
       ORDER BY min_price
       LIMIT ${this.maxLimit + 1}
       OFFSET ${offset};
@@ -87,8 +89,9 @@ class Prices extends PricesBase {
   }
 
   async getPricesByProductAndStore(id_product: number, id_store: number) {
+    console.log(id_product, id_store)
     const [prices] = await this.query<Prices['fields'][]>(`
-      SELECT * FROM prices WHERE id_product = ${id_product} AND id_store = ${id_store};
+      SELECT * FROM prices WHERE id_product = ${id_product} AND id_store = ${String(id_store)};
     `)
 
     return prices[0];
