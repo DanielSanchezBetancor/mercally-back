@@ -5,10 +5,11 @@ import { generateListCodeController } from "../../controllers/shoppinglists/gene
 import { shoppingListRequestsController } from "../../controllers/shoppinglists/shoppingListRequestsController";
 import { handleShoppingListRequestController } from "../../controllers/shoppinglists/handleShoppingListRequestController";
 import { getShoppingListByUserController } from "../../controllers/shoppinglists/getShoppingListByUserController";
-import { createShoppingListController } from "../../controllers/shoppinglists/createShoppingListController";
+import { handleShoppingListController } from "../../controllers/shoppinglists/handleShoppingListController";
 import { getShoppingListByIdController } from "../../controllers/shoppinglists/getShoppingListByIdController";
 import { getShoppingListProductsByIdController } from "../../controllers/shoppinglists/getShoppingListProductsByIdController";
 import { getShoppingListStoresPrices } from "../../controllers/shoppinglists/getShoppingListStoresPrices";
+import { setActiveShoppingList } from "../../controllers/shoppinglists/setActiveShoppingList";
 
 const shoppingListEndpoints = (app: Express) => {
   app.get("/shoppingListByCode", shoppingListByCodeController)
@@ -18,7 +19,8 @@ const shoppingListEndpoints = (app: Express) => {
   app.get("/getShoppingListProductsById", getShoppingListProductsByIdController);
   app.get("/getShoppingListStoresPrices", getShoppingListStoresPrices)
   app.post("/generateListCode", generateListCodeController)
-  app.post('/createShoppingList', createShoppingListController)
+  app.post('/handleShoppingList', handleShoppingListController)
+  app.post('/setActiveShoppingList', setActiveShoppingList)
   app.put("/modifyList", modifyListController)
   app.put("/handleShoppingListRequest", handleShoppingListRequestController)
 };

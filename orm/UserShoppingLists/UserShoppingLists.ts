@@ -32,6 +32,11 @@ class UserShoppingLists extends UserShoppingListsBase {
 
     return favoriteList[0]?.id_shopping_list;
   }
+
+  async updateActiveList(newActiveId: number, idUser: number) {
+    await this.query<UserShoppingList[]>(`UPDATE ${this.table} SET is_active = 0 WHERE id_user = ${idUser}`);
+    await this.query<UserShoppingList[]>(`UPDATE ${this.table} SET is_active = 1 WHERE id_user = ${idUser} AND id_shopping_list = ${newActiveId}`);
+  }
 }
 
 export { UserShoppingLists };
