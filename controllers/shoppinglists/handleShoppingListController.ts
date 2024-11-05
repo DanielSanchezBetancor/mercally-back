@@ -3,7 +3,7 @@ import ShoppingLists from "../../orm/ShoppingLists/ShoppingLists";
 import { UserShoppingLists } from "../../orm/UserShoppingLists/UserShoppingLists";
 import { UserShoppingListRequest } from "../../orm/UserShoppingLists/UserShoppingListsBase";
 
-const createShoppingListController = async (req: Request, res: Response) => {
+const handleShoppingListController = async (req: Request, res: Response) => {
   // Aqui comprobamos que el usuario esté autenticado y recogemos su ID
   const fakeUserId = 1
   const { name, id_background, id } = req.body;
@@ -30,6 +30,11 @@ const createShoppingListController = async (req: Request, res: Response) => {
 
 const handleUpdateList = async (id: number, name: string, id_background: number) => {
   const oldData = await new ShoppingLists().getByPk(id);
+
+  // Maybe we should return a 404 if the list does not exist and save the logs of the request to check if it's a bug or a user error
+  if (!oldData) {
+    return;
+  }
 
   await new ShoppingLists().update({
     ...oldData,
@@ -59,7 +64,8 @@ const handleCreateList = async (id_user: number, name: string, id_background: nu
     is_accepted: UserShoppingListRequest.ACCEPTED,
     is_active: 0,
     is_owner: 1,
+    is_favorite_list: 0,
   });
 }
 
-export { createShoppingListController };
+export { handleShoppingListController };

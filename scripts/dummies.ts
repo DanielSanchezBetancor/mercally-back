@@ -101,7 +101,7 @@ PRODUCT_NAMES.forEach((produtName, index) => {
   USER_SHOPPING_LISTS.push({
     id_user: 1,
     id_shopping_list: index + 1,
-    is_active: randomBoolean() ? 1 : 0,
+    is_active: index === 0 ? 1 : 0,
     is_owner: randomBoolean() ? 1 : 0,
     is_accepted: randomBoolean() ? UserShoppingListRequest.ACCEPTED : UserShoppingListRequest.PENDING,
     is_favorite_list: 0

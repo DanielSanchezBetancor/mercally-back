@@ -30,6 +30,7 @@ const getShoppingListByUserController = async (req: Request, res: Response) => {
         name: shoppingList.name,
         id_background: shoppingList.id_background,
         quantity: shoppingListProducts.length,
+        is_active: userShoppingList.is_active,
       });
     }
   }

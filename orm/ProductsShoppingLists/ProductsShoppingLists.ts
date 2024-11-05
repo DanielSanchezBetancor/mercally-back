@@ -8,18 +8,23 @@ class ProductsShoppingLists extends ProductsShoppingListsBase {
     super();
   }
 
-  async getQuantityByProductIdAndShoppingListId(productId: string, shoppingListId: number) {
-    const [quantity] = await this.query<{ quantity?: string }[]>(`SELECT quantity FROM ${this.table} WHERE id_shopping_list = ${shoppingListId} AND id_product = ${productId}`);
+  getCommonWhere(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id']) {
+    return `WHERE id_shopping_list = ${shoppingListId} AND id_product = ${productId} AND id_store = ${idStore}`;
+  }
+
+  async getProductQuantity(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id']) {
+    const [quantity] = await this.query<{ quantity?: string }[]>(`SELECT quantity FROM ${this.table} ${this.getCommonWhere(shoppingListId, productId, idStore)}`);
 
     return quantity[0]?.quantity;
   }
 
-  async updateQuantityByProductIdAndShoppingListId(productId: number, shoppingListId: number, quantity: number) {
-    await this.query(`UPDATE ${this.table} SET quantity = ${quantity} WHERE id_shopping_list = ${shoppingListId} AND id_product = ${productId}`);
+  async updateProductQuantity(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id'], quantity: number) {
+    await this.query(`UPDATE ${this.table} SET quantity = ${quantity} ${this.getCommonWhere(shoppingListId, productId, idStore)}`);
   }
 
-  async deleteByProductIdAndShoppingListId(productId: string, shoppingListId: number) {
-    await this.query(`DELETE FROM ${this.table} WHERE id_shopping_list = ${shoppingListId} AND id_product = ${productId}`);
+  async deleteProductFromList(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id']) {
+    await this.query(`DELETE FROM ${this.table} ${this.getCommonWhere(shoppingListId, productId, idStore)}`);
+    
   }
 
   async saveFavorite(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id']) {
@@ -32,13 +37,13 @@ class ProductsShoppingLists extends ProductsShoppingListsBase {
   }
 
   async isFavorite(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id']) {
-    const [favorite] = await this.query<{ id: number }[]>(`SELECT * FROM ${this.table} WHERE id_shopping_list = ${shoppingListId} AND id_product = ${productId} AND id_store = ${idStore}`);
-
+    const [favorite] = await this.query<{ id: number }[]>(`SELECT * FROM ${this.table} ${this.getCommonWhere(shoppingListId, productId, idStore)}`);
+  
     return !!favorite.length;
   }
 
   async removeFavorite(shoppingListId: ShoppingList['id'], productId: Product['id'], idStore: Store['id']) {
-    await this.query(`DELETE FROM ${this.table} WHERE id_shopping_list = ${shoppingListId} AND id_product = ${productId} AND id_store = ${idStore}`);
+    await this.query(`DELETE FROM ${this.table} ${this.getCommonWhere(shoppingListId, productId, idStore)}`);
   }
 }
 
